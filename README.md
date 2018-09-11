@@ -26,12 +26,12 @@ First, create a volume helper:
 
         docker run -i -t -d \
             --name eephttpd-volume \
-            --volume eephttpd:/home/eephttpd/ \
+            --volume eephttpd:/opt/eephttpd/ \
             eyedeekay/eephttpd
 
 Then, copy files you wish to serve into the volume folder:
 
-        docker cp www/* eephttpd-volume:/home/eephttpd/www
+        docker cp www/* eephttpd-volume:/opt/eephttpd/www
 
 Stop the volume helper:
 

@@ -27,7 +27,7 @@ docker:
 volume:
 	docker run -i -t -d \
 		--name eephttpd-volume \
-		--volume eephttpd:/home/eephttpd/ \
+		--volume eephttpd:/opt/eephttpd/ \
 		eyedeekay/eephttpd; true
 	docker cp www/* eephttpd-volume:/opt/eephttpd/www
 	docker stop eephttpd-volume; true
