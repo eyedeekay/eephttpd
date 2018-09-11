@@ -1,6 +1,11 @@
 # eephttpd
 
-Serving simple static sites directly to i2p via the SAM API.
+So, basically everything I put on i2p is a bunch of static files. Until now, I
+tried to host them using darkhttpd(a fork of lighttpd from Alpine which
+functions as a static Web Server) and by adding tunnel configuration information
+to tunnels.conf for i2pd. This is easier than manipulating a web interface, but
+still tedious and kind of error-prone. So instead, this serves simple static
+sites directly to i2p via the SAM API.
 
 to build:
 
@@ -44,3 +49,4 @@ and run the container:
             --restart always \
             --volumes-from eephttpd-volume \
             eyedeekay/eephttpd
+
