@@ -11,6 +11,7 @@ WORKDIR /usr/src/eephttpd
 RUN make release install
 USER eephttpd
 CMD eephttpd -f /usr/src/eephttpd/etc/eephttpd/eephttpd.conf \
+    -i \
     -d /opt/eephttpd/www \
     -s /opt/eephttpd/ \
     -sh=$samhost \
