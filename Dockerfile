@@ -9,10 +9,12 @@ RUN adduser -h /opt/eephttpd -D -g "eephttpd,,,," eephttpd
 COPY . /usr/src/eephttpd
 WORKDIR /usr/src/eephttpd
 RUN make release install
+WORKDIR /opt/eephttpd
 USER eephttpd
+COPY www /opt/eephttpd/www
+VOLUME /opt/eephttpd/
 CMD eephttpd -f /usr/src/eephttpd/etc/eephttpd/eephttpd.conf \
     -i \
     -d /opt/eephttpd/www \
-    -s /opt/eephttpd/ \
     -sh=$samhost \
     -sp=$samport $args

@@ -22,17 +22,27 @@ install:
 	install -m755 eephttpd /usr/bin/eephttpd
 
 docker:
-	docker build -f Dockerfile -t eyedeekay/eephttpd .
+	docker build --no-cache -f Dockerfile -t eyedeekay/eephttpd .
 
-volume:
+run-volume:
 	docker run -i -t -d \
 		--name eephttpd-volume \
 		--volume eephttpd:/opt/eephttpd/ \
 		eyedeekay/eephttpd; true
-	docker cp www/* eephttpd-volume:/opt/eephttpd/www
+
+copy-volume:
+	docker cp www/index.html eephttpd-volume:/opt/eephttpd/www
+
+copy:
+	docker cp www/index.html eephttpd:/opt/eephttpd/www
+
+stop-volume:
 	docker stop eephttpd-volume; true
 
-run: volume
+volume: run-volume copy-volume stop-volume
+
+run:
+	docker rm -f eephttpd; true
 	docker run -i -t -d \
 		--network $(network) \
 		--env samhost=$(samhost) \
@@ -44,3 +54,9 @@ run: volume
 		--restart always \
 		--volumes-from eephttpd-volume \
 		eyedeekay/eephttpd
+
+clean:
+	docker rm -f eephttpd eephttpd-volume
+
+clobber: clean
+	docker system prune -f
