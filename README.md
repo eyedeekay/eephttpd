@@ -20,6 +20,8 @@ to run:
 
 will serve the files from ./www, and store i2p keys in the working directory.
 
+## [Usage](USAGE.md)
+
 ## Docker
 
 First, create a volume helper:
