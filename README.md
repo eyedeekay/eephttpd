@@ -21,34 +21,3 @@ to run:
 will serve the files from ./www, and store i2p keys in the working directory.
 
 ## [Usage](USAGE.md)
-
-## Docker
-
-First, create a volume helper:
-
-        docker run -i -t -d \
-            --name eephttpd-volume \
-            --volume eephttpd:/opt/eephttpd/ \
-            eyedeekay/eephttpd
-
-Then, copy files you wish to serve into the volume folder:
-
-        docker cp www/* eephttpd-volume:/opt/eephttpd/www
-
-Stop the volume helper:
-
-        docker stop eephttpd-volume
-
-and run the container:
-
-        docker run -i -t -d \
-            --env samhost=$(samhost) \
-            --env samport=$(samport) \
-            --env args=$(args) \
-            --network-alias eephttpd \
-            --hostname eephttpd \
-            --name eephttpd \
-            --restart always \
-            --volumes-from eephttpd-volume \
-            eyedeekay/eephttpd
-

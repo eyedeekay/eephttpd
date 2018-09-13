@@ -122,4 +122,4 @@ docker-cmd:
 	@echo '```' >> USAGE.md
 
 index:
-	pandoc USAGE.md -o www/index.html
+	pandoc README.md USAGE.md -o www/index.html
