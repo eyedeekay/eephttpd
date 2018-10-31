@@ -42,7 +42,7 @@ stop-volume:
 
 volume: run-volume copy-volume stop-volume
 
-run:
+run: volume
 	docker rm -f $(eephttpd); true
 	docker run -i -t -d \
 		--network $(network) \
