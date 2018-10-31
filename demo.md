@@ -1,15 +1,15 @@
-2018/10/31 06:23:44 Found Labels: []
-2018/10/31 06:23:44 SAM Bridge connection established.
-2018/10/31 06:23:44 Destination keys generated, tunnel name: eephttpd
-2018/10/31 06:23:44 Serving /opt/eephttpd/www on HTTP port: 7880	 and on 
-74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
-2018/10/31 06:24:04 SAM stream session established.
-2018/10/31 06:24:04 Starting Listener.
-2018/10/31 06:24:04 SAM Listener created, 74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
-2018/10/31 06:26:10 Accepted connection &{Mrh4ZOAJjlVL7NbiG9-L~CmWV4UmZSZH8GxFg2M6EFCh-1ctMEFGTeDO4APzrLXwy4IWrpQ~8c~pvpTyFwjA4datgmUvKBWZsygnsqxbC8krHhT4nrjt1kT8zQDwLZN9tqicqt0xL6tUxKXjaz1Vz3vir9BxIi61lrmL9eQspPzUjrdrhDxIDlHqhh2oxGj8XBLgfw6DAzO5UkHF4-~pGKw2v28iNIpAw2zFS2F4Mnk-BArURasGZHZQM8ArVEXkl8GojfqrhzrqLPyQYBbx8mbMim6CPLEaHKgYuhRVqtSS8~ESbFi5FgHqm7WgdJMg5rYl2wM~y93HImB5piIX1S0iV8lzRbcS4KIBak2UvaYoXLR1B8Qnlm7mfV1ZMwA1jwsXsB0Dbp-B-d6YVfsWSCBq9I3EhzM6sYPEmI9D5cADtIepOzdLObIcigmzbnP58WELCwBayTgDdfW4ekP7enHYhhNeX5GEphSO3uBFcCQJRkO~VtSNJTe3FfXy~mYzAAAA uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA 0xc420166028}
-2018/10/31 06:26:10 Forwarding modified request: 
+2018/10/31 06:47:27 Found Labels: []
+2018/10/31 06:47:27 SAM Bridge connection established.
+2018/10/31 06:47:27 Destination keys generated, tunnel name: eephttpd
+2018/10/31 06:47:27 Serving /opt/eephttpd/www on HTTP port: 7880	 and on 
+5n2nm5nidfptjc2nc4zaqkwonmzc4fc2qynwdqueyvvt4pzwjnaq.b32.i2p
+2018/10/31 06:47:47 SAM stream session established.
+2018/10/31 06:47:47 Starting Listener.
+2018/10/31 06:47:47 SAM Listener created, 5n2nm5nidfptjc2nc4zaqkwonmzc4fc2qynwdqueyvvt4pzwjnaq.b32.i2p
+2018/10/31 06:48:19 Accepted connection &{UrwAU7TryeMuQ4iBSVAcSPpp66LoPU6Bz~EUE5UfCx-Z8sjKugSyYawmsePruyze7xgLLM~iR26syKe2mO3rM1CRZQ1bbv4FgABulP5cqMXxFYXi3yop8sJ1Uz6jSDUaBe~csOL~B6CatM2y6En6LxCw2QztkMq5ztdzMQ-pVJkolCjtvSf~BRjkwRYRspbyO0imtveb7U~2-Hov3b52A44eUQg0~-aDxkQ3IE8Ie9AqN4JMeOwlwtGGWJonss-jdxzrpt6PojcISRNDcQno1aN3EX3fbdUND8JScK1ZZuXoErS3jTd9cVwEhsJmFof6IlGbUcgVBq21bqvYw1YkaVOHi2hzzn9FbNlUW9vmxDoYDmji8pwl3zyAs4Z6scMPYtiVQrhxQSVIkYWfWumHJ9KryIj1huKhb3SwTfvrmVyyeDL33fI3whvzDUQy2NjL4jjzbYQpeTAOCjuw7nQfBL30fjC69hnO4TzYwTLwEUtYvdwnUqPmuIjTgJpSuYB5AAAA uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA 0xc42000c098}
+2018/10/31 06:48:19 Forwarding modified request: 
 	 GET / HTTP/1.1
-Host: 74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
+Host: 5n2nm5nidfptjc2nc4zaqkwonmzc4fc2qynwdqueyvvt4pzwjnaq.b32.i2p
 Connection: close
 Accept-Encoding: gzip, deflate
 Connection: close
@@ -19,16 +19,16 @@ X-I2p-Dest-Base32: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
 X-I2p-Dest-Base64: uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA
 X-I2p-Dest-Hash: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
 
-2018/10/31 06:26:10 Forwarding modified response: 
+2018/10/31 06:48:19 Forwarding modified response: 
 	HTTP/1.1 200 OK
 Connection: close
 Content-Length: 4255
 Accept-Ranges: bytes
 Content-Type: text/html; charset=utf-8
-Date: Wed, 31 Oct 2018 06:26:10 GMT
+Date: Wed, 31 Oct 2018 06:48:19 GMT
 Last-Modified: Wed, 31 Oct 2018 06:18:14 GMT
-X-I2p-Dest-Base32: 74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
-X-I2p-Dest-Base64: Mrh4ZOAJjlVL7NbiG9-L~CmWV4UmZSZH8GxFg2M6EFCh-1ctMEFGTeDO4APzrLXwy4IWrpQ~8c~pvpTyFwjA4datgmUvKBWZsygnsqxbC8krHhT4nrjt1kT8zQDwLZN9tqicqt0xL6tUxKXjaz1Vz3vir9BxIi61lrmL9eQspPzUjrdrhDxIDlHqhh2oxGj8XBLgfw6DAzO5UkHF4-~pGKw2v28iNIpAw2zFS2F4Mnk-BArURasGZHZQM8ArVEXkl8GojfqrhzrqLPyQYBbx8mbMim6CPLEaHKgYuhRVqtSS8~ESbFi5FgHqm7WgdJMg5rYl2wM~y93HImB5piIX1S0iV8lzRbcS4KIBak2UvaYoXLR1B8Qnlm7mfV1ZMwA1jwsXsB0Dbp-B-d6YVfsWSCBq9I3EhzM6sYPEmI9D5cADtIepOzdLObIcigmzbnP58WELCwBayTgDdfW4ekP7enHYhhNeX5GEphSO3uBFcCQJRkO~VtSNJTe3FfXy~mYzAAAA
+X-I2p-Dest-Base32: 5n2nm5nidfptjc2nc4zaqkwonmzc4fc2qynwdqueyvvt4pzwjnaq.b32.i2p
+X-I2p-Dest-Base64: UrwAU7TryeMuQ4iBSVAcSPpp66LoPU6Bz~EUE5UfCx-Z8sjKugSyYawmsePruyze7xgLLM~iR26syKe2mO3rM1CRZQ1bbv4FgABulP5cqMXxFYXi3yop8sJ1Uz6jSDUaBe~csOL~B6CatM2y6En6LxCw2QztkMq5ztdzMQ-pVJkolCjtvSf~BRjkwRYRspbyO0imtveb7U~2-Hov3b52A44eUQg0~-aDxkQ3IE8Ie9AqN4JMeOwlwtGGWJonss-jdxzrpt6PojcISRNDcQno1aN3EX3fbdUND8JScK1ZZuXoErS3jTd9cVwEhsJmFof6IlGbUcgVBq21bqvYw1YkaVOHi2hzzn9FbNlUW9vmxDoYDmji8pwl3zyAs4Z6scMPYtiVQrhxQSVIkYWfWumHJ9KryIj1huKhb3SwTfvrmVyyeDL33fI3whvzDUQy2NjL4jjzbYQpeTAOCjuw7nQfBL30fjC69hnO4TzYwTLwEUtYvdwnUqPmuIjTgJpSuYB5AAAA
 
 <h1 id="eephttpd">eephttpd</h1>
 <p>So, basically everything I put on i2p is a bunch of static files. Until now, I tried to host them using darkhttpd(a fork of lighttpd from Alpine which functions as a static Web Server) and by adding tunnel configuration information to tunnels.conf for i2pd. This is easier than manipulating a web interface, but still tedious and kind of error-prone. So instead, this serves simple static sites directly to i2p via the SAM API.</p>
@@ -114,10 +114,10 @@ X-I2p-Dest-Base64: Mrh4ZOAJjlVL7NbiG9-L~CmWV4UmZSZH8GxFg2M6EFCh-1ctMEFGTeDO4APzr
     eyedeekay/eephttpd</code></pre>
 <h2 id="instance">instance</h2>
 <p>a running instance of eephttpd with the example index file is availble on <a href="http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p" class="uri">http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p</a></p>
-2018/10/31 06:26:19 Accepted connection &{Mrh4ZOAJjlVL7NbiG9-L~CmWV4UmZSZH8GxFg2M6EFCh-1ctMEFGTeDO4APzrLXwy4IWrpQ~8c~pvpTyFwjA4datgmUvKBWZsygnsqxbC8krHhT4nrjt1kT8zQDwLZN9tqicqt0xL6tUxKXjaz1Vz3vir9BxIi61lrmL9eQspPzUjrdrhDxIDlHqhh2oxGj8XBLgfw6DAzO5UkHF4-~pGKw2v28iNIpAw2zFS2F4Mnk-BArURasGZHZQM8ArVEXkl8GojfqrhzrqLPyQYBbx8mbMim6CPLEaHKgYuhRVqtSS8~ESbFi5FgHqm7WgdJMg5rYl2wM~y93HImB5piIX1S0iV8lzRbcS4KIBak2UvaYoXLR1B8Qnlm7mfV1ZMwA1jwsXsB0Dbp-B-d6YVfsWSCBq9I3EhzM6sYPEmI9D5cADtIepOzdLObIcigmzbnP58WELCwBayTgDdfW4ekP7enHYhhNeX5GEphSO3uBFcCQJRkO~VtSNJTe3FfXy~mYzAAAA uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA 0xc42013a020}
-2018/10/31 06:26:19 Forwarding modified request: 
+2018/10/31 06:48:37 Accepted connection &{UrwAU7TryeMuQ4iBSVAcSPpp66LoPU6Bz~EUE5UfCx-Z8sjKugSyYawmsePruyze7xgLLM~iR26syKe2mO3rM1CRZQ1bbv4FgABulP5cqMXxFYXi3yop8sJ1Uz6jSDUaBe~csOL~B6CatM2y6En6LxCw2QztkMq5ztdzMQ-pVJkolCjtvSf~BRjkwRYRspbyO0imtveb7U~2-Hov3b52A44eUQg0~-aDxkQ3IE8Ie9AqN4JMeOwlwtGGWJonss-jdxzrpt6PojcISRNDcQno1aN3EX3fbdUND8JScK1ZZuXoErS3jTd9cVwEhsJmFof6IlGbUcgVBq21bqvYw1YkaVOHi2hzzn9FbNlUW9vmxDoYDmji8pwl3zyAs4Z6scMPYtiVQrhxQSVIkYWfWumHJ9KryIj1huKhb3SwTfvrmVyyeDL33fI3whvzDUQy2NjL4jjzbYQpeTAOCjuw7nQfBL30fjC69hnO4TzYwTLwEUtYvdwnUqPmuIjTgJpSuYB5AAAA uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA 0xc4201a2010}
+2018/10/31 06:48:37 Forwarding modified request: 
 	 GET / HTTP/1.1
-Host: 74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
+Host: 5n2nm5nidfptjc2nc4zaqkwonmzc4fc2qynwdqueyvvt4pzwjnaq.b32.i2p
 Connection: close
 Accept-Encoding: gzip, deflate
 Connection: close
@@ -127,32 +127,4 @@ X-I2p-Dest-Base32: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
 X-I2p-Dest-Base64: uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA
 X-I2p-Dest-Hash: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
 
-2018/10/31 06:26:19 Response Error:  [] read tcp 127.0.0.1:49446->127.0.0.1:7880: use of closed network connection
-2018/10/31 06:26:25 Accepted connection &{Mrh4ZOAJjlVL7NbiG9-L~CmWV4UmZSZH8GxFg2M6EFCh-1ctMEFGTeDO4APzrLXwy4IWrpQ~8c~pvpTyFwjA4datgmUvKBWZsygnsqxbC8krHhT4nrjt1kT8zQDwLZN9tqicqt0xL6tUxKXjaz1Vz3vir9BxIi61lrmL9eQspPzUjrdrhDxIDlHqhh2oxGj8XBLgfw6DAzO5UkHF4-~pGKw2v28iNIpAw2zFS2F4Mnk-BArURasGZHZQM8ArVEXkl8GojfqrhzrqLPyQYBbx8mbMim6CPLEaHKgYuhRVqtSS8~ESbFi5FgHqm7WgdJMg5rYl2wM~y93HImB5piIX1S0iV8lzRbcS4KIBak2UvaYoXLR1B8Qnlm7mfV1ZMwA1jwsXsB0Dbp-B-d6YVfsWSCBq9I3EhzM6sYPEmI9D5cADtIepOzdLObIcigmzbnP58WELCwBayTgDdfW4ekP7enHYhhNeX5GEphSO3uBFcCQJRkO~VtSNJTe3FfXy~mYzAAAA uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA 0xc420166060}
-2018/10/31 06:26:25 Forwarding modified request: 
-	 GET / HTTP/1.1
-Host: 74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
-Connection: close
-Accept-Encoding: gzip, deflate
-Connection: close
-Upgrade-Insecure-Requests: 1
-User-Agent: MYOB/6.66 (AN/ON)
-X-I2p-Dest-Base32: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
-X-I2p-Dest-Base64: uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA
-X-I2p-Dest-Hash: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
-
-2018/10/31 06:26:25 Response Error:  [] read tcp 127.0.0.1:49452->127.0.0.1:7880: use of closed network connection
-2018/10/31 06:26:29 Accepted connection &{Mrh4ZOAJjlVL7NbiG9-L~CmWV4UmZSZH8GxFg2M6EFCh-1ctMEFGTeDO4APzrLXwy4IWrpQ~8c~pvpTyFwjA4datgmUvKBWZsygnsqxbC8krHhT4nrjt1kT8zQDwLZN9tqicqt0xL6tUxKXjaz1Vz3vir9BxIi61lrmL9eQspPzUjrdrhDxIDlHqhh2oxGj8XBLgfw6DAzO5UkHF4-~pGKw2v28iNIpAw2zFS2F4Mnk-BArURasGZHZQM8ArVEXkl8GojfqrhzrqLPyQYBbx8mbMim6CPLEaHKgYuhRVqtSS8~ESbFi5FgHqm7WgdJMg5rYl2wM~y93HImB5piIX1S0iV8lzRbcS4KIBak2UvaYoXLR1B8Qnlm7mfV1ZMwA1jwsXsB0Dbp-B-d6YVfsWSCBq9I3EhzM6sYPEmI9D5cADtIepOzdLObIcigmzbnP58WELCwBayTgDdfW4ekP7enHYhhNeX5GEphSO3uBFcCQJRkO~VtSNJTe3FfXy~mYzAAAA uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA 0xc420230118}
-2018/10/31 06:26:29 Forwarding modified request: 
-	 GET / HTTP/1.1
-Host: 74ikhaialwqdnfmhrfdsqfe7pxifw6ui6vgafj27pmxeh7bprdjq.b32.i2p
-Connection: close
-Accept-Encoding: gzip, deflate
-Connection: close
-Upgrade-Insecure-Requests: 1
-User-Agent: MYOB/6.66 (AN/ON)
-X-I2p-Dest-Base32: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
-X-I2p-Dest-Base64: uZvt~gfiQ6c7h0qt2Tg9mvPTLNJarXidhRqR-RW4z-VHcKN91pdROLLctSkTY9Qoq9ncuWxr5zmfS-3A~PRLZjn56KCoih4-830oU~HdTSgQtZk-~8VJ-OoQ6WvjME~9jQdZirVNrdDCVTx14F4t2-3RPMGbJfFX2l81ADZrxmkGWHq0C61GGRL-BZy7wW8qME5q9KnfHNfl7tnH54Vyw7piIVbuxXBKhfF~7rj-xgLLd-HsdkKUnFd2iEUu7XbDv2FgAjIchyYOmEbY3bIvv2ymHjG3JLbGRyeYzn6CS2LkRjZg~rZJHSnB2QpBwmSlYJ2AuPkEez0ntXP33oLMH3DL41VnQGmfjFXmskCHv-zWLXnZkQ3P3hAd-u1q3cR4jtZTbLwUIawdTrP7j5BbnGjJGuc8RmjxuKFSE-XpxmMKB8r5Ydg~93uX5ROityhKJ9WE7dWPxsilgDcg-jtSD8bqrf0O3Ad6VDAUUyMFIABeWS69fun4Mkib5atH5eWIAAAA
-X-I2p-Dest-Hash: ub2lkd2mckm2dsmt7zgrosrcnpbogowj7jiv5uipyj4s4gimt2za.b32.i2p
-
-2018/10/31 06:26:29 Response Error:  [] read tcp 127.0.0.1:49456->127.0.0.1:7880: use of closed network connection
+2018/10/31 06:48:37 Response Error:  [] read tcp 127.0.0.1:50366->127.0.0.1:7880: use of closed network connection
