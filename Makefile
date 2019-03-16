@@ -10,6 +10,9 @@ eephttpd=eephttpd
 echo:
 	echo $(GOPATH)
 
+orig:
+	tar --exclude=.git --exclude=debian -czvf ../eephttpd_0.0~git20181031.a4b6058.orig.tar.gz .
+
 deps:
 	go get -u "github.com/eyedeekay/sam-forwarder"
 	go get -u "github.com/eyedeekay/sam-forwarder/config"

@@ -1,0 +1,17 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: eephttpd
+Source: https://github.com/eyedeekay/eephttpd
+Files-Excluded:
+  Godeps/_workspace
+
+Files: *
+Copyright: 2018 idk
+License: GPL-3.0
+
+Files: debian/*
+Copyright: 2019 idk <hankhill19580@gmail.com>
+License: GPL-3.0
+Comment: Debian packaging is licensed under the same terms as upstream
+
+License: GPL-3.0
+TODO
