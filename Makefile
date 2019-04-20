@@ -1,5 +1,5 @@
 
-GOPATH=$(PWD)/.go
+#GOPATH=$(PWD)/.go
 
 args=-r
 samhost=sam-host
