@@ -1,13 +1,14 @@
 package eephttpd
 
 import (
-    "log"
+	"log"
 	"net/http"
 
 	"github.com/eyedeekay/sam-forwarder/config"
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
 	"github.com/eyedeekay/sam3/i2pkeys"
+	"gitlab.com/golang-commonmark/markdown"
 )
 
 //EepHttpd is a structure which automatically configured the forwarding of
@@ -16,6 +17,7 @@ type EepHttpd struct {
 	Forwarder samtunnel.SAMTunnel
 	ServeDir  string
 	up        bool
+	mark      *markdown.Markdown
 }
 
 var err error
@@ -80,7 +82,7 @@ func (f *EepHttpd) Base64() string {
 }
 
 func (f *EepHttpd) ServeParent() {
-    log.Println("Starting eepsite server", f.Base32())
+	log.Println("Starting eepsite server", f.Base32())
 	if err = f.Forwarder.Serve(); err != nil {
 		f.Cleanup()
 	}
@@ -90,17 +92,17 @@ func (f *EepHttpd) ServeParent() {
 func (f *EepHttpd) Serve() error {
 	go f.ServeParent()
 	if f.Up() {
-        log.Println("Starting web server", f.Target())
-        if err := http.ListenAndServe(f.Target(), f); err != nil {
-            return err
-        }
+		log.Println("Starting web server", f.Target())
+		if err := http.ListenAndServe(f.Target(), f); err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
 func (f *EepHttpd) Up() bool {
 	if f.Forwarder.Up() {
-        return true
+		return true
 	}
 	return false
 }
@@ -111,16 +113,17 @@ func (f *EepHttpd) Close() error {
 }
 
 func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
-    if ! s.up {
-        log.Println("Started putting tunnel up")
-    }
+	if !s.up {
+		log.Println("Started putting tunnel up")
+	}
 	f, e := s.Forwarder.Load()
 	if e != nil {
 		return nil, e
 	}
 	s.Forwarder = f.(*samforwarder.SAMForwarder)
+	s.mark = markdown.New(markdown.XHTMLOutput(true))
 	s.up = true
-    log.Println("Finished putting tunnel up")
+	log.Println("Finished putting tunnel up")
 	return s, nil
 }
 
@@ -133,14 +136,14 @@ func NewEepHttpd(host, port string) (*EepHttpd, error) {
 func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	var s EepHttpd
 	s.Forwarder = &samforwarder.SAMForwarder{}
-    log.Println("Initializing eephttpd")
+	log.Println("Initializing eephttpd")
 	for _, o := range opts {
 		if err := o(&s); err != nil {
 			return nil, err
 		}
 	}
-    s.Forwarder.Config().SaveFile = true
-    log.Println("Options loaded", s.Print())
+	s.Forwarder.Config().SaveFile = true
+	log.Println("Options loaded", s.Print())
 	l, e := s.Load()
 	if e != nil {
 		return nil, e

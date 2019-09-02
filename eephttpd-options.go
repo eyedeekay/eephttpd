@@ -2,6 +2,7 @@ package eephttpd
 
 import (
 	"fmt"
+	"path/filepath"
 	"strconv"
 )
 
@@ -216,7 +217,11 @@ func SetEncrypt(b bool) func(*EepHttpd) error {
 //SetServeDir sets the path to the directory you want to serve
 func SetServeDir(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
-		c.ServeDir = s
+		var err error
+		c.ServeDir, err = filepath.Abs(s)
+		if err != nil {
+			return err
+		}
 		return nil
 	}
 }

@@ -95,7 +95,7 @@ func main() {
 		eephttpd.SetPort(config.TargetPort),
 		eephttpd.SetSaveFile(config.SaveFile),
 		eephttpd.SetName(config.TunName),
-        eephttpd.SetInLength(config.InLength),
+		eephttpd.SetInLength(config.InLength),
 		eephttpd.SetOutLength(config.OutLength),
 		eephttpd.SetInVariance(config.InVariance),
 		eephttpd.SetOutVariance(config.OutVariance),
@@ -112,11 +112,11 @@ func main() {
 		eephttpd.SetReduceIdleQuantity(config.ReduceIdleQuantity),
 		eephttpd.SetAccessListType(config.AccessListType),
 		eephttpd.SetAccessList(config.AccessList),
-        eephttpd.SetServeDir(*directory),
+		eephttpd.SetServeDir(*directory),
 	)
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	if eepsite != nil {
 		log.Println("Starting server")

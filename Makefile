@@ -10,6 +10,9 @@ eephttpd=eephttpd
 echo:
 	echo $(GOPATH)
 
+fmt:
+	find . -name '*.go' -exec gofmt -w -s {} \;
+
 orig:
 	tar --exclude=.git --exclude=debian -czvf ../eephttpd_0.0~git20181031.a4b6058.orig.tar.gz .
 
