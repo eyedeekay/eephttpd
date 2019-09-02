@@ -18,7 +18,7 @@ deps:
 	go get -u "github.com/eyedeekay/sam-forwarder/config"
 
 build:
-	go build -a -tags netgo -ldflags '-w -extldflags "-static"'
+	cd eephttpd && go build -a -tags netgo -ldflags '-w -extldflags "-static"'
 
 release: deps build
 
