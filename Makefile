@@ -26,7 +26,7 @@ build:
 release: deps build
 
 install:
-	install -m755 $(eephttpd) /usr/bin/$(eephttpd)
+	install -m755 $(eephttpd)/$(eephttpd) /usr/bin/$(eephttpd)
 
 docker:
 	docker build --no-cache -f Dockerfile -t eyedeekay/$(eephttpd) .
