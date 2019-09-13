@@ -2,3 +2,4 @@
 *.crt
 *.key
 .go
+*/*.i2pkeys

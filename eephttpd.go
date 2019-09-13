@@ -14,7 +14,7 @@ import (
 //EepHttpd is a structure which automatically configured the forwarding of
 //a local service to i2p over the SAM API.
 type EepHttpd struct {
-	Forwarder samtunnel.SAMTunnel
+	*samforwarder.SAMForwarder
 	ServeDir  string
 	up        bool
 	mark      *markdown.Markdown
@@ -23,7 +23,7 @@ type EepHttpd struct {
 var err error
 
 func (f *EepHttpd) Config() *i2ptunconf.Conf {
-	return f.Forwarder.Config()
+	return f.SAMForwarder.Config()
 }
 
 func (f *EepHttpd) ID() string {
@@ -31,15 +31,15 @@ func (f *EepHttpd) ID() string {
 }
 
 func (f *EepHttpd) Keys() i2pkeys.I2PKeys {
-	return f.Forwarder.Keys()
+	return f.SAMForwarder.Keys()
 }
 
 func (f *EepHttpd) Cleanup() {
-	f.Forwarder.Cleanup()
+	f.SAMForwarder.Cleanup()
 }
 
 func (f *EepHttpd) GetType() string {
-	return f.Forwarder.GetType()
+	return f.SAMForwarder.GetType()
 }
 
 /*func (f *EepHttpd) targetForPort443() string {
@@ -50,40 +50,40 @@ func (f *EepHttpd) GetType() string {
 }*/
 
 func (f *EepHttpd) Props() map[string]string {
-	return f.Forwarder.Props()
+	return f.SAMForwarder.Props()
 }
 
 func (f *EepHttpd) Print() string {
-	return f.Forwarder.Print()
+	return f.SAMForwarder.Print()
 }
 
 func (f *EepHttpd) Search(search string) string {
-	return f.Forwarder.Search(search)
+	return f.SAMForwarder.Search(search)
 }
 
 // Target returns the host:port of the local service you want to forward to i2p
 func (f *EepHttpd) Target() string {
-	return f.Forwarder.Target()
+	return f.SAMForwarder.Target()
 }
 
 //Base32 returns the base32 address where the local service is being forwarded
 func (f *EepHttpd) Base32() string {
-	return f.Forwarder.Base32()
+	return f.SAMForwarder.Base32()
 }
 
 //Base32Readable returns the base32 address where the local service is being forwarded
 func (f *EepHttpd) Base32Readable() string {
-	return f.Forwarder.Base32Readable()
+	return f.SAMForwarder.Base32Readable()
 }
 
 //Base64 returns the base64 address where the local service is being forwarded
 func (f *EepHttpd) Base64() string {
-	return f.Forwarder.Base64()
+	return f.SAMForwarder.Base64()
 }
 
 func (f *EepHttpd) ServeParent() {
 	log.Println("Starting eepsite server", f.Base32())
-	if err = f.Forwarder.Serve(); err != nil {
+	if err = f.SAMForwarder.Serve(); err != nil {
 		f.Cleanup()
 	}
 }
@@ -101,7 +101,7 @@ func (f *EepHttpd) Serve() error {
 }
 
 func (f *EepHttpd) Up() bool {
-	if f.Forwarder.Up() {
+	if f.SAMForwarder.Up() {
 		return true
 	}
 	return false
@@ -109,18 +109,18 @@ func (f *EepHttpd) Up() bool {
 
 //Close shuts the whole thing down.
 func (f *EepHttpd) Close() error {
-	return f.Forwarder.Close()
+	return f.SAMForwarder.Close()
 }
 
 func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 	if !s.up {
 		log.Println("Started putting tunnel up")
 	}
-	f, e := s.Forwarder.Load()
+	f, e := s.SAMForwarder.Load()
 	if e != nil {
 		return nil, e
 	}
-	s.Forwarder = f.(*samforwarder.SAMForwarder)
+	s.SAMForwarder = f.(*samforwarder.SAMForwarder)
 	s.mark = markdown.New(markdown.XHTMLOutput(true))
 	s.up = true
 	log.Println("Finished putting tunnel up")
@@ -135,14 +135,14 @@ func NewEepHttpd(host, port string) (*EepHttpd, error) {
 //NewEepHttpdFromOptions makes a new SAM forwarder with default options, accepts host:port arguments
 func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	var s EepHttpd
-	s.Forwarder = &samforwarder.SAMForwarder{}
+	s.SAMForwarder = &samforwarder.SAMForwarder{}
 	log.Println("Initializing eephttpd")
 	for _, o := range opts {
 		if err := o(&s); err != nil {
 			return nil, err
 		}
 	}
-	s.Forwarder.Config().SaveFile = true
+	s.SAMForwarder.Config().SaveFile = true
 	log.Println("Options loaded", s.Print())
 	l, e := s.Load()
 	if e != nil {
