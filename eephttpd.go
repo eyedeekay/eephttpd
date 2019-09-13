@@ -4,10 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/eyedeekay/sam-forwarder/config"
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
-	"github.com/eyedeekay/sam3/i2pkeys"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
@@ -22,63 +20,9 @@ type EepHttpd struct {
 
 var err error
 
-func (f *EepHttpd) Config() *i2ptunconf.Conf {
-	return f.SAMForwarder.Config()
-}
-
-func (f *EepHttpd) ID() string {
-	return f.Config().ID()
-}
-
-func (f *EepHttpd) Keys() i2pkeys.I2PKeys {
-	return f.SAMForwarder.Keys()
-}
-
-func (f *EepHttpd) Cleanup() {
-	f.SAMForwarder.Cleanup()
-}
 
 func (f *EepHttpd) GetType() string {
-	return f.SAMForwarder.GetType()
-}
-
-/*func (f *EepHttpd) targetForPort443() string {
-	if f.TargetForPort443 != "" {
-		return "targetForPort.4443=" + f.TargetHost + ":" + f.TargetForPort443
-	}
-	return ""
-}*/
-
-func (f *EepHttpd) Props() map[string]string {
-	return f.SAMForwarder.Props()
-}
-
-func (f *EepHttpd) Print() string {
-	return f.SAMForwarder.Print()
-}
-
-func (f *EepHttpd) Search(search string) string {
-	return f.SAMForwarder.Search(search)
-}
-
-// Target returns the host:port of the local service you want to forward to i2p
-func (f *EepHttpd) Target() string {
-	return f.SAMForwarder.Target()
-}
-
-//Base32 returns the base32 address where the local service is being forwarded
-func (f *EepHttpd) Base32() string {
-	return f.SAMForwarder.Base32()
-}
-
-//Base32Readable returns the base32 address where the local service is being forwarded
-func (f *EepHttpd) Base32Readable() string {
-	return f.SAMForwarder.Base32Readable()
-}
-
-//Base64 returns the base64 address where the local service is being forwarded
-func (f *EepHttpd) Base64() string {
-	return f.SAMForwarder.Base64()
+	return "eephttpd"
 }
 
 func (f *EepHttpd) ServeParent() {
