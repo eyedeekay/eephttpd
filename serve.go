@@ -1,14 +1,14 @@
 package eephttpd
 
 import (
-    "log"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"path/filepath"
 	"strings"
 
-    "github.com/d5/tengo/script"
+	"github.com/d5/tengo/script"
 )
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
@@ -16,46 +16,45 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 		f.HandleMarkdown(rw, rq)
 		return
 	}
-    if strings.HasSuffix(rq.URL.Path, ".tengo") {
+	if strings.HasSuffix(rq.URL.Path, ".tengo") {
 		f.HandleScript(rw, rq)
-	    return
+		return
 	}
 	f.HandleFile(rw, rq)
 }
 
-func (f *EepHttpd) checkURL(rq *http.Request) string{
-    p := rq.URL.Path
-    if rq.URL.Path == "/" {
-        p = "/index.html"
-    }
+func (f *EepHttpd) checkURL(rq *http.Request) string {
+	p := rq.URL.Path
+	if rq.URL.Path == "/" {
+		p = "/index.html"
+	}
 	log.Println(p)
-    return filepath.Join(f.ServeDir, p)
+	return filepath.Join(f.ServeDir, p)
 }
 
 func (f *EepHttpd) HandleScript(rw http.ResponseWriter, rq *http.Request) {
-    path := f.checkURL(rq)
+	path := f.checkURL(rq)
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
-        log.Println(err)
+		log.Println(err)
 		return
 	}
-    scr := script.New(bytes)
-    com, err := scr.Compile()
+	scr := script.New(bytes)
+	com, err := scr.Compile()
 	if err != nil {
-        log.Println(err)
+		log.Println(err)
 		panic(err)
 	}
-    if err := com.Run(); err != nil {
-        log.Println(err)
+	if err := com.Run(); err != nil {
+		log.Println(err)
 		panic(err)
 	}
-    response := com.Get("response")
-    fmt.Fprintf(rw, response.String())
+	response := com.Get("response")
+	fmt.Fprintf(rw, response.String())
 }
 
-
 func (f *EepHttpd) HandleMarkdown(rw http.ResponseWriter, rq *http.Request) {
-    path := f.checkURL(rq)
+	path := f.checkURL(rq)
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		return
@@ -73,6 +72,6 @@ func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {
 }
 
 func (f *EepHttpd) HandleMissing(rw http.ResponseWriter, rq *http.Request) {
-    path := f.checkURL(rq)
+	path := f.checkURL(rq)
 	fmt.Fprintf(rw, "ERROR %s NOT FOUND", strings.Replace(path, f.ServeDir, "", -1))
 }

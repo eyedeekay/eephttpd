@@ -13,13 +13,12 @@ import (
 //a local service to i2p over the SAM API.
 type EepHttpd struct {
 	*samforwarder.SAMForwarder
-	ServeDir  string
-	up        bool
-	mark      *markdown.Markdown
+	ServeDir string
+	up       bool
+	mark     *markdown.Markdown
 }
 
 var err error
-
 
 func (f *EepHttpd) GetType() string {
 	return "eephttpd"
