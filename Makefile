@@ -12,10 +12,14 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.6
+VERSION=0.0.7
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
+
+mod:
+	go get -u github.com/$(USER_GH)/$(packagename)@v$(VERSION)
+
 
 fmt:
 	find . -name '*.go' -exec gofmt -w -s {} \;

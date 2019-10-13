@@ -9,7 +9,7 @@ require (
 	github.com/cryptix/go v1.5.0 // indirect
 	github.com/d5/tengo v1.24.3
 	github.com/eyedeekay/outproxy v0.0.0-20190913044809-33f1668ccb7d // indirect
-	github.com/eyedeekay/sam-forwarder v0.32.082
+	github.com/eyedeekay/sam-forwarder v0.0.0-20190928041036-d2f767dbe008
 	github.com/eyedeekay/sam3 v0.0.0-20190730185140-f8d54526ea25
 	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
