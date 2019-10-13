@@ -83,8 +83,8 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 		}
 	}
 	s.SAMForwarder.Config().SaveFile = true
-	log.Println("Options loaded", s.Print())
 	l, e := s.Load()
+    //log.Println("Options loaded", s.Print())
 	if e != nil {
 		return nil, e
 	}
