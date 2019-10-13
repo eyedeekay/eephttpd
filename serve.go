@@ -23,11 +23,29 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	f.HandleFile(rw, rq)
 }
 
+func FileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	if info != nil {
+		return !info.IsDir()
+	}
+	return false
+}
+
 func (f *EepHttpd) checkURL(rq *http.Request) string {
 	p := rq.URL.Path
 	if rq.URL.Path == "/" {
 		p = "/index.html"
 	}
+    if !FileExists(filepath.Join(f.ServeDir, p)) {
+        p = "/README.md"
+
+    }
+    if FileExists(filepath.Join(f.ServeDir, "/index.tengo")) {
+        p = "/index.tengo"
+    }
 	log.Println(p)
 	return filepath.Join(f.ServeDir, p)
 }
