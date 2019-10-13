@@ -44,10 +44,7 @@ func (f *EepHttpd) Serve() error {
 }
 
 func (f *EepHttpd) Up() bool {
-	if f.SAMForwarder.Up() {
-		return true
-	}
-	return false
+    return f.up
 }
 
 //Close shuts the whole thing down.
