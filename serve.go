@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-    "os"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -40,13 +40,15 @@ func (f *EepHttpd) checkURL(rq *http.Request) string {
 	if rq.URL.Path == "/" {
 		p = "/index.html"
 	}
-    if !FileExists(filepath.Join(f.ServeDir, p)) {
-        p = "/README.md"
+	if !FileExists(filepath.Join(f.ServeDir, p)) {
+		p = "/README.md"
 
-    }
-    if FileExists(filepath.Join(f.ServeDir, "/index.tengo")) {
-        p = "/index.tengo"
-    }
+	}
+	if !FileExists(filepath.Join(f.ServeDir, p)) {
+		if FileExists(filepath.Join(f.ServeDir, "/index.tengo")) {
+			p = "/index.tengo"
+		}
+	}
 	log.Println(p)
 	return filepath.Join(f.ServeDir, p)
 }

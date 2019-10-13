@@ -44,7 +44,7 @@ func (f *EepHttpd) Serve() error {
 }
 
 func (f *EepHttpd) Up() bool {
-    return f.up
+	return f.up
 }
 
 //Close shuts the whole thing down.
@@ -84,7 +84,7 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	}
 	s.SAMForwarder.Config().SaveFile = true
 	l, e := s.Load()
-    //log.Println("Options loaded", s.Print())
+	//log.Println("Options loaded", s.Print())
 	if e != nil {
 		return nil, e
 	}
