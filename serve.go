@@ -15,7 +15,7 @@ import (
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
 	if strings.HasPrefix(rq.Header.Get("X-User-Agent"), "git") {
-		f.HandleFile(rw, rq)
+		f.HandleGit(rw, rq)
 	}
 	if strings.HasSuffix(rp, ".md") {
 		f.HandleMarkdown(rw, rq)
@@ -85,6 +85,10 @@ func (f *EepHttpd) HandleMarkdown(rw http.ResponseWriter, rq *http.Request) {
 		return
 	}
 	f.mark.Render(rw, bytes)
+}
+
+func (f *EepHttpd) HandleGit(rw http.ResponseWriter, rq *http.Request) {
+    f.Server.ServeHTTP(rw, rq)
 }
 
 func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {

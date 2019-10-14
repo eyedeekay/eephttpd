@@ -6,6 +6,7 @@ import (
 
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
+	"github.com/sosedoff/gitkit"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
@@ -13,6 +14,7 @@ import (
 //a local service to i2p over the SAM API.
 type EepHttpd struct {
 	*samforwarder.SAMForwarder
+	*gitkit.Server
 	ServeDir string
 	up       bool
 	mark     *markdown.Markdown
@@ -72,10 +74,15 @@ func NewEepHttpd(host, port string) (*EepHttpd, error) {
 	return NewEepHttpdFromOptions(SetHost(host), SetPort(port))
 }
 
+func Never(gitkit.Credential, *gitkit.Request) (bool, error) {
+	return false, nil
+}
+
 //NewEepHttpdFromOptions makes a new SAM forwarder with default options, accepts host:port arguments
 func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	var s EepHttpd
 	s.SAMForwarder = &samforwarder.SAMForwarder{}
+	s.Server = &gitkit.Server{}
 	log.Println("Initializing eephttpd")
 	for _, o := range opts {
 		if err := o(&s); err != nil {
@@ -84,6 +91,12 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	}
 	s.SAMForwarder.Config().SaveFile = true
 	l, e := s.Load()
+	s.Server = gitkit.New(gitkit.Config{
+		Dir:        s.ServeDir,
+		AutoCreate: true,
+		Auth:       true, // Turned off by default
+	})
+	s.Server.AuthFunc = Never
 	//log.Println("Options loaded", s.Print())
 	if e != nil {
 		return nil, e
