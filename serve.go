@@ -15,6 +15,7 @@ import (
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
 	if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
+        log.Println(rq.Header.Get("User-Agent"))
 		f.HandleFile(rw, rq)
         return
 	}
