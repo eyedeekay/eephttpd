@@ -14,6 +14,9 @@ import (
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
+	if strings.HasPrefix(rq.Header.Get("X-User-Agent"), "git") {
+		f.HandleFile(rw, rq)
+	}
 	if strings.HasSuffix(rp, ".md") {
 		f.HandleMarkdown(rw, rq)
 		return
@@ -46,8 +49,8 @@ func (f *EepHttpd) checkURL(rq *http.Request) string {
 	}
 	if !FileExists(filepath.Join(f.ServeDir, p)) {
 		p = filepath.Join(rq.URL.Path, "index.tengo")
-		if FileExists(filepath.Join(f.ServeDir, p)) {
-			p = filepath.Join(rq.URL.Path, "index.tengo")
+		if !FileExists(filepath.Join(f.ServeDir, p)) {
+			p = rq.URL.Path
 		}
 	}
 	log.Println(p)
