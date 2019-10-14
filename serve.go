@@ -13,11 +13,12 @@ import (
 )
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
-	if strings.HasSuffix(rq.URL.Path, ".md") {
+	rp := f.checkURL(rq)
+	if strings.HasSuffix(rp, ".md") {
 		f.HandleMarkdown(rw, rq)
 		return
 	}
-	if strings.HasSuffix(rq.URL.Path, ".tengo") {
+	if strings.HasSuffix(rp, ".tengo") {
 		f.HandleScript(rw, rq)
 		return
 	}
@@ -37,16 +38,16 @@ func FileExists(filename string) bool {
 
 func (f *EepHttpd) checkURL(rq *http.Request) string {
 	p := rq.URL.Path
-	if rq.URL.Path == "/" {
-		p = "/index.html"
+	if strings.HasSuffix(rq.URL.Path, "/") {
+		p = filepath.Join(rq.URL.Path, "index.html")
 	}
 	if !FileExists(filepath.Join(f.ServeDir, p)) {
-		p = "/README.md"
-
+		p = filepath.Join(rq.URL.Path, "README.md")
 	}
 	if !FileExists(filepath.Join(f.ServeDir, p)) {
-		if FileExists(filepath.Join(f.ServeDir, "/index.tengo")) {
-			p = "/index.tengo"
+		p = filepath.Join(rq.URL.Path, "index.tengo")
+		if FileExists(filepath.Join(f.ServeDir, p)) {
+			p = filepath.Join(rq.URL.Path, "index.tengo")
 		}
 	}
 	log.Println(p)
