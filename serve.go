@@ -14,10 +14,7 @@ import (
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
-    for k, f := range rq.Header {
-        log.Println(k,"=", f)
-    }
-	if strings.HasPrefix(rq.Header.Get("X-User-Agent"), "git") {
+	if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
 		f.HandleGit(rw, rq)
         return
 	}
