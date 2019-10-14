@@ -15,7 +15,7 @@ import (
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
 	if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
-		f.HandleGit(rw, rq)
+		f.HandleFile(rw, rq)
         return
 	}
 	if strings.HasSuffix(rp, ".md") {
