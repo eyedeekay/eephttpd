@@ -101,7 +101,7 @@ usage:
 	@echo "--------" >> USAGE.md
 	@echo "" >> USAGE.md
 	@echo "a running instance of eephttpd with the example index file is availble on" >> USAGE.md
-	@echo '[http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p](http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p)' >> USAGE.md
+	@echo '[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)' >> USAGE.md
 	@echo "" >> USAGE.md
 	@cat USAGE.md
 
