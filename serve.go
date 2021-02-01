@@ -36,6 +36,7 @@ func (f *EepHttpd) ProxyRequest(req *http.Request) *http.Request {
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
 	log.Println("rp", rp)
+	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
 	if rp == "a" {
 		client := http.Client{}
 		req := f.ProxyRequest(rq)
@@ -44,7 +45,6 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 			return
 		}
 		resp.Body.Close()
-		//	  defer resp.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 		fmt.Fprintf(rw, string(body))
 		return
