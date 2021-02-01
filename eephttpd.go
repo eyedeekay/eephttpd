@@ -12,10 +12,11 @@ import (
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
 	"github.com/eyedeekay/samtracker"
-	"github.com/gotoolkits/goTorrent/torrent"
+	"github.com/j-muller/go-torrent-parser"
 	"github.com/radovskyb/watcher"
 	"github.com/sosedoff/gitkit"
 	"gitlab.com/golang-commonmark/markdown"
+	
 )
 
 //EepHttpd is a structure which automatically configured the forwarding of
@@ -113,20 +114,24 @@ func (e *EepHttpd) HostName() string {
 }
 
 func (e *EepHttpd) MakeTorrent() error {
+	log.Println("Generating a torrent for the site.")
 	t, err := mktorrent.MakeTorrent(e.ServeDir, e.Base32(), "http://"+e.HostName()+"/", "http://"+e.HostName()+"/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a")
 	if err != nil {
 		return err
 	}
 	f, err := os.Create(filepath.Join(e.ServeDir, e.Base32()) + ".torrent")
-	defer f.Close()
 	if err != nil {
 		return err
 	}
 	t.Save(f)
-
-	mag := &torrent.MetaInfo{}
-	mag.ReadTorrentMetaInfoFile(f)
-	e.magnet = "magnet:?xt=urn:btih:" + mag.InfoHash + "=" + "http://" + e.Base32() + "/announce"
+	f.Close()
+	
+	torrent, err := gotorrentparser.ParseFromFile(filepath.Join(e.ServeDir, e.Base32()) + ".torrent")
+	if err != nil {
+	  return err
+	}
+	e.magnet = "magnet:?xt=urn:btih:" + torrent.InfoHash + "=" + "http://" + e.Base32() + "/announce"
+	log.Println("Magnet link", e.magnet)
 	return nil
 }
 

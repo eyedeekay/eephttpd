@@ -3,6 +3,7 @@ module github.com/eyedeekay/eephttpd
 go 1.12
 
 require (
+	github.com/PeteGabriel/torgo v0.0.0-20200509093753-d38b3aa2685a
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/cheggaaa/pb v1.0.29
@@ -18,6 +19,7 @@ require (
 	github.com/gorilla/sessions v1.2.0 // indirect
 	github.com/gotoolkits/goTorrent v0.0.0-20170904145641-be7ba52afe97
 	github.com/gotoolkits/gorequest v0.2.15 // indirect
+	github.com/j-muller/go-torrent-parser v0.0.0-20170523202311-f719c960746c
 	github.com/jackpal/bencode-go v1.0.0 // indirect
 	github.com/juju/errors v0.0.0-20190930114154-d42613fe1ab9 // indirect
 	github.com/juju/testing v0.0.0-20191001232224-ce9dec17d28b // indirect
@@ -28,6 +30,7 @@ require (
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f // indirect
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c // indirect
+	github.com/petegabriel/torgo v0.0.0-20200509093753-d38b3aa2685a // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/common v0.7.0 // indirect
 	github.com/prometheus/procfs v0.0.5 // indirect
