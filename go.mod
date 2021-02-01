@@ -13,7 +13,7 @@ require (
 	github.com/eyedeekay/outproxy v0.0.0-20190913044809-33f1668ccb7d // indirect
 	github.com/eyedeekay/sam-forwarder v0.32.1
 	github.com/eyedeekay/sam3 v0.32.32
-	github.com/eyedeekay/samtracker v0.0.0-20210201162706-30e8cb0b4085
+	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
 	github.com/gotoolkits/goTorrent v0.0.0-20170904145641-be7ba52afe97

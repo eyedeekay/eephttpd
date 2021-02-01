@@ -154,10 +154,9 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 			return nil, err
 		}
 	}
-	s.SamTracker.Init()
 	s.SamTracker.Config().SaveFile = true
 	pp, _ := strconv.Atoi(s.SamTracker.Config().TargetPort)
-	s.SamTracker.Config().TargetPort = strconv.Itoa(pp + 1)
+	s.SamTracker.InitTarget(s.SamTracker.Config().TargetHost+":"+strconv.Itoa(pp + 1))
 	//	s.tracker.SamTracker = s.SamTracker
 	l, e := s.Load()
 	s.Server = gitkit.New(gitkit.Config{
