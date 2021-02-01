@@ -1,17 +1,17 @@
 <h1 id="eephttpd">eephttpd</h1>
-<p>So, basically everything I put on i2p is a bunch of static files. Until now, I tried to host them using darkhttpd(a fork of lighttpd from Alpine which functions as a static Web Server) and by adding tunnel configuration information to tunnels.conf for i2pd. This is easier than manipulating a web interface, but still tedious and kind of error-prone. So instead, this serves simple static sites directly to i2p via the SAM API.</p>
-<p>to build:</p>
-<pre><code>    git clone https://github.com/eyedeekay/eephttpd &amp;&amp; cd eephttpd
-    go get -u &quot;github.com/eyedeekay/sam-forwarder&quot;
-    go get -u &quot;github.com/eyedeekay/sam-forwarder/config&quot;
-    go build</code></pre>
-<p>to run:</p>
-<pre><code>    ./eephttpd</code></pre>
-<p>will serve the files from ./www, and store i2p keys in the working directory.</p>
-<h2 id="usage"><a href="USAGE.md">Usage</a></h2>
+<p>So much for a simple static file server.</p>
+<p>eepHttpd is a web hosting tool for content in I2P, I2P sites, and I2P torrents. On it’s own, it’s basically a static directory server with limited scripting abilities written in pure-Go.</p>
+<p>However, it responds differently to different kinds of interaction.</p>
+<ol type="1">
+<li>If a Git client attempts to access it, then they will be able to clone the entire site, up from the document root(So <strong>Use this for things</strong> <strong>You want to <em>SHARE ANONYMOUSLY</em> with a large audience</strong>, not for things you want to keep secret.) This allows people to clone the site in order to mirror it.</li>
+<li>When any file is changed in the docroot, eephttpd generates a multi-file torrent of the site and places it in the docroot under the file name <code>$SITEHOSTNAME.torrent</code>. This allows people to mirror the site’s exact content, and participate in keeping the site’s content up.</li>
+<li>When a browser with I2P in Private Browsing connects to it, it creates a magnet link and replies with it as an <code>X-I2P-TORRENTLOCATION</code> header. In this way, the browser can help the user download the whole web site using Bittorrent and substitute HTTP resources for Bittorrent resources when they are ready.</li>
+<li>If a Torrent client attempts to access the <code>/a</code> URL, it is forwarded to an Open Torrent Tracker. <strong>Every single eephttpd site is also an open</strong> <strong>torrent tracker.</strong> Moreover, every single eephttpd site treats itself as the primary tracker for the whole-site torrent it generates. <strong>This is</strong> <strong>intended to encourage the distribution of <em>open trackers</em> on I2P.</strong></li>
+</ol>
+<p>So… more to come on why this is cool.</p>
 <h1 id="eephttpd---static-file-server-automatically-forwarded-to-i2p">eephttpd - Static file server automatically forwarded to i2p</h1>
-<h2 id="usage-1">usage:</h2>
-<p>eephttpd is a static http server which automatically runs on i2p with the help of the SAM bridge. By default it will only be available from the localhost and it's i2p tunnel. It can be masked from the localhost using a container.</p>
+<h2 id="usage">usage:</h2>
+<p>eephttpd is a static http server which automatically runs on i2p with the help of the SAM bridge. By default it will only be available from the localhost and it’s i2p tunnel. It can be masked from the localhost using a container.</p>
 <pre><code>Usage of ./eephttpd:
   -a string
         hostname to serve on (default &quot;127.0.0.1&quot;)
@@ -81,4 +81,4 @@
     --volumes-from eephttpd-volume \
     eyedeekay/eephttpd</code></pre>
 <h2 id="instance">instance</h2>
-<p>a running instance of eephttpd with the example index file is availble on <a href="http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p" class="uri">http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p</a></p>
+<p>a running instance of eephttpd with the example index file is availble on <a href="http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p">http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p</a></p>
