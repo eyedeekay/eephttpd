@@ -75,6 +75,7 @@ func SetPort(s string) func(*EepHttpd) error {
 		if err != nil {
 			return fmt.Errorf("Invalid TCP Server Target Port %s; non-number ", s)
 		}
+		//		port++
 		if port < 65536 && port > -1 {
 			c.SAMForwarder.Config().TargetPort = s
 			return nil

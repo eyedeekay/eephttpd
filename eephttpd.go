@@ -16,14 +16,12 @@ import (
 	"github.com/radovskyb/watcher"
 	"github.com/sosedoff/gitkit"
 	"gitlab.com/golang-commonmark/markdown"
-	
 )
 
 //EepHttpd is a structure which automatically configured the forwarding of
 //a local service to i2p over the SAM API.
 type EepHttpd struct {
 	*samtracker.SamTracker
-	//tracker
 	*gitkit.Server
 	*watcher.Watcher
 	ServeDir string
@@ -43,6 +41,11 @@ func (f *EepHttpd) ServeParent() {
 	if err = f.SamTracker.Serve(); err != nil {
 		f.Cleanup()
 	}
+}
+
+func (f *EepHttpd) Target() string {
+	pp, _ := strconv.Atoi(f.SamTracker.Config().TargetPort)
+	return f.SamTracker.Config().TargetHost + ":" + strconv.Itoa(pp)
 }
 
 //Serve starts the SAM connection and and forwards the local host:port to i2p
@@ -125,10 +128,10 @@ func (e *EepHttpd) MakeTorrent() error {
 	}
 	t.Save(f)
 	f.Close()
-	
+
 	torrent, err := gotorrentparser.ParseFromFile(filepath.Join(e.ServeDir, e.Base32()) + ".torrent")
 	if err != nil {
-	  return err
+		return err
 	}
 	e.magnet = "magnet:?xt=urn:btih:" + torrent.InfoHash + "=" + "http://" + e.Base32() + "/announce"
 	log.Println("Magnet link", e.magnet)
@@ -161,7 +164,7 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	}
 	s.SamTracker.Config().SaveFile = true
 	pp, _ := strconv.Atoi(s.SamTracker.Config().TargetPort)
-	s.SamTracker.InitTarget(s.SamTracker.Config().TargetHost+":"+strconv.Itoa(pp + 1))
+	s.SamTracker.InitTarget(s.SamTracker.Config().TargetHost + ":" + strconv.Itoa(pp+1))
 	//	s.tracker.SamTracker = s.SamTracker
 	l, e := s.Load()
 	s.Server = gitkit.New(gitkit.Config{

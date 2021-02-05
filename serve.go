@@ -8,61 +8,82 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/d5/tengo/script"
 )
 
-func (f *EepHttpd) ProxyRequest(req *http.Request) *http.Request {
+func (f *EepHttpd) ProxyRequest(req *http.Request) (*http.Request, error) {
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 
 	// you can reassign the body if you need to parse it as multipart
 	//    req.Body = ioutil.NopCloser(bytes.NewReader(body))
 
 	// create a new url from the raw RequestURI sent by the client
-	url := fmt.Sprintf("%s://%s:%s/%s", "http", f.SamTracker.Config().TargetHost, f.SamTracker.Config().TargetPort, "a")
+	pp, err := strconv.Atoi(f.SamTracker.Config().TargetPort)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s://%s:%s/%s", "http", f.SamTracker.Config().TargetHost, strconv.Itoa(pp+1), "announce")
 	log.Println("handling http tracker request", url)
 	proxyReq, err := http.NewRequest(req.Method, url, bytes.NewReader(body))
+	if err != nil {
+		return nil, err
+	}
 
 	// We may want to filter some headers, otherwise we could just use a shallow copy
 	//
 	proxyReq.Header = req.Header
-	return proxyReq
+	return proxyReq, nil
 }
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
 	log.Println("rp", rp)
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
-	if rp == "a" {
+	if rp == "announce" {
 		client := http.Client{}
-		req := f.ProxyRequest(rq)
-		resp, err := client.Do(req)
+		req, err := f.ProxyRequest(rq)
 		if err != nil {
+			log.Println(err.Error())
 			return
 		}
-		resp.Body.Close()
+		defer req.Body.Close()
+		resp, err := client.Do(req)
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
 		fmt.Fprintf(rw, string(body))
 		return
-	}
-	if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
-		log.Println(rq.Header.Get("User-Agent"))
+
+	} else {
+		if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
+			log.Println(rq.Header.Get("User-Agent"))
+			f.HandleFile(rw, rq)
+			return
+		}
+		if strings.HasSuffix(rp, ".md") {
+			f.HandleMarkdown(rw, rq)
+			return
+		}
+		if strings.HasSuffix(rp, ".tengo") {
+			f.HandleScript(rw, rq)
+			return
+		}
 		f.HandleFile(rw, rq)
-		return
 	}
-	if strings.HasSuffix(rp, ".md") {
-		f.HandleMarkdown(rw, rq)
-		return
-	}
-	if strings.HasSuffix(rp, ".tengo") {
-		f.HandleScript(rw, rq)
-		return
-	}
-	f.HandleFile(rw, rq)
+
 }
 
 func FileExists(filename string) bool {
@@ -79,8 +100,12 @@ func FileExists(filename string) bool {
 func (f *EepHttpd) checkURL(rq *http.Request) string {
 	p := rq.URL.Path
 	if strings.HasSuffix("/"+rq.URL.Path, "/a") {
-
-		p = "a"
+		p = "announce"
+		log.Println("URL path", p)
+		return p
+	}
+	if strings.HasSuffix("/"+rq.URL.Path, "/announce") {
+		p = "announce"
 		log.Println("URL path", p)
 		return p
 	}
