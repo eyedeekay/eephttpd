@@ -12,7 +12,53 @@
 <h1 id="eephttpd---static-file-server-automatically-forwarded-to-i2p">eephttpd - Static file server automatically forwarded to i2p</h1>
 <h2 id="usage">usage:</h2>
 <p>eephttpd is a static http server which automatically runs on i2p with the help of the SAM bridge. By default it will only be available from the localhost and it’s i2p tunnel. It can be masked from the localhost using a container.</p>
-<pre><code>/bin/sh: 1: ./eephttpd: Permission denied</code></pre>
+<pre><code>Usage of ./eephttpd/eephttpd:
+  -a string
+        hostname to serve on (default &quot;127.0.0.1&quot;)
+  -b string
+        URL of a git repository to build populate the static directory with(optional)
+  -c    Use an encrypted leaseset(true or false)
+  -d string
+        the directory of static files to host(default ./www) (default &quot;./www&quot;)
+  -f string
+        Use an ini file for configuration (default &quot;none&quot;)
+  -g    Uze gzip(true or false) (default true)
+  -i    save i2p keys(and thus destinations) across reboots (default true)
+  -ib int
+        Set inbound tunnel backup quantity(0 to 5) (default 1)
+  -il int
+        Set inbound tunnel length(0 to 7) (default 3)
+  -iq int
+        Set inbound tunnel quantity(0 to 15) (default 2)
+  -iv int
+        Set inbound tunnel length variance(-7 to 7)
+  -l string
+        Type of access list to use, can be &quot;whitelist&quot; &quot;blacklist&quot; or &quot;none&quot;. (default &quot;none&quot;)
+  -m string
+        Certificate name to use (default &quot;cert&quot;)
+  -n string
+        name to give the tunnel(default eephttpd) (default &quot;eephttpd&quot;)
+  -ob int
+        Set outbound tunnel backup quantity(0 to 5) (default 1)
+  -ol int
+        Set outbound tunnel length(0 to 7) (default 3)
+  -oq int
+        Set outbound tunnel quantity(0 to 15) (default 2)
+  -ov int
+        Set outbound tunnel length variance(-7 to 7)
+  -p string
+        port to serve locally on (default &quot;7880&quot;)
+  -r    Reduce tunnel quantity when idle(true or false)
+  -rc int
+        Reduce idle tunnel quantity to X (0 to 5) (default 3)
+  -rt int
+        Reduce tunnel quantity after X (milliseconds) (default 600000)
+  -sh string
+        sam host to connect to (default &quot;127.0.0.1&quot;)
+  -sp string
+        sam port to connect to (default &quot;7656&quot;)
+  -t    Generate or use an existing TLS certificate
+  -z    Allow zero-hop, non-anonymous tunnels(true or false)</code></pre>
 <h3 id="build-in-docker">build in docker</h3>
 <pre><code>docker build --build-arg user=eephttpd \
     --build-arg path=example/www \

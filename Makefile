@@ -92,7 +92,7 @@ usage:
 	@echo "using a container." >> USAGE.md
 	@echo "" >> USAGE.md
 	@echo '```' >> USAGE.md
-	./$(eephttpd) -h  2>> USAGE.md; true
+	./$(eephttpd)/eephttpd -h  2>> USAGE.md; true
 	@echo '```' >> USAGE.md
 	@echo "" >> USAGE.md
 	make docker-cmd

@@ -154,6 +154,20 @@ func (e *EepHttpd) Pull() error {
 				return err
 			}
 			return nil
+		} else {
+			e.GitRepo, err = git.PlainOpen(e.ServeDir)
+			if err != nil {
+				return err
+			}
+			w, err := e.GitRepo.Worktree()
+			if err != nil {
+				return err
+			}
+			err = w.Pull(&git.PullOptions{RemoteName: "origin"})
+			if err != nil {
+				return err
+			}
+			return nil
 		}
 		return nil
 	}
@@ -202,12 +216,20 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	}
 
 	if s.GitURL != "" {
-		s.GitRepo, e = git.PlainClone(s.ServeDir, false, &git.CloneOptions{
-			URL:               s.GitURL,
-			RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
-		})
-		if err != nil {
-			return nil, e
+		_, err := os.Stat(filepath.Join(s.ServeDir, ".git"))
+		if os.IsNotExist(err) {
+			s.GitRepo, e = git.PlainClone(s.ServeDir, false, &git.CloneOptions{
+				URL:               s.GitURL,
+				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+			})
+			if err != nil {
+				return nil, e
+			}
+		} else {
+			s.GitRepo, e = git.PlainOpen(s.ServeDir)
+			if e != nil {
+				return nil, e
+			}
 		}
 	}
 
