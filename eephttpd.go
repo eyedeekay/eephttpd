@@ -149,6 +149,10 @@ func (e *EepHttpd) Pull() error {
 			if err != nil {
 				return err
 			}
+			err = w.Checkout(&CheckoutOptions{})
+			if err != nil {
+				return err
+			}
 			err = w.Pull(&git.PullOptions{RemoteName: "origin"})
 			if err != nil {
 				return err
@@ -160,6 +164,10 @@ func (e *EepHttpd) Pull() error {
 				return err
 			}
 			w, err := e.GitRepo.Worktree()
+			if err != nil {
+				return err
+			}
+			err = w.Checkout(&CheckoutOptions{})
 			if err != nil {
 				return err
 			}
