@@ -145,16 +145,16 @@ func (e *EepHttpd) MakeTorrent() error {
 }
 
 func (e *EepHttpd) noPull() {
-  e.pulling = false
+	e.pulling = false
 }
 
 func (e *EepHttpd) Pull() error {
-  if e.pulling {
-    return nil
-  }else{
-    e.pulling = true
-    defer e.noPull()
-  }
+	if e.pulling {
+		return nil
+	} else {
+		e.pulling = true
+		defer e.noPull()
+	}
 	if e.GitURL != "" {
 		if e.GitRepo != nil {
 			w, err := e.GitRepo.Worktree()
@@ -179,7 +179,7 @@ func (e *EepHttpd) Pull() error {
 			if err != nil {
 				return err
 			}
-			err = w.Checkout(&git.  CheckoutOptions{})
+			err = w.Checkout(&git.CheckoutOptions{})
 			if err != nil {
 				return err
 			}
