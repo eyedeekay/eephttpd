@@ -3,7 +3,9 @@ module github.com/eyedeekay/eephttpd
 go 1.12
 
 require (
+	github.com/Microsoft/go-winio v0.4.16 // indirect
 	github.com/PeteGabriel/torgo v0.0.0-20200509093753-d38b3aa2685a
+	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/cheggaaa/pb v1.0.29
@@ -15,6 +17,7 @@ require (
 	github.com/eyedeekay/sam-forwarder v0.32.1
 	github.com/eyedeekay/sam3 v0.32.32
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
+	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
 	github.com/gotoolkits/goTorrent v0.0.0-20170904145641-be7ba52afe97
@@ -24,6 +27,7 @@ require (
 	github.com/juju/errors v0.0.0-20190930114154-d42613fe1ab9 // indirect
 	github.com/juju/testing v0.0.0-20191001232224-ce9dec17d28b // indirect
 	github.com/julienschmidt/httprouter v1.3.0 // indirect
+	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kr/pty v1.1.8 // indirect
 	github.com/miolini/datacounter v0.0.0-20190724021726-aa48df3a02c1 // indirect
@@ -36,11 +40,14 @@ require (
 	github.com/prometheus/procfs v0.0.5 // indirect
 	github.com/radovskyb/watcher v1.0.7
 	github.com/satori/go.uuid v1.2.0 // indirect
+	github.com/sergi/go-diff v1.1.0 // indirect
+	github.com/shirou/gopsutil v3.21.1+incompatible // indirect
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/sosedoff/gitkit v0.2.0
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/varyoo/mktorrent v0.0.0-20180208215256-4561e0bf1bc2
+	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/zeebo/bencode v1.0.0 // indirect
 	gitlab.com/golang-commonmark/linkify v0.0.0-20200225224916-64bca66f6ad3 // indirect
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
@@ -57,3 +64,5 @@ require (
 	gopkg.in/src-d/go-git.v4 v4.13.1
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
+
+replace github.com/sosedoff/gitkit v0.2.0 => github.com/eyedeekay/gitkit v0.2.1-0.20210205215343-fbba2108e95a

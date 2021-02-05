@@ -31,6 +31,7 @@ type EepHttpd struct {
 	GitURL   string
 	Hostname string
 	up       bool
+	pulling  bool
 	magnet   string
 	mark     *markdown.Markdown
 }
@@ -143,7 +144,17 @@ func (e *EepHttpd) MakeTorrent() error {
 	return nil
 }
 
+func (e *EepHttpd) noPull() {
+  e.pulling = false
+}
+
 func (e *EepHttpd) Pull() error {
+  if e.pulling {
+    return nil
+  }else{
+    e.pulling = true
+    defer e.noPull()
+  }
 	if e.GitURL != "" {
 		if e.GitRepo != nil {
 			w, err := e.GitRepo.Worktree()
