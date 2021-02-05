@@ -29,6 +29,7 @@ type EepHttpd struct {
 	ServeDir string
 	GitRepo  *git.Repository
 	GitURL   string
+	Hostname string
 	up       bool
 	magnet   string
 	mark     *markdown.Markdown
@@ -149,7 +150,7 @@ func (e *EepHttpd) Pull() error {
 			if err != nil {
 				return err
 			}
-			err = w.Checkout(&CheckoutOptions{})
+			err = w.Checkout(&git.CheckoutOptions{})
 			if err != nil {
 				return err
 			}
@@ -167,7 +168,7 @@ func (e *EepHttpd) Pull() error {
 			if err != nil {
 				return err
 			}
-			err = w.Checkout(&CheckoutOptions{})
+			err = w.Checkout(&git.  CheckoutOptions{})
 			if err != nil {
 				return err
 			}

@@ -446,6 +446,13 @@ func SetGitURL(s string) func(*EepHttpd) error {
 	}
 }
 
+func SetHostname(s string) func(*EepHttpd) error {
+	return func(c *EepHttpd) error {
+		c.Hostname = s
+		return nil
+	}
+}
+
 //SetKeyFile sets
 func SetKeyFile(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {

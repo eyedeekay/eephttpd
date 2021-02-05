@@ -17,6 +17,11 @@ VERSION=0.0.97
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
 
+upload:
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-osx"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename).exe"
+
 mod:
 	go get -u github.com/$(USER_GH)/$(packagename)@v$(VERSION)
 
@@ -28,13 +33,20 @@ orig:
 	tar --exclude=.git --exclude=debian -czvf ../eephttpd_0.0~git20181031.a4b6058.orig.tar.gz .
 
 deps:
-	go get -u "github.com/eyedeekay/sam-forwarder"
-	go get -u "github.com/eyedeekay/sam-forwarder/config"
+	go get -u ./...
 
 build:
 	cd eephttpd && go build -a -tags netgo -ldflags '-w -extldflags "-static"'
 
-release: deps build
+build-osx:
+	cd eephttpd && GOOS=darwin GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd-osx
+
+build-windows:
+	cd eephttpd && GOOS=windows GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd.exe
+
+all: build build-osx build-windows
+
+release: deps all tag upload
 
 install:
 	install -m755 $(eephttpd)/$(eephttpd) /usr/bin/$(eephttpd)
