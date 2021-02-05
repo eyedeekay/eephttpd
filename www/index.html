@@ -1,84 +1,154 @@
-<h1 id="eephttpd">eephttpd</h1>
-<p>So much for a simple static file server.</p>
-<p>eepHttpd is a web hosting tool for content in I2P, I2P sites, and I2P torrents. On it’s own, it’s basically a static directory server with limited scripting abilities written in pure-Go.</p>
-<p>However, it responds differently to different kinds of interaction.</p>
-<ol type="1">
-<li>If a Git client attempts to access it, then they will be able to clone the entire site, up from the document root(So <strong>Use this for things</strong> <strong>You want to <em>SHARE ANONYMOUSLY</em> with a large audience</strong>, not for things you want to keep secret.) This allows people to clone the site in order to mirror it.</li>
-<li>When any file is changed in the docroot, eephttpd generates a multi-file torrent of the site and places it in the docroot under the file name <code>$SITEHOSTNAME.torrent</code>. This allows people to mirror the site’s exact content, and participate in keeping the site’s content up.</li>
-<li>When a browser with I2P in Private Browsing connects to it, it creates a magnet link and replies with it as an <code>X-I2P-TORRENTLOCATION</code> header. In this way, the browser can help the user download the whole web site using Bittorrent and substitute HTTP resources for Bittorrent resources when they are ready.</li>
-<li>If a Torrent client attempts to access the <code>/a</code> URL, it is forwarded to an Open Torrent Tracker. <strong>Every single eephttpd site is also an open</strong> <strong>torrent tracker.</strong> Moreover, every single eephttpd site treats itself as the primary tracker for the whole-site torrent it generates. <strong>This is</strong> <strong>intended to encourage the distribution of <em>open trackers</em> on I2P.</strong></li>
-</ol>
-<p>So… more to come on why this is cool.</p>
-<h1 id="eephttpd---static-file-server-automatically-forwarded-to-i2p">eephttpd - Static file server automatically forwarded to i2p</h1>
-<h2 id="usage">usage:</h2>
-<p>eephttpd is a static http server which automatically runs on i2p with the help of the SAM bridge. By default it will only be available from the localhost and it’s i2p tunnel. It can be masked from the localhost using a container.</p>
-<pre><code>Usage of ./eephttpd:
-  -a string
-        hostname to serve on (default &quot;127.0.0.1&quot;)
-  -c    Use an encrypted leaseset(true or false)
-  -d string
-        the directory of static files to host(default ./www) (default &quot;./www&quot;)
-  -f string
-        Use an ini file for configuration (default &quot;none&quot;)
-  -g    Uze gzip(true or false) (default true)
-  -i    save i2p keys(and thus destinations) across reboots (default true)
-  -ib int
-        Set inbound tunnel backup quantity(0 to 5) (default 4)
-  -il int
-        Set inbound tunnel length(0 to 7) (default 3)
-  -iq int
-        Set inbound tunnel quantity(0 to 15) (default 8)
-  -iv int
-        Set inbound tunnel length variance(-7 to 7)
-  -l string
-        Type of access list to use, can be &quot;whitelist&quot; &quot;blacklist&quot; or &quot;none&quot;. (default &quot;none&quot;)
-  -m string
-        Certificate name to use (default &quot;cert&quot;)
-  -n string
-        name to give the tunnel(default eephttpd) (default &quot;eephttpd&quot;)
-  -ob int
-        Set outbound tunnel backup quantity(0 to 5) (default 4)
-  -ol int
-        Set outbound tunnel length(0 to 7) (default 3)
-  -oq int
-        Set outbound tunnel quantity(0 to 15) (default 8)
-  -ov int
-        Set outbound tunnel length variance(-7 to 7)
-  -p string
-        port to serve locally on (default &quot;7880&quot;)
-  -r    Reduce tunnel quantity when idle(true or false)
-  -rc int
-        Reduce idle tunnel quantity to X (0 to 5) (default 3)
-  -rt int
-        Reduce tunnel quantity after X (milliseconds) (default 600000)
-  -s string
-        the directory to save the keys in(default ./) (default &quot;.&quot;)
-  -sh string
-        sam host to connect to (default &quot;127.0.0.1&quot;)
-  -sp string
-        sam port to connect to (default &quot;7656&quot;)
-  -t    Generate or use an existing TLS certificate
-  -z    Allow zero-hop, non-anonymous tunnels(true or false)</code></pre>
-<h3 id="build-in-docker">build in docker</h3>
-<pre><code>docker build --build-arg user=eephttpd \
-    --build-arg path=example/www \
-    -f Dockerfile -t \
-    eyedeekay/eephttpd .</code></pre>
-<h3 id="run-in-docker">Run in docker</h3>
-<pre><code>docker run -i -t -d \
-    --name eephttpd-volume \
-    --volume eephttpd:/opt/eephttpd/ \
-    eyedeekay/eephttpd</code></pre>
-<pre><code>docker run -i -t -d \
-    --network si \
-    --env samhost=sam-host \
-    --env samport=7656 \
-    --env args=-r # Additional arguments to pass to eephttpd\
-    --network-alias eephttpd \
-    --hostname eephttpd \
-    --name eephttpd \
-    --restart always \
-    --volumes-from eephttpd-volume \
-    eyedeekay/eephttpd</code></pre>
-<h2 id="instance">instance</h2>
-<p>a running instance of eephttpd with the example index file is availble on <a href="http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p">http://566niximlxdzpanmn4qouucvua3k7neniwss47li5r6ugoertzuq.b32.i2p</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>idk's home page</title>
+  <link rel="stylesheet" type="text/css" href ="style.css" />
+  <meta http-equiv="i2p-location" content="http://b2o47zwxqjbn7jj37yqkmvbmci7kqubwgxu3umqid7cexmc7xudq.b32.i2p"/>
+  <meta http-equiv="i2p-torrentlocation" content="magnet:?xt=urn:btih:2ce0cd7216a46f4514a1a131f06871ba53f1b38e"/>
+</head>
+<body>
+<h1>idk's home page</h1>
+
+<p>I like to make peer-to-peer things, and think we should structure the future in
+a way which builds in privacy by default in a maximally peer-to-peer way.</p>
+
+<h2>Projects:</h2>
+
+<p>Besides working on <a href="https://geti2p.net/">I2P</a>, I have a bunch of side-projects
+centered around the use of I2P, especially in Go and Javascript. Some of these
+are also I2P labs projects.</p>
+
+<h3>I2P Webextensions and Browser Research</h3>
+
+<ul>
+<li><a href="I2P-in-Private-Browsing-Mode-Firefox/">I2P in Private Browsing Mode for Firefox</a>
+inspired by Brave, this browser extension enforces a few privacy rules for
+Firefox, then implements a set of "Container Tabs" which can be used to browse
+I2P in a way which is automatic and safe.</li>
+<li><a href="I2P-Configuration-For-Chromium/">I2P Configuration Helper for Chromium</a>
+A fork of the Firefox plugin before it used container tabs, after the user sets
+up an I2P browsing profile this plugin can automatically set up the profile to
+use I2P with the maximum privacy available from Chromium.</li>
+<li><a href="I2P-Browser-Attackability-Evaluation/">I2P Browser Fingerprint Gallery</a>
+This is an ongoing evaluation of the various ways there are to configure
+browsers for I2P and a developing rating system for them.</li>
+</ul>
+
+<h3>I2P Git Hosting</h3>
+
+<p>I host git services on I2P at <a href="http://git.idk.i2p/">git.idk.i2p</a>, with a non-anonymous
+mirror available at <a href="https://i2pgit.org">i2pgit.org</a>. I provide this service freely to
+the I2P community and it is open to the public, but do have a Terms of Service which
+is predicated on my own threat model. If the TOS is not acceptable to you, I highly
+encourage you to run your own gitlab instance using the instructions I wrote, available
+on the I2P project <a href="http://i2p-projekt.i2p/en/docs/applications/gitlab">I2P Site</a> and
+on the <a href="https://geti2p.net/en/docs/applications/gitlab">Web</a>.</p>
+
+<h3>What's Weird about this I2P Site?</h3>
+
+<p>This I2P site uses an experimental feature of I2P in Private browsing called 
+X-I2P-TorrentLocation. If you are using the latest version of the extension, you
+may notice that there is a pageAction available in the URL bar(It's the little I2P
+logo). If you click that pageAction and follow the magnet link, you will begin to
+download a torrent named idk.i2p. As the torrent completes, the extension will begin
+to replace on-page resources hosted on my server with exactly the same files, except
+shared and downloaded via I2PSnark. The result is a sort of distributed, voluntary
+pseudo-CDN which makes it possible to do things like embed videos directly in your
+I2P Site and actually have them play completely. All of this is accomplished, of
+course, by cheating. If you download the torrent, the file is on your computer, so
+of course it's available in a reliable way. Besides that, even if your content
+goes down, any of your visitors will be able to reproduce your site on a new hostname,
+which may provide a level of resistance to being taken down. How it affects traffic
+flows remains to be seen, but it means that some I2P users will be fetching less
+content via their HTTP Proxies, and will be doing it less repeatedly.</p>
+
+<ul>
+<li><a href="infographics.html">InfoGraphic Gallery for testing X-I2P-TorrentLocation</a> This
+page is to test X-I2P-TorrentLocation. It embeds a bunch of large images/infographics
+I collected off of reddit and is intentionally heavy so it may be slow to load. It will
+use torrent-based resources if I2P In Private Browsing mode is installed and the idk.i2p
+torrent is downloaded.</li>
+<li><a href="video.html">Videos about I2P Gallery for testing X-I2P-TorrentLocation</a> This page
+is even heavier, it embeds videos that have to do with I2P and other crypto/privacy/overlay
+networking related topics.</li>
+<li><a href="plugins.html">Plugin Archive</a> This page is my mirror of the plugin archive at
+<a href="http://stats.i2p/i2p/plugins">stats.i2p</a>. I created one here because the <em>utility</em> of
+X-I2P-TorrentLocation is that it allows you to mingle the versatile presentation abilities
+of hypertext with redundant, peer-to-peer resources, and by using it for plugins, we can
+make it much harder to take them down by taking down their archives. The same would apply
+for any software, actually, this is just where I started.</li>
+</ul>
+
+<h3>Go(golang) I2P Tools</h3>
+
+<ul>
+<li><a href="https://github.com/eyedeekay/sam-forwarder">samcatd</a> a.k.a. sam-forwarder
+many of the other applications use sam-forwarder as a way of automatically
+configuring i2ptunnels, including:
+<ul>
+<li><a href="https://github.com/eyedeekay/httptunnel">httptunnel</a> is a standalone http
+proxy for I2P that uses SAM and implements an interface like sam-forwarder.</li>
+<li><a href="https://github.com/eyedeekay/eephttpd">eephttpd</a> is a simple static http
+server with markdown parsing support.</li>
+<li><a href="https://github.com/eyedeekay/gitsam">gitsam</a> is a super-simple git
+repository setup built on eephttpd and <a href="">gitkit</a>.</li>
+<li><a href="https://github.com/eyedeekay/reposam">reposam</a> is a binary deb repository
+built on <a href="">repogen</a>.</li>
+<li><a href="https://github.com/eyedeekay/samtracker">samtracker</a> is a simple torrent
+tracker built upon <a href="">retracker</a>.</li>
+<li><a href="https://github.com/eyedeekay/cowyosam">cowyosam</a> is a pastebin-wiki hybrid
+built on <a href="">cowyo</a></li>
+<li><a href="https://github.com/eyedeekay/colluding_sites_attack">colluding<em>sites</em>attack</a>
+is a tool for fingerprinting browsers as they visit eepSites to determine if
+useful information can be extracted.</li>
+<li><a href="https://github.com/eyedeekay/outproxy">outproxy</a> is a standalone outproxy
+built on SAM. Definitely don't use it if you don't know what you're in for.</li>
+<li><a href="https://github.com/RTradeLtd/libanonvpn">libanonvpn</a> is a VPN library and
+terminal application that uses SAM Datagrams. Sort of like onioncat, but
+cooler.</li>
+</ul></li>
+<li><a href="https://github.com/eyedeekay/checki2cp">checki2cp</a> is an I2P router presence
+detection tool. Use it to find out if an I2P router is installed.</li>
+<li><a href="https://github.com/eyedeekay/goSam">goSam</a> is a SAM library for Go that
+implements an HTTP Transport.</li>
+<li><a href="https://github.com/eyedeekay/i2pdig">i2pdig</a> is dig, but for I2P. It's been
+a while, I'll update it soon.</li>
+<li><a href="https://github.com/eyedeekay/iget">iget</a> iget is an eepget clone, with some
+extra features and room to grow.</li>
+<li><a href="https://github.com/eyedeekay/keyto">keyto</a> is a text key conversion tool.</li>
+<li><a href="https://github.com/eyedeekay/sam3">sam3</a> is another SAM library for Go, but
+it implements a net.Conn and net.Packetconn making it a near drop-in
+replacement for regular connections.</li>
+</ul>
+
+<h2>Blog:</h2>
+
+<h4>Sun Nov 26 03:21:12 EST 2017</h4>
+
+<p>Hi. This is the blog where I'm going to document all the wierd stuff I do on my
+home network. I'm most passionate about the areas where I am relatively free of
+constraints, and for me, that is in hobby computing in my own home. But since
+it's not a place with an IT staff and other organizational resources, I
+sometimes do wierd, ill-advised things to get my computers just the way I like
+them.</p>
+
+<p>Also I'm pretty bad at blogging.</p>
+
+<h4>Mon Jan 22 12:41:21 EST 2018</h4>
+
+<p>Getting nervous, about to flash an up-to-date coreboot port to my netbook via
+a ch341a flasher. I'm about 99% sure I'm not going to hurt anything, but who
+knows?</p>
+
+<h4>Tue Mar 31, 15:04:40 EST 2020</h4>
+
+<p>See, I told you I was pretty bad at blogging. Over 2 years. Lots of code though.</p>
+
+<h4>Sun Oct 11, 04:08:56 EDT 2020</h4>
+
+<p>Note to self: from now on, build the site with:</p>
+
+<p><code>make all &amp;&amp; make seed &amp;&amp; git commit -am "Example commit message" &amp;&amp; git push --all</code></p>
+  <script src="script.js" type="text/javascript"></script>
+</body>
+</html>

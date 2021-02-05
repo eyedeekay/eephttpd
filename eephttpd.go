@@ -144,13 +144,16 @@ func (e *EepHttpd) MakeTorrent() error {
 
 func (e *EepHttpd) Pull() error {
 	if e.GitURL != "" {
-		w, err := e.GitRepo.Worktree()
-		if err != nil {
-			return err
-		}
-		err = w.Pull(&git.PullOptions{RemoteName: "origin"})
-		if err != nil {
-			return err
+		if e.GitRepo != nil {
+			w, err := e.GitRepo.Worktree()
+			if err != nil {
+				return err
+			}
+			err = w.Pull(&git.PullOptions{RemoteName: "origin"})
+			if err != nil {
+				return err
+			}
+			return nil
 		}
 		return nil
 	}
