@@ -16,6 +16,8 @@ import (
 	"github.com/radovskyb/watcher"
 	"github.com/sosedoff/gitkit"
 	"gitlab.com/golang-commonmark/markdown"
+
+	"gopkg.in/src-d/go-git.v4"
 )
 
 //EepHttpd is a structure which automatically configured the forwarding of
@@ -25,6 +27,8 @@ type EepHttpd struct {
 	*gitkit.Server
 	*watcher.Watcher
 	ServeDir string
+	GitRepo  *git.Repository
+	GitURL   string
 	up       bool
 	magnet   string
 	mark     *markdown.Markdown
@@ -138,6 +142,21 @@ func (e *EepHttpd) MakeTorrent() error {
 	return nil
 }
 
+func (e *EepHttpd) Pull() error {
+	if e.GitURL != "" {
+		w, err := e.GitRepo.Worktree()
+		if err != nil {
+			return err
+		}
+		err = w.Pull(&git.PullOptions{RemoteName: "origin"})
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+	return nil
+}
+
 //NewEepHttpd makes a new SAM forwarder with default options, accepts host:port arguments
 func NewEepHttpd(host, port string) (*EepHttpd, error) {
 	return NewEepHttpdFromOptions(SetHost(host), SetPort(port))
@@ -172,10 +191,22 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 		AutoCreate: true,
 		Auth:       true, // Turned off by default
 	})
+
 	s.Server.AuthFunc = Never
 	//log.Println("Options loaded", s.Print())
 	if e != nil {
 		return nil, e
 	}
+
+	if s.GitURL != "" {
+		s.GitRepo, e = git.PlainClone(s.ServeDir, false, &git.CloneOptions{
+			URL:               s.GitURL,
+			RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+		})
+		if err != nil {
+			return nil, e
+		}
+	}
+
 	return l.(*EepHttpd), nil
 }

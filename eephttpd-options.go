@@ -439,6 +439,13 @@ func SetAccessList(s []string) func(*EepHttpd) error {
 }
 */
 
+func SetGitURL(s string) func(*EepHttpd) error {
+	return func(c *EepHttpd) error {
+		c.GitURL = s
+		return nil
+	}
+}
+
 //SetKeyFile sets
 func SetKeyFile(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {

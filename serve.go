@@ -45,6 +45,7 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
 	log.Println("rp", rp)
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
+	defer f.Pull()
 	if rp == "announce" {
 		client := http.Client{}
 		req, err := f.ProxyRequest(rq)
@@ -83,7 +84,6 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 		}
 		f.HandleFile(rw, rq)
 	}
-
 }
 
 func FileExists(filename string) bool {

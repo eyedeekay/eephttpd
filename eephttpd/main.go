@@ -29,6 +29,7 @@ var (
 	samhost            = flag.String("sh", "127.0.0.1", "sam host to connect to")
 	samport            = flag.String("sp", "7656", "sam port to connect to")
 	directory          = flag.String("d", "./www", "the directory of static files to host(default ./www)")
+	giturl             = flag.String("b", "", "URL of a git repository to build populate the static directory with(optional)")
 	usei2p             = flag.Bool("i", true, "save i2p keys(and thus destinations) across reboots")
 	servicename        = flag.String("n", "eephttpd", "name to give the tunnel(default eephttpd)")
 	useCompression     = flag.Bool("g", true, "Uze gzip(true or false)")
@@ -113,6 +114,7 @@ func main() {
 		eephttpd.SetAccessListType(config.AccessListType),
 		eephttpd.SetAccessList(config.AccessList),
 		eephttpd.SetServeDir(*directory),
+		eephttpd.SetGitURL(*giturl),
 	)
 	if err != nil {
 		log.Fatal(err)
