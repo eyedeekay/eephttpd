@@ -36,3 +36,7 @@ In order to build a .deb file, either use `checkinstall` or run:
         make orig
         debuild -us -uc
 
+or just run:
+
+        make deb
+

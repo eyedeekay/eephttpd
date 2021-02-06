@@ -23,13 +23,24 @@ upload:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Linux GUI -`sha256sum eephttpd/$(packagename)-gui`" -n "$(packagename)-gui" -f "eephttpd/$(packagename)-gui"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "OSX Terminal -`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.build"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.buildinfo"	
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.changes"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.deb"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.dsc"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION).orig.tar.gz"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION).tar.xz"
+		-l "Debian orig.tar.gz -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)_$(VERSION).orig.tar.gz" -f "../$(packagename)_$(VERSION).orig.tar.gz"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) 
+		-l "Debian tar.gz -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)_$(VERSION).tar.xz" -f "../$(packagename)_$(VERSION).tar.xz"
+
+
+upload-deb:
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
+		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.build"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
+		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.buildinfo"	
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
+		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.changes"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
+		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
+		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.dsc"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
+
 
 mod:
 	go get -u github.com/$(USER_GH)/$(packagename)@v$(VERSION)
@@ -207,4 +218,16 @@ index:
 	@echo '</html>' >> www/index.html
 	cat README.md USAGE.md | tee www/README.md
 	cp www/index.html index.html
+
+export PKG=$(package)
+
+release-debs:
+	release-pdeb stable eephttpd
+	distro=stable make upload-deb
+	release-pdeb testing eephttpd
+	distro=testing make upload-deb
+	release-pdeb unstable eephttpd
+	distro=unstable make upload-deb
+	release-pdeb focal eephttpd
+	distro=focal make upload-deb
 
