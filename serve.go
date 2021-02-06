@@ -44,7 +44,7 @@ func (f *EepHttpd) ProxyRequest(req *http.Request) (*http.Request, error) {
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
-		mtype, err := mimetype.DetectFile(rp)
+	mtype, err := mimetype.DetectFile(rp)
 	if err != nil {
 		log.Println("MIME type determination error.", err.Error())
 	}
