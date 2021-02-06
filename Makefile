@@ -18,11 +18,11 @@ tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
 
 upload:
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-gui"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-osx"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-osx-gui"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename).exe"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename).exe`" -n "$(packagename).exe" -f "eephttpd/$(packagename).exe"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "eephttpd/$(packagename)"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)-gui`" -n "$(packagename)-gui" -f "eephttpd/$(packagename)-gui"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
 
 mod:
 	go get -u github.com/$(USER_GH)/$(packagename)@v$(VERSION)
@@ -69,7 +69,7 @@ build-windows:
 		CGO_ENABLED=1 \
 		CXX=x86_64-w64-mingw32-g++ \
 		CC=x86_64-w64-mingw32-gcc \
-		go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd.exe
+		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd.exe
 
 all: build build-gui build-osx build-osx-gui build-windows
 
