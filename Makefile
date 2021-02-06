@@ -18,11 +18,18 @@ tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
 
 upload:
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename).exe`" -n "$(packagename).exe" -f "eephttpd/$(packagename).exe"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "eephttpd/$(packagename)"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)-gui`" -n "$(packagename)-gui" -f "eephttpd/$(packagename)-gui"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
-	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Windows -`sha256sum eephttpd/$(packagename).exe`" -n "$(packagename).exe" -f "eephttpd/$(packagename).exe"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Linux Terminal -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "eephttpd/$(packagename)"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Linux GUI -`sha256sum eephttpd/$(packagename)-gui`" -n "$(packagename)-gui" -f "eephttpd/$(packagename)-gui"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "OSX Terminal -`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.build"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.buildinfo"	
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.changes"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.deb"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION)_amd64.dsc"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION).orig.tar.gz"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) -l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "../$(packagename)_$(VERSION).tar.xz"
 
 mod:
 	go get -u github.com/$(USER_GH)/$(packagename)@v$(VERSION)
@@ -31,7 +38,7 @@ mod:
 fmt:
 	find . -name '*.go' -exec gofmt -w -s {} \;
 
-deb: all
+deb:
 	go mod vendor
 	make orig
 	debuild
@@ -76,12 +83,13 @@ build-windows:
 		CC=x86_64-w64-mingw32-gcc \
 		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd.exe
 
-all: deps build build-gui build-osx build-osx-gui build-windows
+all: deps build build-gui build-osx build-osx-gui build-windows deb
 
 release: deps all tag upload
 
 install:
 	install -m755 $(eephttpd)/$(eephttpd) /usr/bin/$(eephttpd)
+	install -m755 $(eephttpd)/$(eephttpd)-gui /usr/bin/$(eephttpd)-gui
 
 docker:
 	docker build --no-cache -f Dockerfile -t eyedeekay/$(eephttpd) .
