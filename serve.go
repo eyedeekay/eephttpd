@@ -44,7 +44,11 @@ func (f *EepHttpd) ProxyRequest(req *http.Request) (*http.Request, error) {
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	rp := f.checkURL(rq)
-	log.Println("rp", rp)
+		mtype, err := mimetype.DetectFile(rp)
+	if err != nil {
+		log.Println("MIME type determination error.", err.Error())
+	}
+	rw.Header().Set("content-type", mtype.String())
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
 	defer f.Pull()
 	if rp == "announce" {
@@ -163,11 +167,6 @@ func (f *EepHttpd) HandleGit(rw http.ResponseWriter, rq *http.Request) {
 
 func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {
 	path := f.checkURL(rq)
-	mtype, err := mimetype.DetectFile(path)
-	if err != nil {
-		log.Println("MIME type determination error.", err.Error())
-	}
-	rw.Header().Set("content-type", mtype.String())
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		f.HandleMissing(rw, rq)
