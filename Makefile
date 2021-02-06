@@ -12,7 +12,7 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.9991
+VERSION=0.0.999
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
@@ -35,22 +35,28 @@ upload:
 upload-deb:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION).dsc`" \
-		-n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION).dsc"
+		-n "$(packagename)_$(VERSION).dsc" \
+		-f "deb/$(distro)/$(packagename)_$(VERSION).dsc"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION).tar.xz`" \
-		-n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION).tar.xz"
+		-n "$(packagename)_$(VERSION).tar.xz" \
+		-f "deb/$(distro)/$(packagename)_$(VERSION).tar.xz"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_amd64.buildinfo`" \
-		-n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.buildinfo"
+		-n "$(packagename)_$(VERSION)_amd64.buildinfo" \
+		-f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.buildinfo"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_amd64.changes`" \
-		-n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.changes"
+		-n "$(packagename)_$(VERSION)_amd64.changes" \
+		-f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.changes"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb`" \
-		-n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb"
+		-n "$(packagename)_$(VERSION)_amd64.deb" \
+		-f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_source.changes" \
-		-n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_source.changes"
+		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_source.changes"s \
+		-n "$(packagename)_$(VERSION)_source.changes" \
+		-f "deb/$(distro)/$(packagename)_$(VERSION)_source.changes"
 
 
 mod:
