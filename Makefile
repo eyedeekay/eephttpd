@@ -30,15 +30,15 @@ upload:
 
 upload-deb:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.build"
+		-l "Debian($(distro) only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.build"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.buildinfo"	
+		-l "Debian($(distro) only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.buildinfo"	
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.changes"
+		-l "Debian($(distro) only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.changes"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb"
+		-l "Debian($(distro) only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian(Sid only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.dsc"
+		-l "Debian($(distro) only) -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.dsc"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 
 
@@ -221,13 +221,13 @@ index:
 
 export PKG=$(package)
 
-release-debs:
+release-debs: tag
 	release-pdeb stable eephttpd
 	distro=stable make upload-deb
-	release-pdeb testing eephttpd
-	distro=testing make upload-deb
-	release-pdeb unstable eephttpd
-	distro=unstable make upload-deb
-	release-pdeb focal eephttpd
-	distro=focal make upload-deb
+#	release-pdeb testing eephttpd
+#	distro=testing make upload-deb
+#	release-pdeb unstable eephttpd
+#	distro=unstable make upload-deb
+#	release-pdeb focal eephttpd
+#	distro=focal make upload-deb
 
