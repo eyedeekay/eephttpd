@@ -145,7 +145,7 @@ func (e *EepHttpd) MakeTorrent() error {
 	if err != nil {
 		return err
 	}
-	e.magnet = "magnet:?xt=urn:btih:" + torrent.InfoHash + "=" + "http://" + e.Base32() + "/announce"
+	e.magnet = "magnet:?xt=urn:btih:" + torrent.InfoHash + "&tr=" + "http://" + e.Base32() + "/announce"
 	log.Println("Magnet link", e.magnet)
 	return nil
 }
