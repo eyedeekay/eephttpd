@@ -43,6 +43,9 @@ func (f *EepHttpd) ProxyRequest(req *http.Request) (*http.Request, error) {
 }
 
 func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
+	//	Content-Security-Policy: default-src 'self' trusted.com *.trusted.com
+	csp := []string{"default-src: 'self' " + f.Base32(), "script-src: 'self' " + f.Base32()}
+	rw.Header().Set("Content-Security-Policy", strings.Join(csp, "; "))
 	rp := f.checkURL(rq)
 	mtype, err := mimetype.DetectFile(rp)
 	if err != nil {
@@ -52,7 +55,10 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	}
 	rw.Header().Set("Content-Type", mtype.String())
 	if strings.HasSuffix(rq.URL.Path, ".css") {
-		rw.Header().Set("Content-Type", "text/stylesheet")
+		rw.Header().Set("Content-Type", "text/css")
+	}
+	if strings.HasSuffix(rq.URL.Path, ".js") {
+		rw.Header().Set("Content-Type", "text/javascript")
 	}
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
 	defer f.Pull()
