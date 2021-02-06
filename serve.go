@@ -181,7 +181,8 @@ func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {
 	if err != nil {
 		f.HandleMissing(rw, rq)
 	}
-	fmt.Fprintf(rw, string(bytes))
+	rw.Write(bytes)
+//	fmt.Fprintf(rw, string(bytes))
 }
 
 func (f *EepHttpd) HandleMissing(rw http.ResponseWriter, rq *http.Request) {
