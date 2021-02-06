@@ -19,6 +19,7 @@ require (
 	github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9
 	github.com/eyedeekay/sam3 v0.32.32
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
+	github.com/gabriel-vasile/mimetype v1.1.2
 	github.com/getlantern/golog v0.0.0-20201105130739-9586b8bde3a9 // indirect
 	github.com/getlantern/hidden v0.0.0-20201229170000-e66e7f878730 // indirect
 	github.com/getlantern/ops v0.0.0-20200403153110-8476b16edcd6 // indirect
