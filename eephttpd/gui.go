@@ -82,6 +82,7 @@ func makeBasicControlsPage() ui.Control {
 }
 
 func UiMain() {
+	gui = true
 	ui.Main(IniEdit)
 }
 

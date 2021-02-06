@@ -8,12 +8,15 @@ import (
 	"os/user"
 	"path/filepath"
 	"runtime"
+	"time"
 )
 
 import (
 	"github.com/eyedeekay/eephttpd"
 	"github.com/eyedeekay/sam-forwarder/config"
 )
+
+var gui = false
 
 var cfg = &tls.Config{
 	MinVersion:               tls.VersionTLS12,
@@ -76,7 +79,6 @@ var eepsite *eephttpd.EepHttpd
 func main() {
 	flag.Parse()
 	var err error
-	go UiMain()
 	config := i2ptunconf.NewI2PBlankTunConf()
 	if *iniFile != "none" {
 		var err error
@@ -151,6 +153,9 @@ func main() {
 		log.Fatal(err)
 	}
 
+	go UiMain()
+	time.Sleep(time.Second)
+	go runTray()
 	if eepsite != nil {
 		log.Println("Starting server")
 		if err = eepsite.Serve(); err != nil {

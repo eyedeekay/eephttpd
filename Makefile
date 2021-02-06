@@ -12,7 +12,7 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.991
+VERSION=0.0.992
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
@@ -51,14 +51,14 @@ build-osx:
 	cd eephttpd && \
 		GOOS=darwin && \
 		GOARCH=amd64 && \
-		go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd-osx
+		go build -a -tags netgo -o eephttpd-osx
 
 build-osx-gui:
 	cd eephttpd && \
 		GOOS=darwin && \
 		GOARCH=amd64 && \
 		CGO_ENABLED=1 && \
-		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd-osx-gui
+		go build -a -tags "netgo gui" -o eephttpd-osx-gui
 
 #-a -tags netgo -ldflags '-w -extldflags "-static"'
 
