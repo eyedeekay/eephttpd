@@ -12,14 +12,16 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.99
+VERSION=0.0.991
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
 
 upload:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-gui"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-osx"
+	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename)-osx-gui"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t $(VERSION) -l `sha256sum ` -n "$(packagename)" -f "eephttpd/$(packagename).exe"
 
 mod:
@@ -69,7 +71,7 @@ build-windows:
 		CC=x86_64-w64-mingw32-gcc \
 		go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd.exe
 
-all: build build-osx build-windows
+all: build build-gui build-osx build-osx-gui build-windows
 
 release: deps all tag upload
 
