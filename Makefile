@@ -12,7 +12,7 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.996
+VERSION=0.0.997
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
@@ -179,3 +179,4 @@ docker-cmd:
 
 index:
 	pandoc README.md USAGE.md -o www/index.html
+	cat README.md USAGE.md | tee www/README.md
