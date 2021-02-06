@@ -1,6 +1,7 @@
 package eephttpd
 
 import (
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -30,6 +31,7 @@ type EepHttpd struct {
 	GitRepo  *git.Repository
 	GitURL   string
 	Hostname string
+	IniFile  string
 	up       bool
 	pulling  bool
 	magnet   string
@@ -144,8 +146,46 @@ func (e *EepHttpd) MakeTorrent() error {
 	return nil
 }
 
+func (e *EepHttpd) Print() string {
+	pr := e.Config().Print()
+	pr += "servedir=" + e.ServeDir + "\n"
+	pr += "gitrepo=" + e.GitURL + "\n"
+	return pr
+}
+
+func (e *EepHttpd) Save() error {
+	if e.IniFile == "none" {
+		e.IniFile = "eephttpd.ini"
+	}
+	return ioutil.WriteFile(e.IniFile, []byte(e.Print()), 0644)
+}
+
 func (e *EepHttpd) noPull() {
 	e.pulling = false
+}
+
+func (e *EepHttpd) ResetGit() error {
+	if e.GitURL != "" {
+		log.Println("Resetting git repository to", e.GitURL)
+		os.RemoveAll(filepath.Join(e.ServeDir))
+		os.Mkdir(filepath.Join(e.ServeDir), 0755)
+		_, err := os.Stat(filepath.Join(e.ServeDir, ".git"))
+		if os.IsNotExist(err) {
+			e.GitRepo, err = git.PlainClone(e.ServeDir, false, &git.CloneOptions{
+				URL:               e.GitURL,
+				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+			})
+			if err != nil {
+				return err
+			}
+		} else {
+			e.GitRepo, err = git.PlainOpen(e.ServeDir)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
 }
 
 func (e *EepHttpd) Pull() error {
@@ -155,6 +195,25 @@ func (e *EepHttpd) Pull() error {
 		e.pulling = true
 		defer e.noPull()
 	}
+
+	if e.GitURL != "" {
+		_, err := os.Stat(filepath.Join(e.ServeDir, ".git"))
+		if os.IsNotExist(err) {
+			e.GitRepo, err = git.PlainClone(e.ServeDir, false, &git.CloneOptions{
+				URL:               e.GitURL,
+				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+			})
+			if err != nil {
+				return err
+			}
+		} else {
+			e.GitRepo, err = git.PlainOpen(e.ServeDir)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
 	if e.GitURL != "" {
 		if e.GitRepo != nil {
 			w, err := e.GitRepo.Worktree()
@@ -221,7 +280,7 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	s.SamTracker.Config().SaveFile = true
 	pp, _ := strconv.Atoi(s.SamTracker.Config().TargetPort)
 	s.SamTracker.InitTarget(s.SamTracker.Config().TargetHost + ":" + strconv.Itoa(pp+1))
-	//	s.tracker.SamTracker = s.SamTracker
+	//	s.tracker.SamTracker = e.SamTracker
 	l, e := s.Load()
 	s.Server = gitkit.New(gitkit.Config{
 		Dir:        s.ServeDir,
@@ -230,7 +289,7 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	})
 
 	s.Server.AuthFunc = Never
-	//log.Println("Options loaded", s.Print())
+	//log.Println("Options loaded", e.Print())
 	if e != nil {
 		return nil, e
 	}

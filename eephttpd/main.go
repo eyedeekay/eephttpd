@@ -4,6 +4,10 @@ import (
 	"crypto/tls"
 	"flag"
 	"log"
+	"os"
+	"os/user"
+	"path/filepath"
+	"runtime"
 )
 
 import (
@@ -23,12 +27,27 @@ var cfg = &tls.Config{
 	},
 }
 
+func wwwdir() string {
+	path := "./www"
+	if runtime.GOOS == "windows" {
+		user, err := user.Current()
+		if err != nil {
+			return "./www"
+		}
+		path = filepath.Join(user.HomeDir, "My Documents", "www")
+	}
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		os.Mkdir(path, 0755)
+	}
+	return path
+}
+
 var (
 	host               = flag.String("a", "127.0.0.1", "hostname to serve on")
 	port               = flag.String("p", "7880", "port to serve locally on")
 	samhost            = flag.String("sh", "127.0.0.1", "sam host to connect to")
 	samport            = flag.String("sp", "7656", "sam port to connect to")
-	directory          = flag.String("d", "./www", "the directory of static files to host(default ./www)")
+	directory          = flag.String("d", wwwdir(), "the directory of static files to host(default"+wwwdir()+")")
 	giturl             = flag.String("b", "", "URL of a git repository to build populate the static directory with(optional)")
 	usei2p             = flag.Bool("i", true, "save i2p keys(and thus destinations) across reboots")
 	servicename        = flag.String("n", "eephttpd", "name to give the tunnel(default eephttpd)")
@@ -52,10 +71,12 @@ var (
 	certFile           = flag.String("m", "cert", "Certificate name to use")
 )
 
+var eepsite *eephttpd.EepHttpd
+
 func main() {
 	flag.Parse()
-	var eepsite *eephttpd.EepHttpd
 	var err error
+	go UiMain()
 	config := i2ptunconf.NewI2PBlankTunConf()
 	if *iniFile != "none" {
 		var err error
@@ -88,6 +109,15 @@ func main() {
 	config.AccessListType = config.GetAccessListType(*accessListType, "none")
 	config.Type = config.GetTypes(false, false, false, "server")
 
+	testdir, ok := config.Get("servedir")
+	if ok {
+		*directory = testdir
+	}
+	testgit, ok := config.Get("gitrepo")
+	if ok {
+		*giturl = testgit
+	}
+
 	eepsite, err = eephttpd.NewEepHttpdFromOptions(
 		eephttpd.SetType(config.Type),
 		eephttpd.SetSAMHost(config.SamHost),
@@ -115,6 +145,7 @@ func main() {
 		eephttpd.SetAccessList(config.AccessList),
 		eephttpd.SetServeDir(*directory),
 		eephttpd.SetGitURL(*giturl),
+		eephttpd.SetINIFile(*iniFile),
 	)
 	if err != nil {
 		log.Fatal(err)

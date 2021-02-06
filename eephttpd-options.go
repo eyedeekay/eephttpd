@@ -439,6 +439,13 @@ func SetAccessList(s []string) func(*EepHttpd) error {
 }
 */
 
+func SetINIFile(s string) func(*EepHttpd) error {
+	return func(c *EepHttpd) error {
+		c.IniFile = s
+		return nil
+	}
+}
+
 func SetGitURL(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.GitURL = s

@@ -37,12 +37,37 @@ deps:
 
 build:
 	cd eephttpd && go build -a -tags netgo -ldflags '-w -extldflags "-static"'
+	
+build-gui:
+	cd eephttpd && \
+		GOOS=linux && \
+		GOARCH=amd64 && \
+		CGO_ENABLED=1 && \
+		go build -a -tags "netgo gui" -o eephttpd-gui
 
 build-osx:
-	cd eephttpd && GOOS=darwin GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd-osx
+	cd eephttpd && \
+		GOOS=darwin && \
+		GOARCH=amd64 && \
+		go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd-osx
+
+build-osx-gui:
+	cd eephttpd && \
+		GOOS=darwin && \
+		GOARCH=amd64 && \
+		CGO_ENABLED=1 && \
+		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd-osx-gui
+
+#-a -tags netgo -ldflags '-w -extldflags "-static"'
 
 build-windows:
-	cd eephttpd && GOOS=windows GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd.exe
+	cd eephttpd && \
+		GOOS=windows \
+		GOARCH=amd64 \
+		CGO_ENABLED=1 \
+		CXX=x86_64-w64-mingw32-g++ \
+		CC=x86_64-w64-mingw32-gcc \
+		go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o eephttpd.exe
 
 all: build build-osx build-windows
 

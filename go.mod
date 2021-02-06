@@ -7,14 +7,16 @@ require (
 	github.com/PeteGabriel/torgo v0.0.0-20200509093753-d38b3aa2685a
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
+	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
 	github.com/andybalholm/cascadia v1.1.0 // indirect
+	github.com/atotto/clipboard v0.1.2
 	github.com/cheggaaa/pb v1.0.29
 	github.com/creack/pty v1.1.9 // indirect
 	github.com/cryptix/go v1.5.0 // indirect
 	github.com/d5/tengo v1.24.8
 	github.com/eyedeekay/mktorrent v0.0.0-20210201004350-82eef738c99e
 	github.com/eyedeekay/outproxy v0.0.0-20190913044809-33f1668ccb7d // indirect
-	github.com/eyedeekay/sam-forwarder v0.32.1
+	github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9
 	github.com/eyedeekay/sam3 v0.32.32
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/go-ole/go-ole v1.2.5 // indirect
