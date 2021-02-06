@@ -11,6 +11,11 @@ Homepages:
 - **[I2P Site](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/)**
 - **[Visible Internet Site](https://eyedeekay.github.io/eephttpd)**
 
+Releases:
+---------
+
+- **[Releases](https://github.com/eyedeekay/eephttpd/releases)**
+
 Screenshot:
 -----------
 
