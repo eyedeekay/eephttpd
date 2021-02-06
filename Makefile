@@ -187,7 +187,7 @@ index:
 	@echo '    <script src="script.js"></script>' >> www/index.html
 	@echo '  </head>' >> www/index.html
 	@echo '  <body>' >> www/index.html
-	pandoc README.md USAGE.md -o www/pre-index.html
+	pandoc README.md PROPAGANDA.md USAGE.md -o www/pre-index.html
 	@cat www/pre-index.html >> www/index.html
 	rm -f www/pre-index.html
 	@echo '  </body>' >> www/index.html
