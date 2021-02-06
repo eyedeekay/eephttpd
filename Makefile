@@ -178,5 +178,18 @@ docker-cmd:
 	@echo '```' >> USAGE.md
 
 index:
-	pandoc README.md USAGE.md -o www/index.html
+	@echo '<!DOCTYPE html>' > www/index.html
+	@echo '<html lang="en">' >> www/index.html
+	@echo '  <head>' >> www/index.html
+	@echo '    <meta charset="utf-8">' >> www/index.html
+	@echo '    <title>title</title>' >> www/index.html
+	@echo '    <link rel="stylesheet" href="style.css">' >> www/index.html
+	@echo '    <script src="script.js"></script>' >> www/index.html
+	@echo '  </head>' >> www/index.html
+	@echo '  <body>' >> www/index.html
+	pandoc README.md USAGE.md -o www/pre-index.html
+	@cat www/pre-index.html >> www/index.html
+	@echo '  </body>' >> www/index.html
+	@echo '</html>' >> www/index.html
+
 	cat README.md USAGE.md | tee www/README.md
