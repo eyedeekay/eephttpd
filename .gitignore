@@ -3,3 +3,6 @@
 *.key
 .go
 */*.i2pkeys
+deb
+vendor
+eephttpd/eephttpd*
