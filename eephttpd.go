@@ -115,6 +115,10 @@ func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 		s.Watcher.TriggerEvent(watcher.Create, nil)
 		s.Watcher.TriggerEvent(watcher.Remove, nil)
 	}()
+	err := s.MakeTorrent()
+	if err != nil {
+		return nil, err
+	}
 
 	log.Println("Finished putting tunnel up")
 	return s, nil
