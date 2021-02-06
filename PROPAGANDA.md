@@ -14,7 +14,7 @@ Homepages:
 Screenshot:
 -----------
 
-![Initial Setup Screen](/eephttpd.png)
+![Initial Setup Screen](eephttpd.png)
 
 Example Setup:
 --------------
@@ -43,7 +43,7 @@ eepHttpd is capable of mirroring a static site stored in a git repository. Sort 
 a self-hosted github page. This feature is accessible via the GUI. To do this, fill in the
 `Clone Site from a git repository` section.
 
-![Initial Clone Screen](/eephttpd-clone.png)
+![Initial Clone Screen](eephttpd-clone.png)
 
 This example will mirror the eephttpd site itself. It should work for most github pages and
 all static sites.

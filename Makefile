@@ -12,7 +12,7 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.9991
+VERSION=0.0.999
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
@@ -54,7 +54,7 @@ upload-deb:
 		-n "$(packagename)_$(VERSION)_amd64.deb" \
 		-f "deb/$(distro)/$(packagename)_$(VERSION)_amd64.deb"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_source.changes"s \
+		-l "Debian($(distro) only) -`sha256sum deb/$(distro)/$(packagename)_$(VERSION)_source.changes`" \
 		-n "$(packagename)_$(VERSION)_source.changes" \
 		-f "deb/$(distro)/$(packagename)_$(VERSION)_source.changes"
 
