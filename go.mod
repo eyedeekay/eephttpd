@@ -4,20 +4,20 @@ go 1.12
 
 require (
 	github.com/Microsoft/go-winio v0.4.16 // indirect
-	github.com/PeteGabriel/torgo v0.0.0-20200509093753-d38b3aa2685a
+	github.com/PeteGabriel/torgo v0.0.0-20200509093753-d38b3aa2685a // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/atotto/clipboard v0.1.2
-	github.com/cheggaaa/pb v1.0.29
+	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/creack/pty v1.1.9 // indirect
 	github.com/cryptix/go v1.5.0 // indirect
 	github.com/d5/tengo v1.24.8
 	github.com/eyedeekay/mktorrent v0.0.0-20210201004350-82eef738c99e
 	github.com/eyedeekay/outproxy v0.0.0-20190913044809-33f1668ccb7d // indirect
 	github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9
-	github.com/eyedeekay/sam3 v0.32.32
+	github.com/eyedeekay/sam3 v0.32.32 // indirect
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/gabriel-vasile/mimetype v1.1.2
 	github.com/getlantern/golog v0.0.0-20201105130739-9586b8bde3a9 // indirect
@@ -27,7 +27,7 @@ require (
 	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
-	github.com/gotoolkits/goTorrent v0.0.0-20170904145641-be7ba52afe97
+	github.com/gotoolkits/goTorrent v0.0.0-20170904145641-be7ba52afe97 // indirect
 	github.com/gotoolkits/gorequest v0.2.15 // indirect
 	github.com/j-muller/go-torrent-parser v0.0.0-20170523202311-f719c960746c
 	github.com/jackpal/bencode-go v1.0.0 // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/sosedoff/gitkit v0.2.0
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect
-	github.com/varyoo/mktorrent v0.0.0-20180208215256-4561e0bf1bc2
+	github.com/varyoo/mktorrent v0.0.0-20180208215256-4561e0bf1bc2 // indirect
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/zeebo/bencode v1.0.0 // indirect
 	gitlab.com/golang-commonmark/linkify v0.0.0-20200225224916-64bca66f6ad3 // indirect

@@ -29,3 +29,10 @@ the primary tracker for the whole-site torrent it generates. **This is**
 **intended to encourage the distribution of *open trackers* on I2P.**
 
 So... more to come on why this is cool.
+
+In order to build a .deb file, either use `checkinstall` or run:
+
+        go mod vendor
+        make orig
+        debuild -us -uc
+

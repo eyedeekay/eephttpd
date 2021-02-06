@@ -31,8 +31,13 @@ mod:
 fmt:
 	find . -name '*.go' -exec gofmt -w -s {} \;
 
+deb: all
+	go mod vendor
+	make orig
+	debuild
+
 orig:
-	tar --exclude=.git --exclude=debian -czvf ../eephttpd_0.0~git20181031.a4b6058.orig.tar.gz .
+	tar --exclude=.git --exclude=debian -czvf ../eephttpd_$(VERSION).orig.tar.gz .
 
 deps:
 	go get -u ./...
@@ -71,7 +76,7 @@ build-windows:
 		CC=x86_64-w64-mingw32-gcc \
 		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd.exe
 
-all: build build-gui build-osx build-osx-gui build-windows
+all: deps build build-gui build-osx build-osx-gui build-windows
 
 release: deps all tag upload
 

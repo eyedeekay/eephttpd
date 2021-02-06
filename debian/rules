@@ -5,3 +5,4 @@ override_dh_auto_install:
 
 %:
 	dh $@ --buildsystem=golang --with=golang
+

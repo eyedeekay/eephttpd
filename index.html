@@ -18,6 +18,10 @@
 <li>If a Torrent client attempts to access the <code>/a</code> URL, it is forwarded to an Open Torrent Tracker. <strong>Every single eephttpd site is also an open</strong> <strong>torrent tracker.</strong> Moreover, every single eephttpd site treats itself as the primary tracker for the whole-site torrent it generates. <strong>This is</strong> <strong>intended to encourage the distribution of <em>open trackers</em> on I2P.</strong></li>
 </ol>
 <p>So… more to come on why this is cool.</p>
+<p>In order to build a .deb file, either use <code>checkinstall</code> or run:</p>
+<pre><code>    go mod vendor
+    make orig
+    debuild -us -uc</code></pre>
 <h1 id="eephttpd---easy-to-use-tool-for-setting-up-i2p-sites">eepHttpd - easy-to-use tool for setting up I2P Sites</h1>
 <p>eepHttpd is the easiest tool for hosting new sites on the I2P network from your own computer(As long as they are mostly <em>static</em> sites, for now). You start the application and it sets up a directory in a logical place on your system.</p>
 <h2 id="homepages">Homepages:</h2>

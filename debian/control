@@ -1,7 +1,7 @@
 Source: eephttpd
 Section: devel
 Priority: optional
-Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Maintainer: idk <hankhill19580@gmail.com>
 Uploaders: idk <hankhill19580@gmail.com>
 Build-Depends: debhelper (>= 11),
                dh-golang,

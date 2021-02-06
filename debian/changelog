@@ -1,3 +1,9 @@
+eephttpd (0.0.999) unstable; urgency=medium
+
+  * Initial release (Closes: TODO)
+
+ -- idk <hankhill19580@gmail.com>  Sat, 16 Mar 2019 18:27:12 -0400
+
 eephttpd (0.0~git20181031.a4b6058) bionic; urgency=medium
 
   * Initial release (Closes: TODO)
