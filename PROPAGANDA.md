@@ -58,4 +58,4 @@ Learn More:
 
 - **[Source Code](https://github.com/eyedeekay/eephttpd)**
 - **[File an issue, request a feature](https://github.com/eyedeekay/eephttpd/issues)**
-- **[File an issue, request a feature](https://github.com/eyedeekay/eephttpd/pulls)**
+- **[Make a pull request](https://github.com/eyedeekay/eephttpd/pulls)**
