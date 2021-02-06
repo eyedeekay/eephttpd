@@ -1,1 +1,126 @@
-www/index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+<h1 id="eephttpd">eephttpd</h1>
+<p>So much for a simple static file server.</p>
+<p>eepHttpd is a web hosting tool for content in I2P, I2P sites, and I2P torrents. On it’s own, it’s basically a static directory server with limited scripting abilities written in pure-Go.</p>
+<p>However, it responds differently to different kinds of interaction.</p>
+<ol type="1">
+<li>If a Git client attempts to access it, then they will be able to clone the entire site, up from the document root(So <strong>Use this for things</strong> <strong>You want to <em>SHARE ANONYMOUSLY</em> with a large audience</strong>, not for things you want to keep secret.) This allows people to clone the site in order to mirror it.</li>
+<li>When any file is changed in the docroot, eephttpd generates a multi-file torrent of the site and places it in the docroot under the file name <code>$SITEHOSTNAME.torrent</code>. This allows people to mirror the site’s exact content, and participate in keeping the site’s content up.</li>
+<li>When a browser with I2P in Private Browsing connects to it, it creates a magnet link and replies with it as an <code>X-I2P-TORRENTLOCATION</code> header. In this way, the browser can help the user download the whole web site using Bittorrent and substitute HTTP resources for Bittorrent resources when they are ready.</li>
+<li>If a Torrent client attempts to access the <code>/a</code> URL, it is forwarded to an Open Torrent Tracker. <strong>Every single eephttpd site is also an open</strong> <strong>torrent tracker.</strong> Moreover, every single eephttpd site treats itself as the primary tracker for the whole-site torrent it generates. <strong>This is</strong> <strong>intended to encourage the distribution of <em>open trackers</em> on I2P.</strong></li>
+</ol>
+<p>So… more to come on why this is cool.</p>
+<h1 id="eephttpd---easy-to-use-tool-for-setting-up-i2p-sites">eepHttpd - easy-to-use tool for setting up I2P Sites</h1>
+<p>eepHttpd is the easiest tool for hosting new sites on the I2P network from your own computer(As long as they are mostly <em>static</em> sites, for now). You start the application and it sets up a directory in a logical place on your system.</p>
+<h2 id="homepages">Homepages:</h2>
+<ul>
+<li><strong><a href="http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/">I2P Site</a></strong></li>
+<li><strong><a href="https://eyedeekay.github.io/eephttpd">Visible Internet Site</a></strong></li>
+</ul>
+<h2 id="screenshot">Screenshot:</h2>
+<figure>
+<img src="eephttpd.png" alt="" /><figcaption>Initial Setup Screen</figcaption>
+</figure>
+<h2 id="example-setup">Example Setup:</h2>
+<p>On Windows the default site will be created in the “My Documents” folder, and it will be empty by default. For example:</p>
+<pre><code>    C:\\Documents and Settings\User\My Documents\www</code></pre>
+<p>On Unixes(Linux and OSX are tested but any Unix should work) it will be the “www” directory in the directory where you run the application. So if you ran the application from</p>
+<pre><code>    /home/user/eephttpd/</code></pre>
+<p>then you would end up with a <code>www</code> directory there, for example:</p>
+<pre><code>    /home/user/eephttpd/www/</code></pre>
+<p>Just put the files you want to serve, like your web site or open directory of content, inside of that directory.</p>
+<h2 id="example-clone">Example Clone:</h2>
+<p>eepHttpd is capable of mirroring a static site stored in a git repository. Sort of like a self-hosted github page. This feature is accessible via the GUI. To do this, fill in the <code>Clone Site from a git repository</code> section.</p>
+<figure>
+<img src="eephttpd-clone.png" alt="" /><figcaption>Initial Clone Screen</figcaption>
+</figure>
+<p>This example will mirror the eephttpd site itself. It should work for most github pages and all static sites.</p>
+<h2 id="learn-more">Learn More:</h2>
+<ul>
+<li><strong><a href="https://github.com/eyedeekay/eephttpd">Source Code</a></strong></li>
+<li><strong><a href="https://github.com/eyedeekay/eephttpd/issues">File an issue, request a feature</a></strong></li>
+<li><strong><a href="https://github.com/eyedeekay/eephttpd/pulls">File an issue, request a feature</a></strong></li>
+</ul>
+<h1 id="eephttpd---static-file-server-automatically-forwarded-to-i2p">eephttpd - Static file server automatically forwarded to i2p</h1>
+<h2 id="usage">usage:</h2>
+<p>eephttpd is a static http server which automatically runs on i2p with the help of the SAM bridge. By default it will only be available from the localhost and it’s i2p tunnel. It can be masked from the localhost using a container.</p>
+<pre><code>Usage of ./eephttpd/eephttpd:
+  -a string
+        hostname to serve on (default &quot;127.0.0.1&quot;)
+  -b string
+        URL of a git repository to build populate the static directory with(optional)
+  -c    Use an encrypted leaseset(true or false)
+  -d string
+        the directory of static files to host(default ./www) (default &quot;./www&quot;)
+  -f string
+        Use an ini file for configuration (default &quot;none&quot;)
+  -g    Uze gzip(true or false) (default true)
+  -i    save i2p keys(and thus destinations) across reboots (default true)
+  -ib int
+        Set inbound tunnel backup quantity(0 to 5) (default 1)
+  -il int
+        Set inbound tunnel length(0 to 7) (default 3)
+  -iq int
+        Set inbound tunnel quantity(0 to 15) (default 2)
+  -iv int
+        Set inbound tunnel length variance(-7 to 7)
+  -l string
+        Type of access list to use, can be &quot;whitelist&quot; &quot;blacklist&quot; or &quot;none&quot;. (default &quot;none&quot;)
+  -m string
+        Certificate name to use (default &quot;cert&quot;)
+  -n string
+        name to give the tunnel(default eephttpd) (default &quot;eephttpd&quot;)
+  -ob int
+        Set outbound tunnel backup quantity(0 to 5) (default 1)
+  -ol int
+        Set outbound tunnel length(0 to 7) (default 3)
+  -oq int
+        Set outbound tunnel quantity(0 to 15) (default 2)
+  -ov int
+        Set outbound tunnel length variance(-7 to 7)
+  -p string
+        port to serve locally on (default &quot;7880&quot;)
+  -r    Reduce tunnel quantity when idle(true or false)
+  -rc int
+        Reduce idle tunnel quantity to X (0 to 5) (default 3)
+  -rt int
+        Reduce tunnel quantity after X (milliseconds) (default 600000)
+  -sh string
+        sam host to connect to (default &quot;127.0.0.1&quot;)
+  -sp string
+        sam port to connect to (default &quot;7656&quot;)
+  -t    Generate or use an existing TLS certificate
+  -z    Allow zero-hop, non-anonymous tunnels(true or false)</code></pre>
+<h3 id="build-in-docker">build in docker</h3>
+<pre><code>docker build --build-arg user=eephttpd \
+    --build-arg path=example/www \
+    -f Dockerfile -t \
+    eyedeekay/eephttpd .</code></pre>
+<h3 id="run-in-docker">Run in docker</h3>
+<pre><code>docker run -i -t -d \
+    --name eephttpd-volume \
+    --volume eephttpd:/opt/eephttpd/ \
+    eyedeekay/eephttpd</code></pre>
+<pre><code>docker run -i -t -d \
+    --network si \
+    --env samhost=sam-host \
+    --env samport=7656 \
+    --env args=-r # Additional arguments to pass to eephttpd\
+    --network-alias eephttpd \
+    --hostname eephttpd \
+    --name eephttpd \
+    --restart always \
+    --volumes-from eephttpd-volume \
+    eyedeekay/eephttpd</code></pre>
+<h2 id="instance">instance</h2>
+<p>a running instance of eephttpd with the example index file is availble on <a href="http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p">http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p</a></p>
+  </body>
+</html>

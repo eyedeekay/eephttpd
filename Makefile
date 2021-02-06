@@ -193,4 +193,5 @@ index:
 	@echo '  </body>' >> www/index.html
 	@echo '</html>' >> www/index.html
 	cat README.md USAGE.md | tee www/README.md
+	cp www/index.html index.html
 
