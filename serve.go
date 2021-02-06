@@ -47,8 +47,13 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	mtype, err := mimetype.DetectFile(rp)
 	if err != nil {
 		log.Println("MIME type determination error.", err.Error())
+	} else {
+		log.Println("MIME type detected", mtype.String())
 	}
-	rw.Header().Set("content-type", mtype.String())
+	rw.Header().Set("Content-Type", mtype.String())
+	if strings.HasSuffix(rq.URL.Path, ".css") {
+		rw.Header().Set("Content-Type", "text/stylesheet")
+	}
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
 	defer f.Pull()
 	if rp == "announce" {
@@ -72,7 +77,6 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 		}
 		fmt.Fprintf(rw, string(body))
 		return
-
 	} else {
 		if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
 			log.Println(rq.Header.Get("User-Agent"))
