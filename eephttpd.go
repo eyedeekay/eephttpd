@@ -130,7 +130,15 @@ func (e *EepHttpd) HostName() string {
 
 func (e *EepHttpd) MakeTorrent() error {
 	log.Println("Generating a torrent for the site.")
-	t, err := mktorrent.MakeTorrent(e.ServeDir, e.Base32(), "http://"+e.HostName()+"/", "http://"+e.HostName()+"/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a")
+	err := os.Chdir(filepath.Dir(e.ServeDir))
+	if err != nil {
+		return err
+	}
+	_, split := filepath.Split(e.ServeDir)
+	if err != nil {
+		return err
+	}
+	t, err := mktorrent.MakeTorrent(split, e.Base32(), "http://"+e.HostName()+"/", "http://"+e.HostName()+"/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a")
 	if err != nil {
 		return err
 	}
