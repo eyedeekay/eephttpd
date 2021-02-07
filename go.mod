@@ -15,7 +15,7 @@ require (
 	github.com/creack/pty v1.1.9 // indirect
 	github.com/cryptix/go v1.5.0 // indirect
 	github.com/d5/tengo v1.24.8
-	github.com/eyedeekay/mktorrent a83ebb3
+	github.com/eyedeekay/mktorrent v0.0.0-20210207013037-a83ebb3863fb
 	github.com/eyedeekay/outproxy v0.0.0-20190913044809-33f1668ccb7d // indirect
 	github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9
 	github.com/eyedeekay/sam3 v0.32.32 // indirect
