@@ -61,6 +61,9 @@
 </ul>
 <h1 id="eephttpd---static-file-server-automatically-forwarded-to-i2p">eephttpd - Static file server automatically forwarded to i2p</h1>
 <h2 id="usage">usage:</h2>
+<p>eephttpd requires the use of an I2P router with an enabled SAM API. On the default Java I2P router this is enabled by going to <a href="http://localhost:7657/configclients">http://localhost:7657/configclients</a>.</p>
+<p>eephttpd recommends the Java I2P router from <a href="https://geti2p.net">geti2p.net</a> as the I2P router to use, as that is the router I use to test it. Other options are <a href="https://github.com/i2p-zero/i2p-zero">I2P-Zero</a>, a minimized distribution of the Java I2P router with all required dependencies bundled-in, or <a href="https://i2pd.website">i2pd</a>, a C++ implementation of the I2P network which is preferred by some power users and sysadmins for it’s performance and minimal, lightweight interface.</p>
+<p>If you are using a Linux distribution it is recommended that you use your package manager to install or uninstall I2P. Java I2P maintains a Debian-style repository and a PPA for Ubuntu users and up-to-date packages are available in Debian Sid.</p>
 <p>eephttpd is a static http server which automatically runs on i2p with the help of the SAM bridge. By default it will only be available from the localhost and it’s i2p tunnel. It can be masked from the localhost using a container.</p>
 <pre><code>Usage of ./eephttpd/eephttpd:
   -a string
@@ -69,7 +72,7 @@
         URL of a git repository to build populate the static directory with(optional)
   -c    Use an encrypted leaseset(true or false)
   -d string
-        the directory of static files to host(default ./www) (default &quot;./www&quot;)
+        the directory of static files to host(default./www) (default &quot;./www&quot;)
   -f string
         Use an ini file for configuration (default &quot;none&quot;)
   -g    Uze gzip(true or false) (default true)
@@ -132,6 +135,5 @@
     eyedeekay/eephttpd</code></pre>
 <h2 id="instance">instance</h2>
 <p>a running instance of eephttpd with the example index file is availble on <a href="http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p">http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p</a></p>
-<p>Soon, you should also be able to mirror the site with bittorrent as well: <a href="http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p.torrent">http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p.torrent</a></p>
   </body>
 </html>
