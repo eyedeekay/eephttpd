@@ -4,11 +4,27 @@ eephttpd - Static file server automatically forwarded to i2p
 usage:
 ------
 
+eephttpd requires the use of an I2P router with an enabled SAM API.
+On the default Java I2P router this is enabled by going to 
+[http://localhost:7657/configclients](http://localhost:7657/configclients).
+
+eephttpd recommends the Java I2P router from [geti2p.net](https://geti2p.net)
+as the I2P router to use, as that is the router I use to test it. Other options
+are [I2P-Zero](https://github.com/i2p-zero/i2p-zero), a minimized distribution
+of the Java I2P router with all required dependencies bundled-in, or
+[i2pd](https://i2pd.website), a C++ implementation of the I2P network which is
+preferred by some power users and sysadmins for it's performance and minimal,
+lightweight interface.
+
+If you are using a Linux distribution it is recommended that you use your
+package manager to install or uninstall I2P. Java I2P maintains a Debian-style
+repository and a PPA for Ubuntu users and up-to-date packages are available in
+Debian Sid.
+
 eephttpd is a static http server which automatically runs on i2p with
 the help of the SAM bridge. By default it will only be available from
 the localhost and it's i2p tunnel. It can be masked from the localhost
 using a container.
-
 ```
 Usage of ./eephttpd/eephttpd:
   -a string
@@ -17,7 +33,7 @@ Usage of ./eephttpd/eephttpd:
     	URL of a git repository to build populate the static directory with(optional)
   -c	Use an encrypted leaseset(true or false)
   -d string
-    	the directory of static files to host(default ./www) (default "./www")
+    	the directory of static files to host(default./www) (default "./www")
   -f string
     	Use an ini file for configuration (default "none")
   -g	Uze gzip(true or false) (default true)
@@ -96,7 +112,4 @@ instance
 
 a running instance of eephttpd with the example index file is availble on
 [http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)
-
-Soon, you should also be able to mirror the site with bittorrent as well:
-[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p.torrent](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p.torrent)
 

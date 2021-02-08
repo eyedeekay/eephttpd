@@ -159,17 +159,7 @@ clobber: clean
 	docker system prune -f
 
 usage:
-	@echo "$(eephttpd) - Static file server automatically forwarded to i2p" > USAGE.md
-	@echo "============================================================" >> USAGE.md
-	@echo "" >> USAGE.md
-	@echo "usage:" >> USAGE.md
-	@echo "------" >> USAGE.md
-	@echo "" >> USAGE.md
-	@echo "$(eephttpd) is a static http server which automatically runs on i2p with" >> USAGE.md
-	@echo "the help of the SAM bridge. By default it will only be available from" >> USAGE.md
-	@echo "the localhost and it's i2p tunnel. It can be masked from the localhost" >> USAGE.md
-	@echo "using a container." >> USAGE.md
-	@echo "" >> USAGE.md
+	@cat .USAGE.md > USAGE.md
 	@echo '```' >> USAGE.md
 	./$(eephttpd)/eephttpd -h  2>> USAGE.md; true
 	@echo '```' >> USAGE.md
@@ -181,6 +171,8 @@ usage:
 	@echo "" >> USAGE.md
 	@echo "a running instance of eephttpd with the example index file is availble on" >> USAGE.md
 	@echo '[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)' >> USAGE.md
+	@echo "Soon, you should also be able to mirror the site with bittorrent as well:" >> USAGE.md
+	@echo "[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent)" >> USAGE.md
 	@echo "" >> USAGE.md
 	@cat USAGE.md
 

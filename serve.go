@@ -62,7 +62,9 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	}
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
 	defer f.Pull()
-	if rp == "announce" {
+	if rp == "torrent" {
+		f.HandleTorrent(rw, rq)
+	} else if rp == "announce" {
 		client := http.Client{}
 		req, err := f.ProxyRequest(rq)
 		if err != nil {
@@ -114,14 +116,16 @@ func FileExists(filename string) bool {
 
 func (f *EepHttpd) checkURL(rq *http.Request) string {
 	p := rq.URL.Path
+	if strings.HasSuffix(rq.URL.Path, "eephttpd.torrent") {
+		p = "torrent"
+		return p
+	}
 	if strings.HasSuffix("/"+rq.URL.Path, "/a") {
 		p = "announce"
-		log.Println("URL path", p)
 		return p
 	}
 	if strings.HasSuffix("/"+rq.URL.Path, "/announce") {
 		p = "announce"
-		log.Println("URL path", p)
 		return p
 	}
 	if strings.HasSuffix(rq.URL.Path, "/") {
@@ -183,6 +187,10 @@ func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {
 	}
 	rw.Write(bytes)
 	//	fmt.Fprintf(rw, string(bytes))
+}
+
+func (e *EepHttpd) HandleTorrent(rw http.ResponseWriter, rq *http.Request) {
+	e.meta.Write(rw)
 }
 
 func (f *EepHttpd) HandleMissing(rw http.ResponseWriter, rq *http.Request) {

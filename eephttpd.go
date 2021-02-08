@@ -8,12 +8,13 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/eyedeekay/mktorrent"
+	//	"github.com/eyedeekay/mktorrent"
 	"github.com/eyedeekay/sam-forwarder/config"
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
 	"github.com/eyedeekay/samtracker"
-	"github.com/j-muller/go-torrent-parser"
+	//	"github.com/j-muller/go-torrent-parser"
+	"github.com/anacrolix/torrent/metainfo"
 	"github.com/radovskyb/watcher"
 	"github.com/sosedoff/gitkit"
 	"gitlab.com/golang-commonmark/markdown"
@@ -35,6 +36,7 @@ type EepHttpd struct {
 	up       bool
 	pulling  bool
 	magnet   string
+	meta     *metainfo.MetaInfo
 	mark     *markdown.Markdown
 }
 
@@ -129,32 +131,30 @@ func (e *EepHttpd) HostName() string {
 }
 
 func (e *EepHttpd) MakeTorrent() error {
-	log.Println("Generating a torrent for the site.")
-	err := os.Chdir(filepath.Dir(e.ServeDir))
+	info := metainfo.Info{
+		PieceLength: 256000,
+	}
+	err := info.BuildFromFilePath(e.ServeDir)
 	if err != nil {
 		return err
 	}
-	_, split := filepath.Split(e.ServeDir)
+	log.Println("Generating torrent:", info.NumPieces(), "pieces")
+	var pieces []byte
+	for n := 0; n < info.NumPieces(); n++ {
+		pieces = append(pieces, info.Piece(n).Hash().Bytes()...)
+	}
+	e.meta = &metainfo.MetaInfo{}
+	e.meta.SetDefaults()
+	e.meta.InfoBytes = pieces
+	e.meta.UrlList = metainfo.UrlList{"http://" + e.HostName() + "/"}
+	e.meta.Announce = "http://" + e.HostName() + "/a"
+	e.meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
+	e.meta.CreatedBy = "eephttpd"
+	infoc := e.meta.HashInfoBytes()
 	if err != nil {
 		return err
 	}
-	t, err := mktorrent.MakeTorrent(split, e.Base32(), "http://"+e.HostName()+"/", "http://"+e.HostName()+"/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a")
-	if err != nil {
-		return err
-	}
-	f, err := os.Create(filepath.Join(e.ServeDir, e.Base32()) + ".torrent")
-	if err != nil {
-		return err
-	}
-	t.Save(f)
-	f.Close()
-
-	torrent, err := gotorrentparser.ParseFromFile(filepath.Join(e.ServeDir, e.Base32()) + ".torrent")
-	if err != nil {
-		return err
-	}
-	e.magnet = "magnet:?xt=urn:btih:" + torrent.InfoHash + "&tr=" + "http://" + e.Base32() + "/a"
-	log.Println("Magnet link", e.magnet)
+	e.magnet = e.meta.Magnet(e.HostName(), infoc).String()
 	return nil
 }
 
@@ -178,6 +178,7 @@ func (e *EepHttpd) noPull() {
 
 func (e *EepHttpd) ResetGit() error {
 	if e.GitURL != "" {
+		defer e.MakeTorrent()
 		log.Println("Resetting git repository to", e.GitURL)
 		os.RemoveAll(filepath.Join(e.ServeDir))
 		os.Mkdir(filepath.Join(e.ServeDir), 0755)
@@ -209,6 +210,7 @@ func (e *EepHttpd) Pull() error {
 	}
 
 	if e.GitURL != "" {
+		defer e.MakeTorrent()
 		_, err := os.Stat(filepath.Join(e.ServeDir, ".git"))
 		if os.IsNotExist(err) {
 			e.GitRepo, err = git.PlainClone(e.ServeDir, false, &git.CloneOptions{

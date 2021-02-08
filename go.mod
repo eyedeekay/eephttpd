@@ -7,6 +7,7 @@ require (
 	github.com/PeteGabriel/torgo v0.0.0-20200509093753-d38b3aa2685a // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
+	github.com/anacrolix/torrent v1.24.0
 	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/atotto/clipboard v0.1.2
@@ -15,7 +16,7 @@ require (
 	github.com/creack/pty v1.1.9 // indirect
 	github.com/cryptix/go v1.5.0 // indirect
 	github.com/d5/tengo v1.24.8
-	github.com/eyedeekay/mktorrent v0.0.0-20210207013037-a83ebb3863fb
+	github.com/eyedeekay/mktorrent v0.0.0-20210207184234-8bc047a745c2
 	github.com/eyedeekay/outproxy v0.0.0-20190913044809-33f1668ccb7d // indirect
 	github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9
 	github.com/eyedeekay/sam3 v0.32.32 // indirect
@@ -68,7 +69,6 @@ require (
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
-	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e // indirect
 	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 	golang.org/x/text v0.3.5 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect

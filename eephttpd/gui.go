@@ -87,7 +87,7 @@ func UiMain() {
 }
 
 func IniEdit() {
-	mainwin = ui.NewWindow("eepsite control panel", 640, 480, true)
+	mainwin = ui.NewWindow("I2P Site Control Panel", 640, 480, true)
 	mainwin.OnClosing(func(*ui.Window) bool {
 		ui.Quit()
 		return true
