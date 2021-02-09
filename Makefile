@@ -17,20 +17,27 @@ VERSION=0.0.9991
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
 
-upload:
+upload-linux:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Linux Terminal -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)" -f "eephttpd/$(packagename)"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Linux GUI -`sha256sum eephttpd/$(packagename)-gui`" -n "$(packagename)-gui" -f "eephttpd/$(packagename)-gui"
+
+upload-osx:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "OSX Terminal -`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
+
+upload-windows:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Windows -`sha256sum eephttpd/$(packagename).exe`" -n "$(packagename).exe" -f "eephttpd/$(packagename).exe"
+
+upload-orig:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian orig.tar.gz -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)_$(VERSION).orig.tar.gz" -f "../$(packagename)_$(VERSION).orig.tar.gz"
 
+upload: upload-linux upload-osx upload-windows upload-orig upload-deb
 
 upload-deb:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
@@ -78,25 +85,27 @@ deps:
 
 build:
 	cd eephttpd && go build -a -tags netgo -ldflags '-w -extldflags "-static"'
-	
+
 build-gui:
 	cd eephttpd && \
-		GOOS=linux && \
-		GOARCH=amd64 && \
-		CGO_ENABLED=1 && \
+		GOOS=linux \
+		GOARCH=amd64 \
+		CGO_ENABLED=1 \
 		go build -a -tags "netgo gui" -o eephttpd-gui
+
+ #		CGO_ENABLED=1 \
 
 build-osx:
 	cd eephttpd && \
-		GOOS=darwin && \
-		GOARCH=amd64 && \
+		GOOS=darwin \
+		GOARCH=amd64 \
 		go build -a -tags netgo -o eephttpd-osx
 
 build-osx-gui:
 	cd eephttpd && \
-		GOOS=darwin && \
-		GOARCH=amd64 && \
-		CGO_ENABLED=1 && \
+		GOOS=darwin \
+		GOARCH=amd64 \
+		CGO_ENABLED=1 \
 		go build -a -tags "netgo gui" -o eephttpd-osx-gui
 
 #-a -tags netgo -ldflags '-w -extldflags "-static"'
