@@ -43,6 +43,8 @@ or just run:
 eephttpd - Static file server automatically forwarded to i2p
 ============================================================
 
+- [Address Helper](http://eephttpd.i2p/?i2paddresshelper=tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)
+
 usage:
 ------
 
@@ -154,4 +156,6 @@ instance
 
 a running instance of eephttpd with the example index file is availble on
 [http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)
+Soon, you should also be able to mirror the site with bittorrent as well:
+[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent)
 
