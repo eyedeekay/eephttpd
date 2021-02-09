@@ -143,15 +143,11 @@ func (e *EepHttpd) MakeTorrent() error {
 	if err != nil {
 		return err
 	}
-	e.meta.URLList = metainfo.URLList{"http://" + e.HostName() + "/"}
+	e.meta.URLList = metainfo.URLList{"http://" + e.HostName()}
 	e.meta.Announce = "http://" + e.HostName() + "/a"
 	e.meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
 	e.meta.CreatedBy = "eephttpd"
-	infoc := e.meta.InfoHash()
-	if err != nil {
-		return err
-	}
-	e.magnet = e.meta.Magnet(e.HostName(), infoc).String()
+	e.magnet = e.meta.Magnet(e.HostName(), e.meta.InfoHash()).String()
 	return nil
 }
 
