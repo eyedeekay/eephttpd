@@ -8,15 +8,14 @@ import (
 	"path/filepath"
 	"strconv"
 
-	//	"github.com/eyedeekay/mktorrent"
 	"github.com/eyedeekay/sam-forwarder/config"
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
 	"github.com/eyedeekay/samtracker"
-	//	"github.com/j-muller/go-torrent-parser"
-	"github.com/anacrolix/torrent/metainfo"
 	"github.com/radovskyb/watcher"
 	"github.com/sosedoff/gitkit"
+	"github.com/xgfone/bt/bencode"
+	"github.com/xgfone/bt/metainfo"
 	"gitlab.com/golang-commonmark/markdown"
 
 	"gopkg.in/src-d/go-git.v4"
@@ -131,26 +130,23 @@ func (e *EepHttpd) HostName() string {
 }
 
 func (e *EepHttpd) MakeTorrent() error {
-	info := metainfo.Info{
-		PieceLength: 256000,
-	}
-	err := info.BuildFromFilePath(e.ServeDir)
+	e.meta = &metainfo.MetaInfo{}
+	info, err := metainfo.NewInfoFromFilePath(e.ServeDir, int64(2^16))
 	if err != nil {
 		return err
 	}
-	log.Println("Generating torrent:", info.NumPieces(), "pieces")
-	var pieces []byte
-	for n := 0; n < info.NumPieces(); n++ {
-		pieces = append(pieces, info.Piece(n).Hash().Bytes()...)
+	log.Println("Generating torrent:", info.CountPieces(), "pieces")
+
+	//	e.meta.SetDefaults()
+	e.meta.InfoBytes, err = bencode.EncodeBytes(info)
+	if err != nil {
+		return err
 	}
-	e.meta = &metainfo.MetaInfo{}
-	e.meta.SetDefaults()
-	e.meta.InfoBytes = pieces
-	e.meta.UrlList = metainfo.UrlList{"http://" + e.HostName() + "/"}
+	e.meta.URLList = metainfo.URLList{"http://" + e.HostName() + "/"}
 	e.meta.Announce = "http://" + e.HostName() + "/a"
 	e.meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
 	e.meta.CreatedBy = "eephttpd"
-	infoc := e.meta.HashInfoBytes()
+	infoc := e.meta.InfoHash()
 	if err != nil {
 		return err
 	}

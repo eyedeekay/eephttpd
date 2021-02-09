@@ -27,7 +27,7 @@ upload-osx:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "OSX Terminal -`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
+		-l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"; true
 
 upload-windows:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
@@ -106,7 +106,7 @@ build-osx-gui:
 		GOOS=darwin \
 		GOARCH=amd64 \
 		CGO_ENABLED=1 \
-		go build -a -tags "netgo gui" -o eephttpd-osx-gui
+		go build -a -tags "netgo gui" -o eephttpd-osx-gui; true
 
 #-a -tags netgo -ldflags '-w -extldflags "-static"'
 
