@@ -3,7 +3,12 @@ eepHttpd - easy-to-use tool for setting up I2P Sites
 
 eepHttpd is the easiest tool for hosting new sites on the I2P network from your own
 computer(As long as they are mostly *static* sites, for now). You start the application
-and it sets up a directory in a logical place on your system.
+and it sets up a directory in a logical place on your system. It has some neat features 
+to make your sites available to people who want it even when you aren't available to
+host it. Probably the most cool thing that it can do is that it can mirror most github
+pages as long as they are statically pre-generated. The I2P Site itself is actually just
+a clone of the github repository, making the act of mirroring the site also the act of
+mirroring the source code.
 
 Homepages:
 ----------
