@@ -37,7 +37,7 @@ upload-orig:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "Debian orig.tar.gz -`sha256sum eephttpd/$(packagename)`" -n "$(packagename)_$(VERSION).orig.tar.gz" -f "../$(packagename)_$(VERSION).orig.tar.gz"
 
-upload: upload-linux upload-osx upload-windows upload-orig upload-deb
+upload: upload-linux upload-osx upload-windows upload-orig
 
 upload-deb:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
@@ -180,7 +180,8 @@ usage:
 	@echo "" >> USAGE.md
 	@echo "a running instance of eephttpd with the example index file is availble on" >> USAGE.md
 	@echo '[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)' >> USAGE.md
-	@echo "Soon, you should also be able to mirror the site with bittorrent as well:" >> USAGE.md
+	@echo "" >> USAGE.md
+	@echo "You can mirror the site with bittorrent as well:" >> USAGE.md
 	@echo "[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent)" >> USAGE.md
 	@echo "" >> USAGE.md
 	@cat USAGE.md
