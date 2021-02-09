@@ -135,6 +135,7 @@ func (e *EepHttpd) MakeTorrent() error {
 	if err != nil {
 		return err
 	}
+	info.Name = e.HostName()
 	log.Println("Generating torrent:", info.CountPieces(), "pieces")
 
 	//	e.meta.SetDefaults()
