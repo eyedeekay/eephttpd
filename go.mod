@@ -61,7 +61,7 @@ require (
 	github.com/varyoo/mktorrent v0.0.0-20180208215256-4561e0bf1bc2 // indirect
 	github.com/vishvananda/netns v0.0.0-20210104183010-2eb08e3e575f // indirect
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
-	github.com/xgfone/bt v0.4.0
+	github.com/xgfone/bt v0.4.1-0.20210208083425-55d5ad3494d2
 	github.com/xgfone/bttools v0.2.0 // indirect
 	github.com/xgfone/goapp v0.17.0 // indirect
 	github.com/zeebo/bencode v1.0.0 // indirect
