@@ -83,6 +83,32 @@ func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 	if !s.up {
 		log.Println("Started putting tunnel up")
 	}
+	s.Server = gitkit.New(gitkit.Config{
+		Dir:        s.ServeDir,
+		AutoCreate: true,
+		Auth:       true, // Turned off by default
+	})
+
+	s.Server.AuthFunc = Never
+	//log.Println("Options loaded", e.Print())
+
+	if s.GitURL != "" {
+		_, err := os.Stat(filepath.Join(s.ServeDir, ".git"))
+		if os.IsNotExist(err) {
+			s.GitRepo, err = git.PlainClone(s.ServeDir, false, &git.CloneOptions{
+				URL:               s.GitURL,
+				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+			})
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			s.GitRepo, err = git.PlainOpen(s.ServeDir)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
 	f, e := s.SamTracker.Load()
 	if e != nil {
 		return nil, e
@@ -131,7 +157,16 @@ func (e *EepHttpd) HostName() string {
 
 func (e *EepHttpd) MakeTorrent() error {
 	e.meta = &metainfo.MetaInfo{}
-	info, err := metainfo.NewInfoFromFilePath(e.ServeDir, int64(2^16))
+	wd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	defer os.Chdir(wd)
+	err = os.Chdir(e.ServeDir)
+	if err != nil {
+		return err
+	}
+	info, err := metainfo.NewInfoFromFilePath(".", int64(2^18))
 	if err != nil {
 		return err
 	}
@@ -289,35 +324,8 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	s.SamTracker.InitTarget(s.SamTracker.Config().TargetHost + ":" + strconv.Itoa(pp+1))
 	//	s.tracker.SamTracker = e.SamTracker
 	l, e := s.Load()
-	s.Server = gitkit.New(gitkit.Config{
-		Dir:        s.ServeDir,
-		AutoCreate: true,
-		Auth:       true, // Turned off by default
-	})
-
-	s.Server.AuthFunc = Never
-	//log.Println("Options loaded", e.Print())
 	if e != nil {
 		return nil, e
 	}
-
-	if s.GitURL != "" {
-		_, err := os.Stat(filepath.Join(s.ServeDir, ".git"))
-		if os.IsNotExist(err) {
-			s.GitRepo, e = git.PlainClone(s.ServeDir, false, &git.CloneOptions{
-				URL:               s.GitURL,
-				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
-			})
-			if err != nil {
-				return nil, e
-			}
-		} else {
-			s.GitRepo, e = git.PlainOpen(s.ServeDir)
-			if e != nil {
-				return nil, e
-			}
-		}
-	}
-
 	return l.(*EepHttpd), nil
 }
