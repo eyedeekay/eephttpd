@@ -155,6 +155,20 @@ func (e *EepHttpd) HostName() string {
 	return e.Base32()
 }
 
+func DirSize(path string) (int64, error) {
+	var size int64
+	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			size += info.Size()
+		}
+		return err
+	})
+	return size, err
+}
+
 func (e *EepHttpd) MakeTorrent() error {
 	e.meta = &metainfo.MetaInfo{}
 	wd, err := os.Getwd()
@@ -166,7 +180,13 @@ func (e *EepHttpd) MakeTorrent() error {
 	if err != nil {
 		return err
 	}
-	info, err := metainfo.NewInfoFromFilePath(".", int64(2^18))
+	size, err := DirSize(e.ServeDir)
+	if err != nil {
+		return err
+	}
+	pieceLen := (size / 30000) / 2
+	log.Println("Calculating optimal piece length", size, pieceLen)
+	info, err := metainfo.NewInfoFromFilePath(".", int64(pieceLen))
 	if err != nil {
 		return err
 	}
