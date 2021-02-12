@@ -176,14 +176,14 @@ func main() {
 
 	go Serve()
 	time.Sleep(time.Second)
-	go runTray()
 	UiMain()
+	runTray()
 }
 
 func Serve() {
 	if eepsite != nil {
 		log.Println("Starting server")
-		if err = eepsite.Serve(); err != nil {
+		if err := eepsite.Serve(); err != nil {
 			log.Fatal(err)
 		}
 	} else {
