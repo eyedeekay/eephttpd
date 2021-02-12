@@ -39,6 +39,9 @@ func wwwdir() string {
 		}
 		path = filepath.Join(user.HomeDir, "My Documents", "www")
 	}
+	if runtime.GOOS == "darwin" {
+		return "../Resources/www"
+	}
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		os.Mkdir(path, 0755)
 	}
