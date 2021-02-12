@@ -27,7 +27,7 @@ require (
 	github.com/sosedoff/gitkit v0.2.0
 	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
-	github.com/xgfone/bt v0.4.1-0.20210208083425-55d5ad3494d2
+	github.com/xgfone/bt v0.4.1
 	gitlab.com/golang-commonmark/linkify v0.0.0-20200225224916-64bca66f6ad3 // indirect
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect

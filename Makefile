@@ -27,7 +27,7 @@ upload-osx:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
 		-l "OSX Terminal -`sha256sum eephttpd/$(packagename)-osx`" -n "$(packagename)-osx" -f "eephttpd/$(packagename)-osx"
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
-		-l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"; true
+		-l "OSX GUI -`sha256sum eephttpd/$(packagename)-osx-gui`" -n "$(packagename)-osx-gui" -f "eephttpd/$(packagename)-osx-gui"
 
 upload-windows:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
@@ -102,12 +102,14 @@ build-osx:
 		go build -a -tags netgo -o eephttpd-osx
 
 build-osx-gui:
-	cd eephttpd && \
-		GOOS=darwin \
-		GOARCH=amd64 \
-		go build -a -tags "netgo gui" -o eephttpd-osx-gui; true
+	##TODO: Cross-Compile for OSX from Linux
+	#cd eephttpd && \
+	#	GOOS=darwin \
+	#	GOARCH=amd64 \
+	#	go build -a -tags "netgo gui" -o eephttpd-osx-gui; true
+	#-a -tags netgo -ldflags '-w -extldflags "-static"'
+	scp admin@192.168.1.104:~/go/src/github.com/eyedeekay/eephttpd/eephttpd/eephttpd-osx-gui eephttpd/eephttpd-osx-gui
 
-#-a -tags netgo -ldflags '-w -extldflags "-static"'
 
 build-windows:
 	cd eephttpd && \
