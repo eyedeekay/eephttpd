@@ -185,6 +185,9 @@ func (e *EepHttpd) MakeTorrent() error {
 		return err
 	}
 	pieceLen := (size / 30000) / 2
+	if pieceLen < 25600 {
+		pieceLen = 25600
+	}
 	log.Println("Calculating optimal piece length", size, pieceLen)
 	info, err := metainfo.NewInfoFromFilePath(".", int64(pieceLen))
 	if err != nil {
