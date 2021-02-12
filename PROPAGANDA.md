@@ -30,19 +30,19 @@ Screenshot:
 Example Setup:
 --------------
 
-On Windows the default site will be created in the "My Documents" folder, and it will be
+On Windows the default site will be created in the `My Documents` folder, and it will be
 empty by default. For example:
 
-        C:\\Documents and Settings\User\My Documents\www
+        C:\\Documents and Settings\User\My Documents\I2P_Site
 
-On Unixes(Linux and OSX are tested but any Unix should work) it will be the "www" directory
+On Unixes(Linux and OSX are tested but any Unix should work) it will be the `I2P_Site` directory
 in the directory where you run the application. So if you ran the application from
 
-        /home/user/eephttpd/
+        /home/user/eephttpd/I2P_Site
 
-then you would end up with a `www` directory there, for example:
+then you would end up with a `I2P_Site` directory there, for example:
 
-        /home/user/eephttpd/www/
+        /home/user/eephttpd/I2P_Site/
 
 Just put the files you want to serve, like your web site or open directory of content, inside
 of that directory.

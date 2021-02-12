@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/tls"
 	"flag"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/user"
@@ -30,20 +31,37 @@ var cfg = &tls.Config{
 	},
 }
 
+var Boilerplate = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    I2P Site
+  </body>
+</html>`
+
 func wwwdir() string {
 	path := "./www"
+	user, err := user.Current()
+	if err != nil {
+		path = "./www"
+	}
 	if runtime.GOOS == "windows" {
-		user, err := user.Current()
-		if err != nil {
-			return "./www"
-		}
-		path = filepath.Join(user.HomeDir, "My Documents", "www")
+		path = filepath.Join(user.HomeDir, "My Documents", "I2P_Site")
 	}
 	if runtime.GOOS == "darwin" {
-		return "../Resources/www"
+		path = filepath.Join(user.HomeDir, "Documents", "I2P_Site")
 	}
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		os.Mkdir(path, 0755)
+		ioutil.WriteFile(filepath.Join(path, "index.html"), []byte(Boilerplate), 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 	return path
 }
