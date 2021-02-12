@@ -249,3 +249,45 @@ release-debs: orig
 	release-pdeb focal eephttpd
 	distro=focal make upload-deb
 
+APPNAME=$(packagename)
+APPBUNDLE=$(APPNAME).app
+APPBUNDLECONTENTS=$(APPBUNDLE)/Contents
+APPBUNDLEEXE=$(APPBUNDLECONTENTS)/MacOS
+APPBUNDLERESOURCES=$(APPBUNDLECONTENTS)/Resources
+APPBUNDLEICON=$(APPBUNDLECONTENTS)/Resources
+OUTFILE=eephttpd/eephttpd-osx-gui
+
+appbundle: macosx/$(APPNAME).icns
+	rm -rf $(APPBUNDLE)
+	mkdir $(APPBUNDLE)
+	mkdir $(APPBUNDLE)/Contents
+	mkdir $(APPBUNDLE)/Contents/MacOS
+	mkdir $(APPBUNDLE)/Contents/Resources
+	cp macosx/Info.plist $(APPBUNDLECONTENTS)/
+	cp macosx/PkgInfo $(APPBUNDLECONTENTS)/
+	cp macosx/$(APPNAME).icns $(APPBUNDLEICON)/
+	cp $(OUTFILE) $(APPBUNDLEEXE)/$(APPNAME)
+
+macosx/$(APPNAME).icns: macosx/$(APPNAME)Icon.png
+	rm -rf macosx/$(APPNAME).iconset
+	mkdir macosx/$(APPNAME).iconset
+	mogrify -resize 16x16	  -write macosx/$(APPNAME).iconset/icon_16x16.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 32x32	  -write macosx/$(APPNAME).iconset/icon_16x16@2x.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 32x32	  -write macosx/$(APPNAME).iconset/icon_32x32.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 64x64	  -write macosx/$(APPNAME).iconset/icon_64x64.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 128x128    -write macosx/$(APPNAME).iconset/icon_128x128.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 256x256    -write macosx/$(APPNAME).iconset/icon_128x128@2x.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 256x256    -write macosx/$(APPNAME).iconset/icon_256x256.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 512x512    -write macosx/$(APPNAME).iconset/icon_256x256@2x.png macosx/$(APPNAME)Icon.png
+	mogrify -resize 512x512    -write macosx/$(APPNAME).iconset/icon_512x512.png macosx/$(APPNAME)Icon.png
+	cp macosx/$(APPNAME)Icon.png macosx/$(APPNAME).iconset/icon_512x512@2x.png
+	png2icns macosx/$(APPNAME).icns \
+		macosx/$(APPNAME).iconset/icon_16x16.png \
+		macosx/$(APPNAME).iconset/icon_32x32.png \
+		macosx/$(APPNAME).iconset/icon_128x128.png \
+		macosx/$(APPNAME).iconset/icon_256x256.png \
+		macosx/$(APPNAME).iconset/icon_512x512.png
+	#/*-c icns -o macosx/$(APPNAME).icns macosx/$(APPNAME).iconset*/
+	rm -r macosx/$(APPNAME).iconset
+
+

@@ -29,7 +29,7 @@ func (f *EepHttpd) ProxyRequest(req *http.Request) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
-	url := fmt.Sprintf("%s://%s:%s/%s", "http", f.SamTracker.Config().TargetHost, strconv.Itoa(pp+1), "announce")
+	url := fmt.Sprintf("%s://%s:%s%s", "http", f.SamTracker.Config().TargetHost, strconv.Itoa(pp+1), req.URL.Path)
 	log.Println("handling http tracker request", url)
 	proxyReq, err := http.NewRequest(req.Method, url, bytes.NewReader(body))
 	if err != nil {
@@ -124,7 +124,23 @@ func (f *EepHttpd) checkURL(rq *http.Request) string {
 		p = "announce"
 		return p
 	}
-	if strings.HasSuffix("/"+rq.URL.Path, "/announce") {
+	if strings.HasPrefix("/"+rq.URL.Path, "/announce") {
+		p = "announce"
+		return p
+	}
+	if strings.HasSuffix("/"+rq.URL.Path, "/a/s") {
+		p = "announce"
+		return p
+	}
+	if "/"+rq.URL.Path == "/s" {
+		p = "announce"
+		return p
+	}
+	if strings.HasSuffix("/"+rq.URL.Path, "/announce/s") {
+		p = "announce"
+		return p
+	}
+	if strings.HasPrefix("/"+rq.URL.Path, "/scrape") {
 		p = "announce"
 		return p
 	}
