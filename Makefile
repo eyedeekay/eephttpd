@@ -105,7 +105,7 @@ build-osx-gui:
 	cd eephttpd && \
 		GOOS=darwin \
 		GOARCH=amd64 \
-		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd-osx-gui; true
+		go build -a -tags "netgo gui" -o eephttpd-osx-gui; true
 
 #-a -tags netgo -ldflags '-w -extldflags "-static"'
 
