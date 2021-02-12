@@ -36,5 +36,5 @@ func onExit() {
 }
 
 func runTray() {
-	go systray.Run(onReady, onExit)
+	systray.Run(onReady, onExit)
 }
