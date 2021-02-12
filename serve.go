@@ -144,6 +144,10 @@ func (f *EepHttpd) checkURL(rq *http.Request) string {
 		p = "announce"
 		return p
 	}
+	if strings.HasPrefix("/"+rq.URL.Path, "/a/scrape") {
+		p = "announce"
+		return p
+	}
 	if strings.HasSuffix(rq.URL.Path, "/") {
 		p = filepath.Join(rq.URL.Path, "index.html")
 	}
