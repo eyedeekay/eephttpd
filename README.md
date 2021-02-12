@@ -15,7 +15,7 @@ things you want to keep secret.) This allows people to clone the site
 in order to mirror it.
  2. When any file is changed in the docroot, eephttpd generates a
 multi-file torrent of the site and places it in the docroot under the file
-name `$SITEHOSTNAME.torrent`. This allows people to mirror the site's exact
+name `eephttpd.torrent`. This allows people to mirror the site's exact
 content, and participate in keeping the site's content up.
  2. When a browser with I2P in Private Browsing connects to it, it creates
 a magnet link and replies with it as an `X-I2P-TORRENTLOCATION` header. In

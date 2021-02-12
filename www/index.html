@@ -13,7 +13,7 @@
 <p>However, it responds differently to different kinds of interaction.</p>
 <ol type="1">
 <li>If a Git client attempts to access it, then they will be able to clone the entire site, up from the document root(So <strong>Use this for things</strong> <strong>You want to <em>SHARE ANONYMOUSLY</em> with a large audience</strong>, not for things you want to keep secret.) This allows people to clone the site in order to mirror it.</li>
-<li>When any file is changed in the docroot, eephttpd generates a multi-file torrent of the site and places it in the docroot under the file name <code>$SITEHOSTNAME.torrent</code>. This allows people to mirror the site’s exact content, and participate in keeping the site’s content up.</li>
+<li>When any file is changed in the docroot, eephttpd generates a multi-file torrent of the site and places it in the docroot under the file name <code>eephttpd.torrent</code>. This allows people to mirror the site’s exact content, and participate in keeping the site’s content up.</li>
 <li>When a browser with I2P in Private Browsing connects to it, it creates a magnet link and replies with it as an <code>X-I2P-TORRENTLOCATION</code> header. In this way, the browser can help the user download the whole web site using Bittorrent and substitute HTTP resources for Bittorrent resources when they are ready.</li>
 <li>If a Torrent client attempts to access the <code>/a</code> URL, it is forwarded to an Open Torrent Tracker. <strong>Every single eephttpd site is also an open</strong> <strong>torrent tracker.</strong> Moreover, every single eephttpd site treats itself as the primary tracker for the whole-site torrent it generates. <strong>This is</strong> <strong>intended to encourage the distribution of <em>open trackers</em> on I2P.</strong></li>
 </ol>
@@ -41,12 +41,12 @@
 <img src="eephttpd.png" alt="" /><figcaption>Initial Setup Screen</figcaption>
 </figure>
 <h2 id="example-setup">Example Setup:</h2>
-<p>On Windows the default site will be created in the “My Documents” folder, and it will be empty by default. For example:</p>
-<pre><code>    C:\\Documents and Settings\User\My Documents\www</code></pre>
-<p>On Unixes(Linux and OSX are tested but any Unix should work) it will be the “www” directory in the directory where you run the application. So if you ran the application from</p>
-<pre><code>    /home/user/eephttpd/</code></pre>
-<p>then you would end up with a <code>www</code> directory there, for example:</p>
-<pre><code>    /home/user/eephttpd/www/</code></pre>
+<p>On Windows the default site will be created in the <code>My Documents</code> folder, and it will be empty by default. For example:</p>
+<pre><code>    C:\\Documents and Settings\User\My Documents\I2P_Site</code></pre>
+<p>On Unixes(Linux and OSX are tested but any Unix should work) it will be the <code>I2P_Site</code> directory in the directory where you run the application. So if you ran the application from</p>
+<pre><code>    /home/user/eephttpd/I2P_Site</code></pre>
+<p>then you would end up with a <code>I2P_Site</code> directory there, for example:</p>
+<pre><code>    /home/user/eephttpd/I2P_Site/</code></pre>
 <p>Just put the files you want to serve, like your web site or open directory of content, inside of that directory.</p>
 <h2 id="example-clone">Example Clone:</h2>
 <p>eepHttpd is capable of mirroring a static site stored in a git repository. Sort of like a self-hosted github page. This feature is accessible via the GUI. To do this, fill in the <code>Clone Site from a git repository</code> section.</p>
