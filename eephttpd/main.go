@@ -174,9 +174,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	go UiMain()
+	if runtime.GOOS == "darwin" {
+		UiMain()
+	} else {
+		go UiMain()
+	}
 	time.Sleep(time.Second)
-	go runTray()
+	if runtime.GOOS == "darwin" {
+		runTray()
+	} else {
+		go runTray()
+	}
 	if eepsite != nil {
 		log.Println("Starting server")
 		if err = eepsite.Serve(); err != nil {
