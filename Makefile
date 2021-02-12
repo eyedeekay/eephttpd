@@ -105,8 +105,7 @@ build-osx-gui:
 	cd eephttpd && \
 		GOOS=darwin \
 		GOARCH=amd64 \
-		CGO_ENABLED=1 \
-		go build -a -tags "netgo gui" -o eephttpd-osx-gui; true
+		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd-osx-gui; true
 
 #-a -tags netgo -ldflags '-w -extldflags "-static"'
 
@@ -266,6 +265,8 @@ appbundle: macosx/$(APPNAME).icns
 	cp macosx/Info.plist $(APPBUNDLECONTENTS)/
 	cp macosx/PkgInfo $(APPBUNDLECONTENTS)/
 	cp macosx/$(APPNAME).icns $(APPBUNDLEICON)/
+	cp -r www $(APPBUNDLERESOURCES)/www
+	cp -r etc $(APPBUNDLERESOURCES)/etc
 	cp $(OUTFILE) $(APPBUNDLEEXE)/$(APPNAME)
 
 macosx/$(APPNAME).icns: macosx/$(APPNAME)Icon.png
