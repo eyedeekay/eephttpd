@@ -18,6 +18,9 @@ func onReady() {
 		go func() {
 			<-mEdit.ClickedCh
 			UiMain()
+			if runtime.GOOS == "darwin" {
+				defer runTray()
+			}
 		}()
 	}
 	mQuit := systray.AddMenuItem("Quit", "Quit the whole app")
