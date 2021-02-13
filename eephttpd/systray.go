@@ -6,6 +6,7 @@ import (
 	"github.com/getlantern/systray"
 	"github.com/getlantern/systray/example/icon"
 	"os"
+	"runtime"
 )
 
 func onReady() {
@@ -36,5 +37,8 @@ func onExit() {
 }
 
 func runTray() {
+	if runtime.GOOS == "darwin" {
+		gui = true
+	}
 	systray.Run(onReady, onExit)
 }
