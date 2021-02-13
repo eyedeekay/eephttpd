@@ -176,6 +176,9 @@ func main() {
 
 	go Serve()
 	time.Sleep(time.Second)
+	if runtime.GOOS == "darwin" {
+		go runTray()
+	}
 	UiMain()
 	runTray()
 }

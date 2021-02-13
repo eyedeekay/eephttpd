@@ -120,7 +120,7 @@ build-windows:
 		CC=x86_64-w64-mingw32-gcc \
 		go build -a -tags "netgo gui" -ldflags '-w -extldflags "-static"' -o eephttpd.exe
 
-all: deps build build-gui build-osx build-osx-gui build-windows
+all: deps orig build build-gui build-osx build-osx-gui build-windows
 
 release: deps all tag upload
 
