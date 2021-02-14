@@ -178,9 +178,10 @@ func main() {
 	time.Sleep(time.Second)
 	if runtime.GOOS == "darwin" {
 		runTray()
+	} else {
+		UiMain()
+		runTray()
 	}
-	UiMain()
-	runTray()
 }
 
 func Serve() {
