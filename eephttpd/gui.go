@@ -89,6 +89,9 @@ func UiMain() {
 func IniEdit() {
 	mainwin = ui.NewWindow("I2P Site Control Panel", 640, 480, true)
 	mainwin.OnClosing(func(*ui.Window) bool {
+		if runtime.GOOS == "darwin" {
+			return false
+		}
 		ui.Quit()
 		return true
 	})
