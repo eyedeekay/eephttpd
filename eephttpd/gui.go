@@ -97,10 +97,10 @@ func IniEdit() {
 		return true
 	})
 	ui.OnShouldQuit(func() bool {
+		mainwin.Destroy()
 		if runtime.GOOS == "darwin" {
 			return false
 		}
-		mainwin.Destroy()
 		return true
 	})
 
