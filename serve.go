@@ -60,6 +60,12 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	if strings.HasSuffix(rq.URL.Path, ".js") {
 		rw.Header().Set("Content-Type", "text/javascript")
 	}
+	if strings.HasSuffix(rq.URL.Path, ".md") {
+		rw.Header().Set("Content-Type", "text/html")
+	}
+	if strings.HasSuffix(rp, ".html") {
+		rw.Header().Set("Content-Type", "text/html")
+	}
 	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
 	defer f.Pull()
 	if rp == "torrent" {
@@ -160,8 +166,19 @@ func (f *EepHttpd) checkURL(rq *http.Request) string {
 			p = rq.URL.Path
 		}
 	}
+	if IsDirectory(p) {
+		p = filepath.Join(rq.URL.Path, "index.html")
+	}
 	fp := filepath.Join(f.ServeDir, p)
 	return fp
+}
+
+func IsDirectory(path string) bool {
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return fileInfo.IsDir()
 }
 
 func (f *EepHttpd) HandleScript(rw http.ResponseWriter, rq *http.Request) {

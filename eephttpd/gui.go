@@ -5,7 +5,7 @@ package main
 import (
 	"github.com/andlabs/ui"
 	"github.com/atotto/clipboard"
-	"runtime"
+	// "runtime"
 )
 
 var mainwin *ui.Window
