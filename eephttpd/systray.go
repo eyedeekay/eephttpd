@@ -4,14 +4,14 @@ package main
 
 import (
 	"github.com/getlantern/systray"
-	"github.com/getlantern/systray/example/icon"
+	"github.com/eyedeekay/eephttpd/icon"
 	"os"
 	"runtime"
 	"time"
 )
 
 func onReady() {
-	systray.SetIcon(icon.Data)
+	systray.SetIcon(icon.Icon)
 	systray.SetTitle("I2P Web Site")
 	systray.SetTooltip("Administer your local I2P site.")
 	var mEdit *systray.MenuItem
