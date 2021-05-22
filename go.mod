@@ -20,7 +20,7 @@ require (
 	github.com/google/go-cmp v0.5.4 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
 	github.com/kr/pretty v0.2.1 // indirect
-	github.com/lmas/feedloggr v0.0.0-20210215173714-3928864c7445 // indirect
+	github.com/lmas/feedloggr v0.0.0-20210215173714-3928864c7445
 	github.com/radovskyb/watcher v1.0.7
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect

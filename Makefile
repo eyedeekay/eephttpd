@@ -108,7 +108,7 @@ build-osx-gui:
 	#	GOARCH=amd64 \
 	#	go build -a -tags "netgo gui" -o eephttpd-osx-gui; true
 	#-a -tags netgo -ldflags '-w -extldflags "-static"'
-	scp admin@192.168.1.104:~/go/src/github.com/eyedeekay/eephttpd/eephttpd/eephttpd-osx-gui eephttpd/eephttpd-osx-gui
+	#scp admin@192.168.1.104:~/go/src/github.com/eyedeekay/eephttpd/eephttpd/eephttpd-osx-gui eephttpd/eephttpd-osx-gui
 
 
 build-windows:
