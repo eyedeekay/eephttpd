@@ -12,10 +12,10 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.9994
+VERSION=0.0.9995
 
 tag:
-	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "I2P Tunnel Management tool for Go applications"
+	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "Tiny, freestanding I2P Web Server with Superpowers for file-sharing, mirroring, and social capabilities."
 
 upload-linux:
 	gothub upload -R -u $(USER_GH) -r "$(packagename)" -t v$(VERSION) \
@@ -81,7 +81,7 @@ orig:
 	tar --exclude=.git --exclude=debian -czvf ../eephttpd_$(VERSION).orig.tar.gz .
 
 deps:
-	go get -u ./...
+	#go get -u ./...
 
 build:
 	cd eephttpd && go build -a -tags netgo -ldflags '-w -extldflags "-static"'
