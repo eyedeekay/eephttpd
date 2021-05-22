@@ -467,3 +467,11 @@ func SetKeyFile(s string) func(*EepHttpd) error {
 		return nil
 	}
 }
+
+//SetFeedFilePath sets the path to save the config file at.
+func SetFeedFilePath(s string) func(*EepHttpd) error {
+	return func(c *EepHttpd) error {
+		c.feedlist = s
+		return nil
+	}
+}

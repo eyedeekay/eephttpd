@@ -93,6 +93,7 @@ var (
 	iniFile            = flag.String("f", "none", "Use an ini file for configuration")
 	useTLS             = flag.Bool("t", false, "Generate or use an existing TLS certificate")
 	certFile           = flag.String("m", "cert", "Certificate name to use")
+	feedFile           = flag.String("rs", "", "File with RSS feeds to aggregate and share")
 )
 
 var eepsite *eephttpd.EepHttpd
@@ -132,6 +133,8 @@ func main() {
 	config.AccessListType = config.GetAccessListType(*accessListType, "none")
 	config.Type = config.GetTypes(false, false, false, "server")
 
+	os.Setenv("http_proxy", "http://127.0.0.1:4444")
+
 	testdir, ok := config.Get("servedir")
 	if ok {
 		*directory = testdir
@@ -169,6 +172,7 @@ func main() {
 		eephttpd.SetServeDir(*directory),
 		eephttpd.SetGitURL(*giturl),
 		eephttpd.SetINIFile(*iniFile),
+		eephttpd.SetFeedFilePath(*feedFile),
 	)
 	if err != nil {
 		log.Fatal(err)

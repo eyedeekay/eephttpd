@@ -7,11 +7,14 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 
 	"github.com/eyedeekay/sam-forwarder/config"
 	"github.com/eyedeekay/sam-forwarder/interface"
 	"github.com/eyedeekay/sam-forwarder/tcp"
 	"github.com/eyedeekay/samtracker"
+
+	feed "github.com/lmas/feedloggr/pkg"
 	"github.com/radovskyb/watcher"
 	"github.com/sosedoff/gitkit"
 	"github.com/xgfone/bt/bencode"
@@ -37,6 +40,9 @@ type EepHttpd struct {
 	magnet   string
 	meta     *metainfo.MetaInfo
 	mark     *markdown.Markdown
+	feedcfg  feed.Config
+	feedlist string
+	updating bool
 }
 
 var err error
@@ -142,6 +148,21 @@ func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 		s.Watcher.TriggerEvent(watcher.Create, nil)
 		s.Watcher.TriggerEvent(watcher.Remove, nil)
 	}()
+
+	if s.feedlist != "" {
+		s.feedcfg.Verbose = false
+		s.feedcfg.Timeout = 600
+		s.feedcfg.OutputPath = filepath.Join(s.ServeDir, "feeds")
+		s.feedcfg.Feeds = LoadFeedConfig(s.feedlist)
+		feedapp, err := feed.New(&s.feedcfg)
+		if err != nil {
+			return nil, err
+		}
+		err = feedapp.Update()
+		if err != nil {
+			return nil, err
+		}
+	}
 	err := s.MakeTorrent()
 	if err != nil {
 		return nil, err
@@ -153,6 +174,24 @@ func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 
 func (e *EepHttpd) HostName() string {
 	return e.Base32()
+}
+
+func LoadFeedConfig(filename string) (ret map[string]string) {
+	ret = make(map[string]string)
+	bytelist, err := ioutil.ReadFile(filename)
+	if err != nil {
+		if os.IsNotExist(err) {
+			ret[""] = ""
+		}
+	}
+	strbytelist := strings.Split(string(bytelist), "\n")
+	for _, v := range strbytelist {
+		kv := strings.Split(v, "=")
+		if len(kv) == 2 {
+			ret[kv[0]] = kv[1]
+		}
+	}
+	return
 }
 
 func DirSize(path string) (int64, error) {
@@ -227,6 +266,10 @@ func (e *EepHttpd) noPull() {
 	e.pulling = false
 }
 
+func (e *EepHttpd) noUpdate() {
+	e.updating = false
+}
+
 func (e *EepHttpd) ResetGit() error {
 	if e.GitURL != "" {
 		defer e.MakeTorrent()
@@ -248,6 +291,27 @@ func (e *EepHttpd) ResetGit() error {
 				return err
 			}
 		}
+	}
+	return nil
+}
+
+func (e *EepHttpd) PullFeeds() error {
+	if e.feedlist == "" {
+		return nil
+	}
+	if e.updating {
+		return nil
+	} else {
+		e.updating = true
+		defer e.noUpdate()
+	}
+	feedapp, err := feed.New(&e.feedcfg)
+	if err != nil {
+		return err
+	}
+	err = feedapp.Update()
+	if err != nil {
+		return err
 	}
 	return nil
 }

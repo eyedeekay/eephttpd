@@ -107,6 +107,7 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 		}
 		f.HandleFile(rw, rq)
 	}
+	f.PullFeeds()
 }
 
 func FileExists(filename string) bool {

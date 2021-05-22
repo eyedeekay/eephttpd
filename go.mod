@@ -7,7 +7,6 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20210224194228-fe8f1750fd46 // indirect
 	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
 	github.com/atotto/clipboard v0.1.4
-	github.com/cratonica/2goarray v0.0.0-20190331194516-514510793eaa // indirect
 	github.com/d5/tengo v1.24.8
 	github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9
 	github.com/eyedeekay/sam3 v0.32.32 // indirect
@@ -21,6 +20,7 @@ require (
 	github.com/google/go-cmp v0.5.4 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
 	github.com/kr/pretty v0.2.1 // indirect
+	github.com/lmas/feedloggr v0.0.0-20210215173714-3928864c7445 // indirect
 	github.com/radovskyb/watcher v1.0.7
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect

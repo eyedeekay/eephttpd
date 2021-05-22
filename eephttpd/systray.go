@@ -3,8 +3,8 @@
 package main
 
 import (
-	"github.com/getlantern/systray"
 	"github.com/eyedeekay/eephttpd/icon"
+	"github.com/getlantern/systray"
 	"os"
 	"runtime"
 	"time"
