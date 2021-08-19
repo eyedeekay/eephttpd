@@ -6,7 +6,7 @@ RUN mkdir -p /opt/eephttpd
 RUN adduser -h /opt/eephttpd -D -g "eephttpd,,,," eephttpd
 COPY . /usr/src/eephttpd
 WORKDIR /usr/src/eephttpd
-RUN go mod vendor && make build install
+RUN go mod vendor && make build build-gui install
 WORKDIR /opt/eephttpd
 USER eephttpd
 COPY www /opt/eephttpd/www
