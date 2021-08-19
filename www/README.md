@@ -157,39 +157,8 @@ instance
 --------
 
 a running instance of eephttpd with the example index file is availble on
-[http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p](http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p)
+[http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p](http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p)
 
 You can mirror the site with bittorrent as well:
-[http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p/eephttpd.torrent](http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p/eephttpd.torrent)
+[http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p/eephttpd.torrent](http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p/eephttpd.torrent)
 
-### build in docker
-
-```
-docker build --build-arg user=eephttpd \
-    --build-arg path=example/www \
-    -f Dockerfile -t \
-    eyedeekay/eephttpd .
-```
-
-### Run in docker
-
-```
-docker run -i -t -d \
-    --name eephttpd-volume \
-    --volume eephttpd:/opt/eephttpd/ \
-    eyedeekay/eephttpd
-```
-
-```
-docker run -i -t -d \
-    --network si \
-    --env samhost=localhost \
-    --env samport=7656 \
-    --env args=-r # Additional arguments to pass to eephttpd\
-    --network-alias eephttpd \
-    --hostname eephttpd \
-    --name eephttpd \
-    --restart always \
-    --volumes-from eephttpd-volume \
-    eyedeekay/eephttpd
-```
