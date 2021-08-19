@@ -136,23 +136,23 @@ func (f *EepHttpd) checkURL(rq *http.Request) string {
 		return p
 	}
 	if strings.HasSuffix("/"+rq.URL.Path, "/a/s") {
-		p = "announce"
+		p = "scrape"
 		return p
 	}
 	if "/"+rq.URL.Path == "/s" {
-		p = "announce"
+		p = "scrape"
 		return p
 	}
 	if strings.HasSuffix("/"+rq.URL.Path, "/announce/s") {
-		p = "announce"
+		p = "scrape"
 		return p
 	}
 	if strings.HasPrefix("/"+rq.URL.Path, "/scrape") {
-		p = "announce"
+		p = "scrape"
 		return p
 	}
 	if strings.HasPrefix("/"+rq.URL.Path, "/a/scrape") {
-		p = "announce"
+		p = "scrape"
 		return p
 	}
 	if strings.HasSuffix(rq.URL.Path, "/") {

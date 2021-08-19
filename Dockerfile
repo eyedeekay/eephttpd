@@ -1,14 +1,12 @@
-FROM alpine:3.8
-ENV samhost=sam-host
-ENV samport=7656
-ENV args="-r"
+FROM alpine:latest
+ENV samhost=localhost samport=7656 args="-r"
 RUN apk update -U
 RUN apk add go git make musl-dev
 RUN mkdir -p /opt/eephttpd
 RUN adduser -h /opt/eephttpd -D -g "eephttpd,,,," eephttpd
 COPY . /usr/src/eephttpd
 WORKDIR /usr/src/eephttpd
-RUN make release install
+RUN go mod vendor && make build install
 WORKDIR /opt/eephttpd
 USER eephttpd
 COPY www /opt/eephttpd/www
