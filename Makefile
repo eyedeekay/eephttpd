@@ -141,10 +141,10 @@ run:
 		--hostname $(eephttpd) \
 		--name $(eephttpd) \
 		--restart always \
-		--volume $(PWD)/www:/opt/$(eephttpd)/www \
-		--volume $(PWD)/eephttpd.i2pkeys:/opt/$(eephttpd)/eephttpd.i2pkeys \
+		--volume $(PWD):/opt/$(eephttpd) \
 		eyedeekay/$(eephttpd)
 
+#		--volume $(PWD)/eephttpd.i2pkeys:/opt/$(eephttpd)/eephttpd.i2pkeys \
 #		--network-alias $(eephttpd) \
 
 clean:

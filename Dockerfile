@@ -8,8 +8,7 @@ COPY . /usr/src/eephttpd
 WORKDIR /usr/src/eephttpd
 RUN go mod vendor && make build && install -m755 eephttpd/eephttpd /usr/bin/eephttpd
 WORKDIR /opt/eephttpd
-USER eephttpd
-COPY www /opt/eephttpd/www
+USER 1000
 VOLUME /opt/eephttpd/
 CMD eephttpd -f /usr/src/eephttpd/etc/eephttpd/eephttpd.conf \
     -i \
