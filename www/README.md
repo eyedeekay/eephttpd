@@ -109,6 +109,8 @@ Usage of ./eephttpd/eephttpd:
   -r	Reduce tunnel quantity when idle(true or false)
   -rc int
     	Reduce idle tunnel quantity to X (0 to 5) (default 3)
+  -rs string
+    	File with RSS feeds to aggregate and share
   -rt int
     	Reduce tunnel quantity after X (milliseconds) (default 600000)
   -sh string
@@ -140,7 +142,7 @@ docker run -i -t -d \
 ```
 docker run -i -t -d \
     --network si \
-    --env samhost=sam-host \
+    --env samhost=localhost \
     --env samport=7656 \
     --env args=-r # Additional arguments to pass to eephttpd\
     --network-alias eephttpd \
@@ -155,8 +157,39 @@ instance
 --------
 
 a running instance of eephttpd with the example index file is availble on
-[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p)
+[http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p](http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p)
 
 You can mirror the site with bittorrent as well:
-[http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent](http://tvndxxkxcstbtqfxg7iigco6bj22ff2y6jxikmk7wqkyadkhrd4a.b32.i2p/eephttpd.torrent)
+[http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p/eephttpd.torrent](http://yw3am4w2tsbdfuw4ieqdi43pbamwtyodkxur3p5wfoeqzc7uo54a.b32.i2p/eephttpd.torrent)
 
+### build in docker
+
+```
+docker build --build-arg user=eephttpd \
+    --build-arg path=example/www \
+    -f Dockerfile -t \
+    eyedeekay/eephttpd .
+```
+
+### Run in docker
+
+```
+docker run -i -t -d \
+    --name eephttpd-volume \
+    --volume eephttpd:/opt/eephttpd/ \
+    eyedeekay/eephttpd
+```
+
+```
+docker run -i -t -d \
+    --network si \
+    --env samhost=localhost \
+    --env samport=7656 \
+    --env args=-r # Additional arguments to pass to eephttpd\
+    --network-alias eephttpd \
+    --hostname eephttpd \
+    --name eephttpd \
+    --restart always \
+    --volumes-from eephttpd-volume \
+    eyedeekay/eephttpd
+```
