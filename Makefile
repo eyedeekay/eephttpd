@@ -165,10 +165,10 @@ usage:
 	@echo "--------" >> USAGE.md
 	@echo "" >> USAGE.md
 	@echo "a running instance of eephttpd with the example index file is availble on" >> USAGE.md
-	@echo '[http://mjkmqlpigqe7ze45kmiqznyq6mfjdnp2jazd3pn4ivckziznrrba.b32.i2p](http://mjkmqlpigqe7ze45kmiqznyq6mfjdnp2jazd3pn4ivckziznrrba.b32.i2p)' >> USAGE.md
+	@echo '[http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p](http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p)' >> USAGE.md
 	@echo "" >> USAGE.md
 	@echo "You can mirror the site with bittorrent as well:" >> USAGE.md
-	@echo "[http://mjkmqlpigqe7ze45kmiqznyq6mfjdnp2jazd3pn4ivckziznrrba.b32.i2p/eephttpd.torrent](http://mjkmqlpigqe7ze45kmiqznyq6mfjdnp2jazd3pn4ivckziznrrba.b32.i2p/eephttpd.torrent)" >> USAGE.md
+	@echo "[http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p/eephttpd.torrent](http://k5xlaoc4xqlwv5wpgoq2io2xusrmjpk622hgbsw6pyeviimpcr4q.b32.i2p/eephttpd.torrent)" >> USAGE.md
 	@echo "" >> USAGE.md
 	@cat USAGE.md
 
