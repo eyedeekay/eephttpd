@@ -12,7 +12,7 @@ echo:
 
 USER_GH=eyedeekay
 packagename=eephttpd
-VERSION=0.0.9995
+VERSION=0.0.9996
 
 tag:
 	gothub release -s $(GITHUB_TOKEN) -u $(USER_GH) -r $(packagename) -t v$(VERSION) -d "Tiny, freestanding I2P Web Server with Superpowers for file-sharing, mirroring, and social capabilities."
