@@ -7,7 +7,7 @@ require (
 	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
 	github.com/atotto/clipboard v0.1.4
 	github.com/d5/tengo v1.24.8
-	github.com/eyedeekay/sam-forwarder v0.32.2-0.20220603202605-9a46feacc370
+	github.com/eyedeekay/sam-forwarder 9a46feacc370255868036a146b085ea09a8ac937
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/gabriel-vasile/mimetype v1.4.0
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
@@ -19,4 +19,4 @@ require (
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )
 
-replace github.com/sosedoff/gitkit v0.2.0 => github.com/eyedeekay/gitkit v0.2.1-0.20210205215343-fbba2108e95a
+replace github.com/sosedoff/gitkit v0.3.0 => github.com/eyedeekay/gitkit v0.2.1-0.20210205215343-fbba2108e95a
