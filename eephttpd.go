@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/eyedeekay/sam-forwarder/config"
-	"github.com/eyedeekay/sam-forwarder/interface"
-	"github.com/eyedeekay/sam-forwarder/tcp"
+	i2ptunconf "github.com/eyedeekay/sam-forwarder/config"
+	samtunnel "github.com/eyedeekay/sam-forwarder/interface"
+	samforwarder "github.com/eyedeekay/sam-forwarder/tcp"
 	"github.com/eyedeekay/samtracker"
 
 	feed "github.com/lmas/feedloggr/pkg"
@@ -37,8 +37,8 @@ type EepHttpd struct {
 	IniFile  string
 	up       bool
 	pulling  bool
-	magnet   string
-	meta     *metainfo.MetaInfo
+	magnet   map[string]string
+	meta     map[string]*metainfo.MetaInfo
 	mark     *markdown.Markdown
 	feedcfg  feed.Config
 	feedlist string
@@ -66,7 +66,7 @@ func (f *EepHttpd) Target() string {
 //Serve starts the SAM connection and and forwards the local host:port to i2p
 func (f *EepHttpd) Serve() error {
 	go f.ServeParent()
-	f.MakeTorrent()
+	//f.MakeAllTorrents() TODO: write this function.
 	if f.Up() {
 		log.Println("Starting web server", f.Target())
 		if err := http.ListenAndServe(f.Target(), f); err != nil {
@@ -131,7 +131,7 @@ func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 			select {
 			case event := <-s.Watcher.Event:
 				log.Printf("File event %v\n", event)
-				err := s.MakeTorrent()
+				//f.MakeAllTorrents() TODO: write this function.
 				if err != nil {
 					log.Printf("File Watcher Error %e", err)
 				}
@@ -163,7 +163,7 @@ func (s *EepHttpd) Load() (samtunnel.SAMTunnel, error) {
 			return nil, err
 		}
 	}
-	err := s.MakeTorrent()
+	//f.MakeAllTorrents() TODO: write this function.
 	if err != nil {
 		return nil, err
 	}
@@ -207,9 +207,18 @@ func DirSize(path string) (int64, error) {
 	})
 	return size, err
 }
+func (e *EepHttpd) metaLook(file string) *metainfo.MetaInfo {
+	meta, ok := e.meta[file]
+	if ok {
+		return meta
+	}
+	e.meta[file] = &metainfo.MetaInfo{}
+	return e.meta[file]
+}
 
-func (e *EepHttpd) MakeTorrent() error {
-	e.meta = &metainfo.MetaInfo{}
+func (e *EepHttpd) MakeTorrent(file string) error {
+	//e.meta = make(map[string]*metainfo.MetaInfo)
+	meta := e.metaLook(file)
 	wd, err := os.Getwd()
 	if err != nil {
 		return err
@@ -236,16 +245,32 @@ func (e *EepHttpd) MakeTorrent() error {
 	log.Println("Generating torrent:", info.CountPieces(), "pieces")
 
 	//	e.meta.SetDefaults()
-	e.meta.InfoBytes, err = bencode.EncodeBytes(info)
+	meta.InfoBytes, err = bencode.EncodeBytes(info)
 	if err != nil {
 		return err
 	}
-	e.meta.URLList = metainfo.URLList{"http://" + e.HostName()}
-	e.meta.Announce = "http://" + e.HostName() + "/a"
-	e.meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
-	e.meta.CreatedBy = "eephttpd"
-	e.magnet = e.meta.Magnet(e.HostName(), e.meta.InfoHash()).String()
+	meta.URLList = metainfo.URLList{"http://" + e.HostName()}
+	meta.Announce = "http://" + e.HostName() + "/a"
+	meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
+	meta.CreatedBy = "eephttpd"
+	e.magnet[file] = meta.Magnet(e.HostName(), meta.InfoHash()).String()
 	return nil
+}
+
+func (e *EepHttpd) GetMagnet(file string) string {
+	err := e.MakeTorrent(file)
+	if err != nil {
+		return ""
+	}
+	return e.magnet[file]
+}
+
+func (e *EepHttpd) GetTorrent(file string) *metainfo.MetaInfo {
+	err := e.MakeTorrent(file)
+	if err != nil {
+		return nil
+	}
+	return e.meta[file]
 }
 
 func (e *EepHttpd) Print() string {
@@ -271,8 +296,8 @@ func (e *EepHttpd) noUpdate() {
 }
 
 func (e *EepHttpd) ResetGit() error {
+	//defer f.MakeAllTorrents() TODO: write this function.
 	if e.GitURL != "" {
-		defer e.MakeTorrent()
 		log.Println("Resetting git repository to", e.GitURL)
 		os.RemoveAll(filepath.Join(e.ServeDir))
 		os.Mkdir(filepath.Join(e.ServeDir), 0755)
@@ -325,7 +350,7 @@ func (e *EepHttpd) Pull() error {
 	}
 
 	if e.GitURL != "" {
-		defer e.MakeTorrent()
+		//defer f.MakeAllTorrents() TODO: write this function.
 		_, err := os.Stat(filepath.Join(e.ServeDir, ".git"))
 		if os.IsNotExist(err) {
 			e.GitRepo, err = git.PlainClone(e.ServeDir, false, &git.CloneOptions{

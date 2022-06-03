@@ -66,7 +66,7 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	if strings.HasSuffix(rp, ".html") {
 		rw.Header().Set("Content-Type", "text/html")
 	}
-	rw.Header().Set("X-I2P-TORRENTLOCATION", f.magnet)
+	rw.Header().Set("X-I2P-TORRENTLOCATION", f.GetMagnet(rq.URL.Path))
 	defer f.Pull()
 	if rp == "torrent" {
 		f.HandleTorrent(rw, rq)
@@ -228,7 +228,7 @@ func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {
 }
 
 func (e *EepHttpd) HandleTorrent(rw http.ResponseWriter, rq *http.Request) {
-	e.meta.Write(rw)
+	e.GetTorrent(rq.URL.Path).Write(rw)
 }
 
 func (f *EepHttpd) HandleMissing(rw http.ResponseWriter, rq *http.Request) {
