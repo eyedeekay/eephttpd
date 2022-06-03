@@ -7,7 +7,7 @@ require (
 	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
 	github.com/atotto/clipboard v0.1.4
 	github.com/d5/tengo v1.24.8
-	github.com/eyedeekay/sam-forwarder v0.32.2-0.20220603202605-9a46feacc370
+	github.com/eyedeekay/sam-forwarder v0.32.2-0.20220603211822-949c7c733dcf
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/gabriel-vasile/mimetype v1.4.0
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
