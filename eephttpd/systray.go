@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/eyedeekay/eephttpd/icon"
-	"github.com/getlantern/systray"
+	"fyne.io/systray"
 	"os"
 	"runtime"
 	"time"

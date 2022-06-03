@@ -3,6 +3,7 @@ module github.com/eyedeekay/eephttpd
 go 1.12
 
 require (
+	fyne.io/systray v1.9.0
 	github.com/Microsoft/go-winio v0.4.16 // indirect
 	github.com/StackExchange/wmi v0.0.0-20210224194228-fe8f1750fd46 // indirect
 	github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e
@@ -12,10 +13,6 @@ require (
 	github.com/eyedeekay/sam3 v0.32.32 // indirect
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/gabriel-vasile/mimetype v1.2.0
-	github.com/getlantern/golog v0.0.0-20201105130739-9586b8bde3a9 // indirect
-	github.com/getlantern/hidden v0.0.0-20201229170000-e66e7f878730 // indirect
-	github.com/getlantern/ops v0.0.0-20200403153110-8476b16edcd6 // indirect
-	github.com/getlantern/systray v1.1.0
 	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/google/go-cmp v0.5.4 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
