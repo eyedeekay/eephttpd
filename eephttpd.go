@@ -249,7 +249,7 @@ func (e *EepHttpd) MakeTorrent(file string) error {
 	if err != nil {
 		return err
 	}
-	meta.URLList = metainfo.URLList{"http://" + e.HostName()}
+	meta.URLList = metainfo.URLList{"http://" + e.HostName() + "/" + file}
 	meta.Announce = "http://" + e.HostName() + "/a"
 	meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
 	meta.CreatedBy = "eephttpd"
