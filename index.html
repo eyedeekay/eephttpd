@@ -1,161 +1,162 @@
 <html>
-<head>
-  <title>
-    eephttpd
-  </title>
-  <meta name="author" content="eyedeekay" />
-  <meta name="description" content="eephttpd" />
-  <meta name="keywords" content="master" />
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <link rel="stylesheet" type="text/css" href="showhider.css" />
-</head>
-<body>
-<div id="navbar">
-  <a href="#shownav">
-    Show navigation
-  </a>
-  <div id="shownav">
-    <div id="hidenav">
-      <ul>
-        <li>
-          <a href="index.html">
-            index
-          </a>
-        </li>
-        <li>
-          <a href=".html"></a>
-        </li>
-        <li>
-          <a href="PROPAGANDA.html">
-            PROPAGANDA
-          </a>
-        </li>
-        <li>
-          <a href="USAGE.html">
-            USAGE
-          </a>
-        </li>
-        <li>
-          <a href="demo.html">
-            demo
-          </a>
-        </li>
-      </ul>
-      <br>
-      <a href="#hidenav">
-        Hide Navigation
+  <head>
+    <title>
+      eephttpd
+    </title>
+    <meta name="author" content="eyedeekay" />
+    <meta name="description" content="eephttpd" />
+    <meta name="keywords" content="master" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="showhider.css" />
+  </head>
+  <body>
+    <div id="navbar">
+      <a href="#shownav">
+        Show navigation
       </a>
+      <div id="shownav">
+        <div id="hidenav">
+          <ul>
+            <li>
+              <a href="index.html">
+                index
+              </a>
+            </li>
+            <li>
+              <a href=".html"></a>
+            </li>
+            <li>
+              <a href="PROPAGANDA.html">
+                PROPAGANDA
+              </a>
+            </li>
+            <li>
+              <a href="USAGE.html">
+                USAGE
+              </a>
+            </li>
+            <li>
+              <a href="demo.html">
+                demo
+              </a>
+            </li>
+          </ul>
+          <br>
+          <a href="#hidenav">
+            Hide Navigation
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<h1>
-<a href="#<a href=".">
-  eephttpd
-</a>
-" rel="nofollow">
-<span></span>
-eephttpd
-<p>
-  So much for a simple static file server.
-</p>
-<p>
-  eepHttpd is a web hosting tool for content in I2P, I2P sites, and
-  I2P torrents. On it&#39;s own, it&#39;s basically a static directory server
-  with limited scripting abilities written in pure-Go.
-</p>
-<p>
-  However, it responds differently to different kinds of interaction.
-</p>
-<ol>
-  <li>
-    If a Git client attempts to access it, then they will be able to clone
-    the entire site, up from the document root(So
-    <strong>
-      Use this for things
-    </strong>
-    <strong>
-      You want to
-      <em>
-        SHARE ANONYMOUSLY
-      </em>
-      with a large audience
-    </strong>
-    , not for
-    things you want to keep secret.) This allows people to clone the site
-    in order to mirror it.
-  </li>
-  <li>
-    When any file is changed in the docroot, eephttpd generates a
-    multi-file torrent of the site and places it in the docroot under the file
-    name
-    <code>
-      eephttpd.torrent
-    </code>
-    . This allows people to mirror the site&#39;s exact
-    content, and participate in keeping the site&#39;s content up.
-  </li>
-  <li>
-    When a browser with I2P in Private Browsing connects to it, it creates
-    a magnet link and replies with it as an
-    <code>
-      X-I2P-TORRENTLOCATION
-    </code>
-    header. In
-    this way, the browser can help the user download the whole web site using
-    Bittorrent and substitute HTTP resources for Bittorrent resources when
-    they are ready.
-  </li>
-  <li>
-    If a Torrent client attempts to access the
-    <code>
-      /a
-    </code>
-    URL, it is forwarded
-    to an Open Torrent Tracker.
-    <strong>
-      Every single eephttpd site is also an open
-    </strong>
-    <strong>
-      torrent tracker.
-    </strong>
-    Moreover, every single eephttpd site treats itself as
-    the primary tracker for the whole-site torrent it generates.
-    <strong>
-      This is
-    </strong>
-    <strong>
-      intended to encourage the distribution of
-      <em>
-        open trackers
-      </em>
-      on I2P.
-    </strong>
-  </li>
-</ol>
-<p>
-  So... more to come on why this is cool.
-</p>
-<p>
-  In order to build a .deb file, either use
-  <code>
-    checkinstall
-  </code>
-  or run:
-</p><pre><code>    go mod vendor
+    <h1>
+      <a href="#eephttpd" rel="nofollow">
+        <span></span>
+      </a>
+      eephttpd
+    </h1>
+    <p>
+      So much for a simple static file server.
+    </p>
+    <p>
+      eepHttpd is a web hosting tool for content in I2P, I2P sites, and
+      I2P torrents. On it&#39;s own, it&#39;s basically a static directory server
+      with limited scripting abilities written in pure-Go.
+    </p>
+    <p>
+      However, it responds differently to different kinds of interaction.
+    </p>
+    <ol>
+      <li>
+        If a Git client attempts to access it, then they will be able to clone
+        the entire site, up from the document root(So
+        <strong>
+          Use this for things
+        </strong>
+        <strong>
+          You want to
+          <em>
+            SHARE ANONYMOUSLY
+          </em>
+          with a large audience
+        </strong>
+        , not for
+        things you want to keep secret.) This allows people to clone the site
+        in order to mirror it.
+      </li>
+      <li>
+        When any file is changed in the docroot, eephttpd generates a
+        multi-file torrent of the site and places it in the docroot under the file
+        name
+        <code>
+          eephttpd.torrent
+        </code>
+        . This allows people to mirror the site&#39;s exact
+        content, and participate in keeping the site&#39;s content up.
+      </li>
+      <li>
+        When a browser with I2P in Private Browsing connects to it, it creates
+        a magnet link and replies with it as an
+        <code>
+          X-I2P-TORRENTLOCATION
+        </code>
+        header. In
+        this way, the browser can help the user download the whole web site using
+        Bittorrent and substitute HTTP resources for Bittorrent resources when
+        they are ready.
+      </li>
+      <li>
+        If a Torrent client attempts to access the
+        <code>
+          /a
+        </code>
+        URL, it is forwarded
+        to an Open Torrent Tracker.
+        <strong>
+          Every single eephttpd site is also an open
+        </strong>
+        <strong>
+          torrent tracker.
+        </strong>
+        Moreover, every single eephttpd site treats itself as
+        the primary tracker for the whole-site torrent it generates.
+        <strong>
+          This is
+        </strong>
+        <strong>
+          intended to encourage the distribution of
+          <em>
+            open trackers
+          </em>
+          on I2P.
+        </strong>
+      </li>
+    </ol>
+    <p>
+      So... more to come on why this is cool.
+    </p>
+    <p>
+      In order to build a .deb file, either use
+      <code>
+        checkinstall
+      </code>
+      or run:
+    </p>
+    <pre><code>    go mod vendor
     make orig
     debuild -us -uc
 </code></pre>
-<p>
-  or just run:
-</p><pre><code>    make deb
+    <p>
+      or just run:
+    </p>
+    <pre><code>    make deb
 </code></pre>
-<div>
-  <a href="#show">
-    Show license
-  </a>
-  <div id="show">
-    <div id="hide">
-      <pre><code>                    GNU GENERAL PUBLIC LICENSE
+    <div>
+      <a href="#show">
+        Show license
+      </a>
+      <div id="show">
+        <div id="hide">
+          <pre><code>                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
@@ -830,18 +831,20 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 </code></pre>
-      <a href="#hide">
-        Hide license
+          <a href="#hide">
+            Hide license
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <iframe src="https://snowflake.torproject.org/embed.html" width="320" height="240" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <div>
+      <a href="https://geti2p.net/">
+        <img src="i2plogo.png"></img>
+        I2P
       </a>
     </div>
-  </div>
-</div>
-<div>
-  <iframe src="https://snowflake.torproject.org/embed.html" width="320" height="240" frameborder="0" scrolling="no"></iframe>
-</div>
-<div>
-  <a href="https://geti2p.net/">
-    <img src="i2plogo.png"></img>
-    I2P
-  </a>
-</div>
+  </body>
+</html>
