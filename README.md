@@ -1,6 +1,9 @@
 eephttpd
 ========
 
+**STATUS:** This project is maintained. I will respond to issues, pull requests,
+and feature requests within a few days. I am primarily fixing bugs.
+
 So much for a simple static file server.
 
 eepHttpd is a web hosting tool for content in I2P, I2P sites, and
