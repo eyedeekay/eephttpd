@@ -1,4 +1,5 @@
-# eephttpd
+eephttpd
+========
 
 So much for a simple static file server.
 
