@@ -8,7 +8,7 @@ So much for a simple static file server.
 
 eepHttpd is a web hosting tool for content in I2P, I2P sites, and
 I2P torrents. On it's own, it's basically a static directory server
-with limited scripting abilities written in pure-Go. 
+with limited scripting abilities written in pure-Go.
 
 However, it responds differently to different kinds of interaction.
 
