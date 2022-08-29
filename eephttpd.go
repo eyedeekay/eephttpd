@@ -53,6 +53,9 @@ func (f *EepHttpd) GetType() string {
 
 func (f *EepHttpd) ServeParent() {
 	log.Println("Starting eepsite server", f.Base32())
+	if err = ioutil.WriteFile(f.GetType()+".b32.txt", []byte(f.Base32()), 0644); err != nil {
+		f.Cleanup()
+	}
 	if err = f.SamTracker.Serve(); err != nil {
 		f.Cleanup()
 	}
@@ -217,6 +220,9 @@ func (e *EepHttpd) metaLook(file string) *metainfo.MetaInfo {
 }
 
 func (e *EepHttpd) MakeTorrent(file string) error {
+	if _, ok := e.magnet[file]; ok {
+		return nil
+	}
 	//e.meta = make(map[string]*metainfo.MetaInfo)
 	meta := e.metaLook(file)
 	wd, err := os.Getwd()
@@ -249,11 +255,16 @@ func (e *EepHttpd) MakeTorrent(file string) error {
 	if err != nil {
 		return err
 	}
+	log.Println("Bytes encoded")
 	meta.URLList = metainfo.URLList{"http://" + e.HostName() + "/" + file}
+	log.Println("Webseeds added")
 	meta.Announce = "http://" + e.HostName() + "/a"
+	log.Println("Announce added")
 	meta.AnnounceList = metainfo.AnnounceList{[]string{"http://" + e.HostName() + "/a", "http://w7tpbzncbcocrqtwwm3nezhnnsw4ozadvi2hmvzdhrqzfxfum7wa.b32.i2p/a"}}
+	log.Println("Backup announce added")
 	meta.CreatedBy = "eephttpd"
 	e.magnet[file] = meta.Magnet(e.HostName(), meta.InfoHash()).String()
+	log.Println("Magnet generated:", e.magnet[file])
 	return nil
 }
 
@@ -424,6 +435,8 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 			Conf: &i2ptunconf.Conf{},
 		},
 	}
+	s.meta = make(map[string]*metainfo.MetaInfo)
+	s.magnet = make(map[string]string)
 	s.Server = &gitkit.Server{}
 	log.Println("Initializing eephttpd")
 	for _, o := range opts {
@@ -434,6 +447,7 @@ func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	s.SamTracker.Config().SaveFile = true
 	pp, _ := strconv.Atoi(s.SamTracker.Config().TargetPort)
 	s.SamTracker.InitTarget(s.SamTracker.Config().TargetHost + ":" + strconv.Itoa(pp+1))
+	log.Println("Target initialized as:", s.SamTracker.Config().TargetHost, ":", strconv.Itoa(pp+1))
 	//	s.tracker.SamTracker = e.SamTracker
 	l, e := s.Load()
 	if e != nil {
