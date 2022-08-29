@@ -1,10 +1,11 @@
+//go:build gui
 // +build gui
 
 package main
 
 import (
-	"github.com/eyedeekay/eephttpd/icon"
 	"fyne.io/systray"
+	"github.com/eyedeekay/eephttpd/icon"
 	"os"
 	"runtime"
 	"time"
