@@ -6,10 +6,10 @@ import (
 	"strconv"
 )
 
-//Option is a EepHttpd Option
+// Option is a EepHttpd Option
 type Option func(*EepHttpd) error
 
-//SetFilePath sets the path to save the config file at.
+// SetFilePath sets the path to save the config file at.
 func SetFilePath(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().FilePath = s
@@ -17,7 +17,7 @@ func SetFilePath(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetType sets the type of the forwarder server
+// SetType sets the type of the forwarder server
 func SetType(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if s == "http" {
@@ -30,7 +30,7 @@ func SetType(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetSigType sets the type of the forwarder server
+// SetSigType sets the type of the forwarder server
 func SetSigType(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if s == "" {
@@ -52,7 +52,7 @@ func SetSigType(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetSaveFile tells the router to save the tunnel's keys long-term
+// SetSaveFile tells the router to save the tunnel's keys long-term
 func SetSaveFile(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().SaveFile = b
@@ -60,7 +60,7 @@ func SetSaveFile(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetHost sets the host of the service to forward
+// SetHost sets the host of the service to forward
 func SetHost(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().TargetHost = s
@@ -68,7 +68,7 @@ func SetHost(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetPort sets the port of the service to forward
+// SetPort sets the port of the service to forward
 func SetPort(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		port, err := strconv.Atoi(s)
@@ -84,7 +84,7 @@ func SetPort(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetSAMHost sets the host of the EepHttpd's SAM bridge
+// SetSAMHost sets the host of the EepHttpd's SAM bridge
 func SetSAMHost(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().SamHost = s
@@ -92,7 +92,7 @@ func SetSAMHost(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetSAMPort sets the port of the EepHttpd's SAM bridge using a string
+// SetSAMPort sets the port of the EepHttpd's SAM bridge using a string
 func SetSAMPort(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		port, err := strconv.Atoi(s)
@@ -107,7 +107,7 @@ func SetSAMPort(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetName sets the host of the EepHttpd's SAM bridge
+// SetName sets the host of the EepHttpd's SAM bridge
 func SetName(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().TunName = s
@@ -115,7 +115,7 @@ func SetName(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetInLength sets the number of hops inbound
+// SetInLength sets the number of hops inbound
 func SetInLength(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u < 7 && u >= 0 {
@@ -126,7 +126,7 @@ func SetInLength(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetOutLength sets the number of hops outbound
+// SetOutLength sets the number of hops outbound
 func SetOutLength(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u < 7 && u >= 0 {
@@ -137,7 +137,7 @@ func SetOutLength(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetInVariance sets the variance of a number of hops inbound
+// SetInVariance sets the variance of a number of hops inbound
 func SetInVariance(i int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if i < 7 && i > -7 {
@@ -148,7 +148,7 @@ func SetInVariance(i int) func(*EepHttpd) error {
 	}
 }
 
-//SetOutVariance sets the variance of a number of hops outbound
+// SetOutVariance sets the variance of a number of hops outbound
 func SetOutVariance(i int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if i < 7 && i > -7 {
@@ -159,7 +159,7 @@ func SetOutVariance(i int) func(*EepHttpd) error {
 	}
 }
 
-//SetInQuantity sets the inbound tunnel quantity
+// SetInQuantity sets the inbound tunnel quantity
 func SetInQuantity(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u <= 16 && u > 0 {
@@ -170,7 +170,7 @@ func SetInQuantity(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetOutQuantity sets the outbound tunnel quantity
+// SetOutQuantity sets the outbound tunnel quantity
 func SetOutQuantity(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u <= 16 && u > 0 {
@@ -181,7 +181,7 @@ func SetOutQuantity(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetInBackups sets the inbound tunnel backups
+// SetInBackups sets the inbound tunnel backups
 func SetInBackups(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u < 6 && u >= 0 {
@@ -192,7 +192,7 @@ func SetInBackups(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetOutBackups sets the inbound tunnel backups
+// SetOutBackups sets the inbound tunnel backups
 func SetOutBackups(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u < 6 && u >= 0 {
@@ -203,7 +203,7 @@ func SetOutBackups(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetEncrypt tells the router to use an encrypted leaseset
+// SetEncrypt tells the router to use an encrypted leaseset
 func SetEncrypt(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -215,7 +215,7 @@ func SetEncrypt(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetServeDir sets the path to the directory you want to serve
+// SetServeDir sets the path to the directory you want to serve
 func SetServeDir(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		var err error
@@ -227,7 +227,7 @@ func SetServeDir(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetLeaseSetKey sets the host of the EepHttpd's SAM bridge
+// SetLeaseSetKey sets the host of the EepHttpd's SAM bridge
 func SetLeaseSetKey(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().LeaseSetKey = s
@@ -235,7 +235,7 @@ func SetLeaseSetKey(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetLeaseSetPrivateKey sets the host of the EepHttpd's SAM bridge
+// SetLeaseSetPrivateKey sets the host of the EepHttpd's SAM bridge
 func SetLeaseSetPrivateKey(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().LeaseSetPrivateKey = s
@@ -243,7 +243,7 @@ func SetLeaseSetPrivateKey(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetLeaseSetPrivateSigningKey sets the host of the EepHttpd's SAM bridge
+// SetLeaseSetPrivateSigningKey sets the host of the EepHttpd's SAM bridge
 func SetLeaseSetPrivateSigningKey(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().LeaseSetPrivateSigningKey = s
@@ -251,7 +251,7 @@ func SetLeaseSetPrivateSigningKey(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetMessageReliability sets the host of the EepHttpd's SAM bridge
+// SetMessageReliability sets the host of the EepHttpd's SAM bridge
 func SetMessageReliability(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().MessageReliability = s
@@ -259,7 +259,7 @@ func SetMessageReliability(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetAllowZeroIn tells the tunnel to accept zero-hop peers
+// SetAllowZeroIn tells the tunnel to accept zero-hop peers
 func SetAllowZeroIn(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -271,7 +271,7 @@ func SetAllowZeroIn(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetAllowZeroOut tells the tunnel to accept zero-hop peers
+// SetAllowZeroOut tells the tunnel to accept zero-hop peers
 func SetAllowZeroOut(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -283,7 +283,7 @@ func SetAllowZeroOut(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetCompress tells clients to use compression
+// SetCompress tells clients to use compression
 func SetCompress(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -295,7 +295,7 @@ func SetCompress(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetFastRecieve tells clients to use compression
+// SetFastRecieve tells clients to use compression
 func SetFastRecieve(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -307,7 +307,7 @@ func SetFastRecieve(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetReduceIdle tells the connection to reduce it's tunnels during extended idle time.
+// SetReduceIdle tells the connection to reduce it's tunnels during extended idle time.
 func SetReduceIdle(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -319,7 +319,7 @@ func SetReduceIdle(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetReduceIdleTime sets the time to wait before reducing tunnels to idle levels
+// SetReduceIdleTime sets the time to wait before reducing tunnels to idle levels
 func SetReduceIdleTime(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().ReduceIdleTime = 300000
@@ -331,7 +331,7 @@ func SetReduceIdleTime(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetReduceIdleTimeMs sets the time to wait before reducing tunnels to idle levels in milliseconds
+// SetReduceIdleTimeMs sets the time to wait before reducing tunnels to idle levels in milliseconds
 func SetReduceIdleTimeMs(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().ReduceIdleTime = 300000
@@ -343,7 +343,7 @@ func SetReduceIdleTimeMs(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetReduceIdleQuantity sets minimum number of tunnels to reduce to during idle time
+// SetReduceIdleQuantity sets minimum number of tunnels to reduce to during idle time
 func SetReduceIdleQuantity(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if u < 5 {
@@ -354,7 +354,7 @@ func SetReduceIdleQuantity(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetCloseIdle tells the connection to close it's tunnels during extended idle time.
+// SetCloseIdle tells the connection to close it's tunnels during extended idle time.
 func SetCloseIdle(b bool) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if b {
@@ -366,7 +366,7 @@ func SetCloseIdle(b bool) func(*EepHttpd) error {
 	}
 }
 
-//SetCloseIdleTime sets the time to wait before closing tunnels to idle levels
+// SetCloseIdleTime sets the time to wait before closing tunnels to idle levels
 func SetCloseIdleTime(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().CloseIdleTime = 300000
@@ -378,7 +378,7 @@ func SetCloseIdleTime(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetCloseIdleTimeMs sets the time to wait before closing tunnels to idle levels in milliseconds
+// SetCloseIdleTimeMs sets the time to wait before closing tunnels to idle levels in milliseconds
 func SetCloseIdleTimeMs(u int) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().CloseIdleTime = 300000
@@ -390,7 +390,7 @@ func SetCloseIdleTimeMs(u int) func(*EepHttpd) error {
 	}
 }
 
-//SetAccessListType tells the system to treat the accessList as a whitelist
+// SetAccessListType tells the system to treat the accessList as a whitelist
 func SetAccessListType(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if s == "whitelist" {
@@ -410,7 +410,7 @@ func SetAccessListType(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetAccessList tells the system to treat the accessList as a whitelist
+// SetAccessList tells the system to treat the accessList as a whitelist
 func SetAccessList(s []string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		if len(s) > 0 {
@@ -460,7 +460,7 @@ func SetHostname(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetKeyFile sets
+// SetKeyFile sets
 func SetKeyFile(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.SAMForwarder.Config().KeyFilePath = s
@@ -468,7 +468,7 @@ func SetKeyFile(s string) func(*EepHttpd) error {
 	}
 }
 
-//SetFeedFilePath sets the path to save the config file at.
+// SetFeedFilePath sets the path to save the config file at.
 func SetFeedFilePath(s string) func(*EepHttpd) error {
 	return func(c *EepHttpd) error {
 		c.feedlist = s

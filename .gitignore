@@ -7,3 +7,4 @@ deb
 vendor
 eephttpd/eephttpd*
 temp
+eephttpd/www

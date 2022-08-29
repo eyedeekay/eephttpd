@@ -24,8 +24,8 @@ import (
 	"gopkg.in/src-d/go-git.v4"
 )
 
-//EepHttpd is a structure which automatically configured the forwarding of
-//a local service to i2p over the SAM API.
+// EepHttpd is a structure which automatically configured the forwarding of
+// a local service to i2p over the SAM API.
 type EepHttpd struct {
 	*samtracker.SamTracker
 	*gitkit.Server
@@ -63,7 +63,7 @@ func (f *EepHttpd) Target() string {
 	return f.SamTracker.Config().TargetHost + ":" + strconv.Itoa(pp)
 }
 
-//Serve starts the SAM connection and and forwards the local host:port to i2p
+// Serve starts the SAM connection and and forwards the local host:port to i2p
 func (f *EepHttpd) Serve() error {
 	go f.ServeParent()
 	//f.MakeAllTorrents() TODO: write this function.
@@ -80,7 +80,7 @@ func (f *EepHttpd) Up() bool {
 	return f.up
 }
 
-//Close shuts the whole thing down.
+// Close shuts the whole thing down.
 func (f *EepHttpd) Close() error {
 	return f.SamTracker.Close()
 }
@@ -407,7 +407,7 @@ func (e *EepHttpd) Pull() error {
 	return nil
 }
 
-//NewEepHttpd makes a new SAM forwarder with default options, accepts host:port arguments
+// NewEepHttpd makes a new SAM forwarder with default options, accepts host:port arguments
 func NewEepHttpd(host, port string) (*EepHttpd, error) {
 	return NewEepHttpdFromOptions(SetHost(host), SetPort(port))
 }
@@ -416,9 +416,11 @@ func Never(gitkit.Credential, *gitkit.Request) (bool, error) {
 	return false, nil
 }
 
-//NewEepHttpdFromOptions makes a new SAM forwarder with default options, accepts host:port arguments
+// NewEepHttpdFromOptions makes a new SAM forwarder with default options, accepts host:port arguments
 func NewEepHttpdFromOptions(opts ...func(*EepHttpd) error) (*EepHttpd, error) {
 	var s EepHttpd
+	s.meta = make(map[string]*metainfo.MetaInfo)
+	s.magnet = make(map[string]string)
 	s.SamTracker = &samtracker.SamTracker{
 		SAMForwarder: &samforwarder.SAMForwarder{
 			Conf: &i2ptunconf.Conf{},
