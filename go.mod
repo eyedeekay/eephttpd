@@ -9,7 +9,7 @@ require (
 	github.com/atotto/clipboard v0.1.4
 	github.com/d5/tengo v1.24.8
 	github.com/eyedeekay/i2pkeys v0.0.0-20220804220722-1048b5ce6ba7 // indirect
-	github.com/eyedeekay/sam-forwarder v0.33.0
+	github.com/eyedeekay/sam-forwarder v0.33.2
 	github.com/eyedeekay/sam3 v0.33.4 // indirect
 	github.com/eyedeekay/samtracker v0.0.0-20210201174310-55c3321622e1
 	github.com/gabriel-vasile/mimetype v1.4.1

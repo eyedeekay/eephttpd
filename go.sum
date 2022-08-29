@@ -99,8 +99,8 @@ github.com/eyedeekay/sam-forwarder v0.32.1-0.20191021175341-aa52be69ffe8/go.mod 
 github.com/eyedeekay/sam-forwarder v0.32.2-0.20210206025830-529a5f77cbb9/go.mod h1:+94hmW7SUHtwTQcIABwc4f8NTCGPhglYFrZAzKLIwrg=
 github.com/eyedeekay/sam-forwarder v0.32.2-0.20220603033253-9c0b2adb95b5/go.mod h1:WNDqiMmkqf8iqeX4wFKdORRXdV90bOcbRhlVsepTLV0=
 github.com/eyedeekay/sam-forwarder v0.32.2-0.20220603202605-9a46feacc370/go.mod h1:/FX9jyxCKjmnLxcm7mRbI0wvDdjY08YmvRFvrFopZHY=
-github.com/eyedeekay/sam-forwarder v0.33.0 h1:7+ZeYemIvxPslHq5V5lGqifBmaAmzW/Sb35PPaQFzI8=
-github.com/eyedeekay/sam-forwarder v0.33.0/go.mod h1:hccqaYyFXC/flv4CFWT+xjwgXd0kOKb1iYP2KZPdgyA=
+github.com/eyedeekay/sam-forwarder v0.33.2 h1:VvqSrRPp5byTM+e2/SK4T+KWAAn6mn+b4gclp8KGXH0=
+github.com/eyedeekay/sam-forwarder v0.33.2/go.mod h1:hccqaYyFXC/flv4CFWT+xjwgXd0kOKb1iYP2KZPdgyA=
 github.com/eyedeekay/sam3 v0.0.0-20190613034117-99ad6522ebe3/go.mod h1:Vrxh+71E3HVYqyRlT5Jg+E26sSuu8UNTLB4p8qyT408=
 github.com/eyedeekay/sam3 v0.0.0-20190730185140-f8d54526ea25/go.mod h1:Y3igFVzN4ybqkkpfUWULGhw7WRp8lieq0ORXbLBbcZM=
 github.com/eyedeekay/sam3 v0.32.1/go.mod h1:Y3igFVzN4ybqkkpfUWULGhw7WRp8lieq0ORXbLBbcZM=

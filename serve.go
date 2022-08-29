@@ -47,26 +47,6 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 	csp := []string{"default-src: 'self' " + f.Base32(), "script-src: 'self' " + f.Base32()}
 	rw.Header().Set("Content-Security-Policy", strings.Join(csp, "; "))
 	rp := f.checkURL(rq)
-	mtype, err := mimetype.DetectFile(rp)
-	if err != nil {
-		log.Println("MIME type determination error.", err.Error())
-	} else {
-		log.Println("MIME type detected", mtype.String())
-	}
-	rw.Header().Set("Content-Type", mtype.String())
-	if strings.HasSuffix(rq.URL.Path, ".css") {
-		rw.Header().Set("Content-Type", "text/css")
-	}
-	if strings.HasSuffix(rq.URL.Path, ".js") {
-		rw.Header().Set("Content-Type", "text/javascript")
-	}
-	if strings.HasSuffix(rq.URL.Path, ".md") {
-		rw.Header().Set("Content-Type", "text/html")
-	}
-	if strings.HasSuffix(rp, ".html") {
-		rw.Header().Set("Content-Type", "text/html")
-	}
-	rw.Header().Set("X-I2P-TORRENTLOCATION", f.GetMagnet(rq.URL.Path))
 	defer f.Pull()
 	if rp == "torrent" {
 		f.HandleTorrent(rw, rq)
@@ -77,21 +57,42 @@ func (f *EepHttpd) ServeHTTP(rw http.ResponseWriter, rq *http.Request) {
 			log.Println(err.Error())
 			return
 		}
-		defer req.Body.Close()
+		//		defer req.Body.Close()
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
+		log.Println("proxy announce request")
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
-		fmt.Fprintf(rw, string(body))
+		rw.Write(body)
 		return
 	} else {
+		mtype, err := mimetype.DetectFile(rp)
+		if err != nil {
+			log.Println("MIME type determination error.", err.Error())
+		} else {
+			log.Println("MIME type detected", mtype.String())
+		}
+		rw.Header().Set("Content-Type", mtype.String())
+		if strings.HasSuffix(rq.URL.Path, ".css") {
+			rw.Header().Set("Content-Type", "text/css")
+		}
+		if strings.HasSuffix(rq.URL.Path, ".js") {
+			rw.Header().Set("Content-Type", "text/javascript")
+		}
+		if strings.HasSuffix(rq.URL.Path, ".md") {
+			rw.Header().Set("Content-Type", "text/html")
+		}
+		if strings.HasSuffix(rp, ".html") {
+			rw.Header().Set("Content-Type", "text/html")
+		}
+		rw.Header().Set("X-I2P-TORRENTLOCATION", f.GetMagnet(rq.URL.Path))
 		if strings.HasPrefix(rq.Header.Get("User-Agent"), "git") {
 			log.Println(rq.Header.Get("User-Agent"))
 			f.HandleFile(rw, rq)
@@ -123,35 +124,17 @@ func FileExists(filename string) bool {
 
 func (f *EepHttpd) checkURL(rq *http.Request) string {
 	p := rq.URL.Path
+	log.Println("Checking URL", rq.URL.Path)
 	if strings.HasSuffix(rq.URL.Path, "eephttpd.torrent") {
 		p = "torrent"
 		return p
 	}
-	if strings.HasSuffix("/"+rq.URL.Path, "/a") {
+	if rq.URL.Path == "/announce" || rq.URL.Path == "/a" {
+		log.Println("Checking URL announce", rq.URL.Path)
 		p = "announce"
 		return p
 	}
-	if strings.HasPrefix("/"+rq.URL.Path, "/announce") {
-		p = "announce"
-		return p
-	}
-	if strings.HasSuffix("/"+rq.URL.Path, "/a/s") {
-		p = "scrape"
-		return p
-	}
-	if "/"+rq.URL.Path == "/s" {
-		p = "scrape"
-		return p
-	}
-	if strings.HasSuffix("/"+rq.URL.Path, "/announce/s") {
-		p = "scrape"
-		return p
-	}
-	if strings.HasPrefix("/"+rq.URL.Path, "/scrape") {
-		p = "scrape"
-		return p
-	}
-	if strings.HasPrefix("/"+rq.URL.Path, "/a/scrape") {
+	if rq.URL.Path == "/scrape" || rq.URL.Path == "/s" || rq.URL.Path == "/a/s" {
 		p = "scrape"
 		return p
 	}
@@ -218,11 +201,14 @@ func (f *EepHttpd) HandleGit(rw http.ResponseWriter, rq *http.Request) {
 }
 
 func (f *EepHttpd) HandleFile(rw http.ResponseWriter, rq *http.Request) {
+	log.Println("Handling file")
 	path := f.checkURL(rq)
+	log.Println(path)
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		f.HandleMissing(rw, rq)
 	}
+	//	log.Println(string(bytes))
 	rw.Write(bytes)
 	//	fmt.Fprintf(rw, string(bytes))
 }
